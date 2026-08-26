@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Amaranth — Agriculture Landing</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['"Plus Jakarta Sans"', 'system-ui', 'sans-serif'],
+            geist: ['Geist', 'system-ui', 'sans-serif'],
+            montserrat: ['Montserrat', 'system-ui', 'sans-serif'],
+          },
+          colors: {
+            brand: { DEFAULT: '#16A34A', dark: '#15803D' },
+          },
+          keyframes: {
+            breathe: {
+              '0%, 100%': { transform: 'scale(1)' },
+              '50%': { transform: 'scale(1.06)' },
+            },
+            'pulse-bar': {
+              '0%, 100%': { transform: 'scaleY(0.35)', opacity: '0.55' },
+              '50%': { transform: 'scaleY(1)', opacity: '1' },
+            },
+            shimmer: {
+              '0%': { transform: 'rotate(0deg)' },
+              '100%': { transform: 'rotate(360deg)' },
+            },
+          },
+          animation: {
+            breathe: 'breathe 20s ease-in-out infinite',
+            'pulse-bar': 'pulse-bar 1.2s ease-in-out infinite',
+            shimmer: 'shimmer 4s linear infinite',
+          },
+        },
+      },
+    };
+  </script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&family=Montserrat:wght@500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <style>
+    html { scroll-behavior: auto; }
+    body {
+      font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
+      background: #fff;
+      color: #171717;
+      overflow-x: hidden;
+    }
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-track { background: transparent; }
+    ::-webkit-scrollbar-thumb { background: #d4d4d4; border-radius: 999px; }
+    ::-webkit-scrollbar-thumb:hover { background: #a3a3a3; }
+
+    .logo-invert { filter: brightness(0) invert(1); }
+    .logo-dark { filter: none; }
+
+    .observe-fade {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.8s ease, transform 0.8s ease;
+    }
+    .observe-fade.in { opacity: 1; transform: translateY(0); }
+
+    .cta-button {
+      position: relative;
+      overflow: hidden;
+      isolation: isolate;
+    }
+    .cta-button::before {
+      content: '';
+      position: absolute;
+      inset: -150%;
+      background: conic-gradient(from 0deg, transparent 0%, rgba(255,255,255,0.55) 10%, transparent 20%);
+      animation: shimmer 4s linear infinite;
+      z-index: -1;
+    }
+    .cta-button::after {
+      content: '';
+      position: absolute;
+      inset: 1.5px;
+      border-radius: inherit;
+      background: #16A34A;
+      z-index: -1;
+    }
+
+    .menu-overlay {
+      transform: translateY(-100%);
+      transition: transform 0.55s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+    .menu-overlay.open { transform: translateY(0); }
+
+    .menu-preview {
+      opacity: 0;
+      transition: opacity 0.35s ease;
+    }
+    .menu-preview.visible { opacity: 1; }
+
+    .hero-h1 { mix-blend-mode: overlay; }
+  </style>
+</head>
+<body class="bg-white text-neutral-900 antialiased">
+
+  <!-- HEADER -->
+  <header id="siteHeader" class="fixed inset-x-0 top-0 z-50">
+    <div id="headerBg" class="header-bg pointer-events-none absolute inset-0 bg-white/80 opacity-0 backdrop-blur-md transition-opacity duration-300"></div>
+    <div class="relative mx-auto flex max-w-7xl items-center justify-between px-5 py-4 md:px-8">
+      <a href="#top" class="flex items-center gap-2" aria-label="Amaranth">
+        <img id="logoImg" src="https://hoirqrkdgbmvpwutwuwj.supabase.co/storage/v1/object/public/assets/assets/7cd2626d-0185-4c9d-bbd5-e20389921e7e_320w.png" alt="Amaranth" class="logo-invert h-8 w-auto" />
+      </a>
+
+      <div class="flex items-center gap-4 md:gap-6">
+        <div class="hidden items-center gap-1 text-xs font-semibold tracking-wider sm:flex" id="langSwitch">
+          <button type="button" class="lang-btn px-1.5 py-1 text-white/70 transition" data-lang="EN">EN</button>
+          <span class="text-white/40">/</span>
+          <button type="button" class="lang-btn px-1.5 py-1 text-white transition" data-lang="RU" aria-current="true">RU</button>
+        </div>
+
+        <button id="burger" type="button" class="group flex h-10 w-10 flex-col items-end justify-center gap-1.5" aria-label="Open menu" aria-expanded="false">
+          <span class="burger-line h-0.5 w-6 bg-white transition-all duration-300 group-hover:w-2/3"></span>
+          <span class="burger-line h-0.5 w-6 bg-white transition-all duration-300"></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- SIDE SCROLL INDICATOR -->
+  <div class="pointer-events-none fixed left-4 top-1/2 z-40 hidden h-40 w-px -translate-y-1/2 bg-white/25 mix-blend-difference md:left-6 md:block" aria-hidden="true">
+    <div id="scrollThumb" class="absolute left-0 top-0 w-full bg-white transition-[height] duration-75" style="height:0%"></div>
+  </div>
+
+  <!-- SOUND BARS (decorative) -->
+  <div class="pointer-events-none fixed bottom-6 right-6 z-40 flex h-8 items-end gap-1 mix-blend-difference" aria-hidden="true">
+    <span class="w-0.5 origin-bottom bg-white animate-pulse-bar" style="height:40%; animation-delay:0s"></span>
+    <span class="w-0.5 origin-bottom bg-white animate-pulse-bar" style="height:70%; animation-delay:0.15s"></span>
+    <span class="w-0.5 origin-bottom bg-white animate-pulse-bar" style="height:55%; animation-delay:0.3s"></span>
+    <span class="w-0.5 origin-bottom bg-white animate-pulse-bar" style="height:90%; animation-delay:0.45s"></span>
+    <span class="w-0.5 origin-bottom bg-white animate-pulse-bar" style="height:45%; animation-delay:0.6s"></span>
+  </div>
+
+  <!-- FULL SCREEN MENU -->
+  <div id="menuOverlay" class="menu-overlay fixed inset-0 z-[100] bg-neutral-950 text-white" aria-hidden="true">
+    <div class="mx-auto flex h-full max-w-7xl flex-col px-5 py-6 md:px-8">
+      <div class="mb-10 flex items-center justify-between">
+        <img src="https://hoirqrkdgbmvpwutwuwj.supabase.co/storage/v1/object/public/assets/assets/7cd2626d-0185-4c9d-bbd5-e20389921e7e_320w.png" alt="" class="logo-invert h-8 w-auto" />
+        <button id="menuClose" type="button" class="text-sm font-medium tracking-wide" aria-label="Close menu">Закрыть</button>
+      </div>
+      <div class="grid flex-1 gap-10 md:grid-cols-2 md:items-center">
+        <nav class="space-y-4 text-4xl font-semibold tracking-tight md:text-6xl" aria-label="Menu">
+          <a href="#about" class="menu-link block transition hover:text-green-500" data-image="https://hoirqrkdgbmvpwutwuwj.supabase.co/storage/v1/object/public/assets/assets/cb0cfc8f-0c7b-4867-9aeb-9cb2823efaf7_1600w.png">О нас</a>
+          <a href="#health" class="menu-link block transition hover:text-green-500" data-image="https://hoirqrkdgbmvpwutwuwj.supabase.co/storage/v1/object/public/assets/assets/a84cf90b-6eec-40d6-ad6c-ad04ef568b50_800w.png">Польза</a>
+          <a href="#hero" class="menu-link block transition hover:text-green-500" data-image="https://hoirqrkdgbmvpwutwuwj.supabase.co/storage/v1/object/public/assets/assets/b8d3ba76-5100-4964-a9ea-7bc1a82313a4_3840w.jpg">Продукция</a>
+          <a href="#contact" class="menu-link block transition hover:text-green-500" data-image="https://hoirqrkdgbmvpwutwuwj.supabase.co/storage/v1/object/public/assets/assets/aa31d635-3237-4ed2-858c-5ec42068e222_800w.png">Контакты</a>
+        </nav>
+        <div class="relative hidden aspect-[4/5] overflow-hidden rounded-3xl md:block">
+          <img id="menuPreview" class="menu-preview absolute inset-0 h-full w-full object-cover" src="" alt="" />
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- HERO SCROLL DRIVER (250vh) -->
+  <div id="top" class="relative h-[250vh]">
+    <section id="hero" class="sticky top-0 h-screen overflow-hidden bg-neutral-950">
+      <!-- Shrink frame -->
+      <div id="heroFrame" class="absolute left-1/2 top-1/2 z-10 overflow-hidden rounded-none" style="width:100%; height:100%; transform:translate(-50%,-50%);">
+        <img
+          id="heroBg"
+          src="https://hoirqrkdgbmvpwutwuwj.supabase.co/storage/v1/object/public/assets/assets/b8d3ba76-5100-4964-a9ea-7bc1a82313a4_3840w.jpg"
+          alt=""
+          class="animate-breathe h-full w-full object-cover"
+        />
+        <div id="heroGrad" class="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/55 via-transparent to-black/25 opacity-0 transition-opacity duration-500"></div>
+      </div>
+
+      <!-- Collage cards -->
+      <div id="collage" class="pointer-events-none absolute inset-0 z-20">
+        <img data-direction="-1,-1" class="collage-card absolute left-[8%] top-[18%] h-28 w-40 rounded-2xl object-cover shadow-2xl md:h-40 md:w-56" src="https://hoirqrkdgbmvpwutwuwj.supabase.co/storage/v1/object/public/assets/assets/aa31d635-3237-4ed2-858c-5ec42068e222_800w.png" alt="" />
+        <img data-direction="-1,1" class="collage-card absolute bottom-[22%] left-[10%] h-28 w-40 rounded-2xl object-cover shadow-2xl md:h-36 md:w-52" src="https://hoirqrkdgbmvpwutwuwj.supabase.co/storage/v1/object/public/assets/assets/b7fd9648-721b-497f-a38e-2ace6245dc03_800w.png" alt="" />
+        <img data-direction="1,-1" class="collage-card absolute right-[8%] top-[16%] h-28 w-40 rounded-2xl object-cover shadow-2xl md:h-40 md:w-56" src="https://hoirqrkdgbmvpwutwuwj.supabase.co/storage/v1/object/public/assets/assets/d1c4fa0c-ce16-4ed3-ae1b-db525748c93e_800w.jpg" alt="" />
+        <img data-direction="1,1" class="collage-card absolute bottom-[20%] right-[9%] h-28 w-40 rounded-2xl object-cover shadow-2xl md:h-36 md:w-52" src="https://hoirqrkdgbmvpwutwuwj.supabase.co/storage/v1/object/public/assets/assets/cb074d68-e7a8-4698-ac04-858d429248c9_800w.jpg" alt="" />
+      </div>
+
+      <!-- Hero copy -->
+      <div id="heroCopy" class="relative z-30 flex h-full flex-col justify-end px-5 pb-28 pt-28 md:px-10 md:pb-32">
+        <div class="mx-auto w-full max-w-7xl">
+          <p id="heroKicker" class="mb-3 text-xs font-semibold uppercase tracking-[0.22em] text-white/80 opacity-0 transition-opacity duration-500">Amaranth Agriculture</p>
+          <h1 id="heroTitle" class="hero-h1 max-w-4xl text-4xl font-extrabold leading-[1.05] text-white md:text-6xl lg:text-7xl opacity-0 transition-opacity duration-500">
+            Сила амаранта<br />для современной жизни
+          </h1>
+          <p id="heroSub" class="mt-4 max-w-xl text-sm text-white/75 md:text-base opacity-0 transition-opacity duration-500">
+            Натуральные продукты из амаранта — белок, клетчатка и антиоксиданты в каждом урожае.
+          </p>
+        </div>
+
+        <!-- Stats bar -->
+        <div id="statsBar" class="absolute inset-x-0 bottom-0 z-30 border-t border-white/10 bg-white/5 backdrop-blur-sm opacity-0 transition-opacity duration-500">
+          <div class="mx-auto grid max-w-7xl grid-cols-2 divide-x divide-white/10 md:grid-cols-4">
+            <div class="px-5 py-4 md:px-8"><p class="text-2xl font-bold text-white">40+</p><p class="text-xs text-white/65">лет опыта</p></div>
+            <div class="px-5 py-4 md:px-8"><p class="text-2xl font-bold text-white">12</p><p class="text-xs text-white/65">стран экспорта</p></div>
+            <div class="px-5 py-4 md:px-8"><p class="text-2xl font-bold text-white">98%</p><p class="text-xs text-white/65">чистый продукт</p></div>
+            <div class="px-5 py-4 md:px-8"><p class="text-2xl font-bold text-white">5k+</p><p class="text-xs text-white/65">партнёров</p></div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <!-- ABOUT -->
+  <section id="about" class="bg-white py-24 md:py-32">
+    <div class="mx-auto grid max-w-7xl gap-10 px-5 md:grid-cols-3 md:gap-12 md:px-8">
+      <div class="observe-fade">
+        <p class="mb-3 text-xs font-semibold uppercase tracking-[0.2em] text-green-600">О компании</p>
+        <h2 class="text-3xl font-bold tracking-tight md:text-4xl">Выращиваем пользу, а не просто урожай</h2>
+      </div>
+      <div class="observe-fade overflow-hidden rounded-3xl" style="transition-delay:80ms">
+        <img src="https://hoirqrkdgbmvpwutwuwj.supabase.co/storage/v1/object/public/assets/assets/cb0cfc8f-0c7b-4867-9aeb-9cb2823efaf7_1600w.png" alt="Amaranth fields" class="h-full min-h-[280px] w-full object-cover" loading="lazy" />
+      </div>
+      <div class="observe-fade flex flex-col justify-between" style="transition-delay:160ms">
+        <p class="text-neutral-600 leading-relaxed">
+          Мы соединяем агротехнологии и традиции, чтобы амарант стал частью повседневного питания — от фермы до полки.
+        </p>
+        <a href="#health" class="cta-button mt-8 inline-flex w-fit items-center gap-3 rounded-full px-6 py-3 text-sm font-semibold text-white">
+          Узнать больше
+          <span class="flex h-8 w-8 items-center justify-center rounded-full bg-white/15">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+          </span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- HEALTH PUZZLE -->
+  <section id="health" class="border-t border-neutral-100 bg-neutral-50 py-24 md:py-32">
+    <div class="mx-auto grid max-w-7xl gap-12 px-5 md:grid-cols-2 md:items-center md:px-8">
+      <div class="observe-fade">
+        <p class="mb-3 text-xs font-semibold uppercase tracking-[0.2em] text-green-600">Польза</p>
+        <h2 class="text-3xl font-bold tracking-tight md:text-5xl">Пазл здоровья из амаранта</h2>
+        <p class="mt-4 max-w-md text-neutral-600 leading-relaxed">
+          Омега, антиоксиданты, белок и клетчатка — четыре опоры рациона, собранные в одном растении.
+        </p>
+        <div class="mt-8 flex items-center gap-3">
+          <button id="slidePrev" type="button" class="flex h-11 w-11 items-center justify-center rounded-full border border-neutral-300 bg-white" aria-label="Previous">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m15 18-6-6 6-6"/></svg>
+          </button>
+          <button id="slideNext" type="button" class="flex h-11 w-11 items-center justify-center rounded-full border border-neutral-300 bg-white" aria-label="Next">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m9 18 6-6-6-6"/></svg>
+          </button>
+          <div id="slideDots" class="ml-2 flex gap-2"></div>
+        </div>
+      </div>
+
+      <div id="sliderWrap" class="observe-fade overflow-hidden" style="transition-delay:100ms">
+        <div id="slideTrack" class="flex gap-6 transition-transform duration-500 ease-out">
+          <article class="slide-card w-[min(78vw,320px)] shrink-0 overflow-hidden rounded-3xl bg-white shadow-sm">
+            <img src="https://hoirqrkdgbmvpwutwuwj.supabase.co/storage/v1/object/public/assets/assets/a84cf90b-6eec-40d6-ad6c-ad04ef568b50_800w.png" alt="Omega" class="h-52 w-full object-cover" loading="lazy" />
+            <div class="p-5"><h3 class="text-xl font-semibold">Омега</h3><p class="mt-1 text-sm text-neutral-500">Жирные кислоты для энергии и сердца</p></div>
+          </article>
+          <article class="slide-card w-[min(78vw,320px)] shrink-0 overflow-hidden rounded-3xl bg-white shadow-sm">
+            <img src="https://hoirqrkdgbmvpwutwuwj.supabase.co/storage/v1/object/public/assets/assets/f551325d-9e3d-4ca4-bf2b-dcbd2bd1e62f_800w.png" alt="Antioxidants" class="h-52 w-full object-cover" loading="lazy" />
+            <div class="p-5"><h3 class="text-xl font-semibold">Антиоксиданты</h3><p class="mt-1 text-sm text-neutral-500">Защита клеток каждый день</p></div>
+          </article>
+          <article class="slide-card w-[min(78vw,320px)] shrink-0 overflow-hidden rounded-3xl bg-white shadow-sm">
+            <img src="https://hoirqrkdgbmvpwutwuwj.supabase.co/storage/v1/object/public/assets/assets/c1177fce-1721-426e-8818-f028c1039524_800w.png" alt="Protein" class="h-52 w-full object-cover" loading="lazy" />
+            <div class="p-5"><h3 class="text-xl font-semibold">Белок</h3><p class="mt-1 text-sm text-neutral-500">Полноценный растительный профиль</p></div>
+          </article>
+          <article class="slide-card w-[min(78vw,320px)] shrink-0 overflow-hidden rounded-3xl bg-white shadow-sm">
+            <img src="https://hoirqrkdgbmvpwutwuwj.supabase.co/storage/v1/object/public/assets/assets/67456745-3f2e-47ac-b680-3a9fe590299b_800w.png" alt="Fiber" class="h-52 w-full object-cover" loading="lazy" />
+            <div class="p-5"><h3 class="text-xl font-semibold">Клетчатка</h3><p class="mt-1 text-sm text-neutral-500">Комфорт пищеварения</p></div>
+          </article>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT / FOOTER -->
+  <footer id="contact" class="bg-neutral-950 px-5 py-16 text-white md:px-8">
+    <div class="mx-auto flex max-w-7xl flex-col gap-8 md:flex-row md:items-end md:justify-between">
+      <div>
+        <img src="https://hoirqrkdgbmvpwutwuwj.supabase.co/storage/v1/object/public/assets/assets/7cd2626d-0185-4c9d-bbd5-e20389921e7e_320w.png" alt="Amaranth" class="logo-invert mb-4 h-8 w-auto" />
+        <p class="max-w-sm text-sm text-white/60">Amaranth Agriculture — от поля до продукта с прозрачным отслеживанием качества.</p>
+      </div>
+      <a href="#top" class="cta-button inline-flex w-fit items-center gap-3 rounded-full px-6 py-3 text-sm font-semibold text-white">
+        Наверх
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+      </a>
+    </div>
+  </footer>
+
+  <script>
+    const lerp = (a, b, t) => a + (b - a) * t;
+    const clamp = (v, min, max) => Math.min(max, Math.max(min, v));
+
+    const header = document.getElementById('siteHeader');
+    const headerBg = document.getElementById('headerBg');
+    const logoImg = document.getElementById('logoImg');
+    const burgerLines = document.querySelectorAll('.burger-line');
+    const langBtns = document.querySelectorAll('.lang-btn');
+    const heroDriver = document.getElementById('top');
+    const heroFrame = document.getElementById('heroFrame');
+    const collageCards = document.querySelectorAll('.collage-card');
+    const heroTitle = document.getElementById('heroTitle');
+    const heroSub = document.getElementById('heroSub');
+    const heroKicker = document.getElementById('heroKicker');
+    const heroGrad = document.getElementById('heroGrad');
+    const statsBar = document.getElementById('statsBar');
+    const scrollThumb = document.getElementById('scrollThumb');
+
+    /* Hardcoded active language: RU */
+    function setLangUI(scrolled) {
+      langBtns.forEach((btn) => {
+        const active = btn.dataset.lang === 'RU';
+        if (scrolled) {
+          btn.classList.toggle('text-neutral-900', active);
+          btn.classList.toggle('text-neutral-400', !active);
+          btn.classList.remove('text-white', 'text-white/70');
+        } else {
+          btn.classList.toggle('text-white', active);
+          btn.classList.toggle('text-white/70', !active);
+          btn.classList.remove('text-neutral-900', 'text-neutral-400');
+        }
+      });
+    }
+
+    function onScroll() {
+      const y = window.scrollY;
+      const docH = document.documentElement.scrollHeight - window.innerHeight;
+      scrollThumb.style.height = `${clamp((y / Math.max(docH, 1)) * 100, 0, 100)}%`;
+
+      const scrolled = y > 50;
+      headerBg.style.opacity = scrolled ? '1' : '0';
+      logoImg.classList.toggle('logo-invert', !scrolled);
+      logoImg.classList.toggle('logo-dark', scrolled);
+      burgerLines.forEach((l) => {
+        l.classList.toggle('bg-white', !scrolled);
+        l.classList.toggle('bg-neutral-900', scrolled);
+      });
+      setLangUI(scrolled);
+
+      /* Shrinking hero progress across 250vh sticky section */
+      const heroTop = heroDriver.offsetTop;
+      const heroRange = heroDriver.offsetHeight - window.innerHeight;
+      const progress = clamp((y - heroTop) / Math.max(heroRange, 1), 0, 1);
+
+      const isDesktop = window.innerWidth >= 768;
+      const width = lerp(100, isDesktop ? 30 : 55, progress);
+      const height = lerp(100, isDesktop ? 70 : 58, progress);
+      const radius = lerp(0, 28, progress);
+      const yShift = lerp(0, 35, progress);
+
+      heroFrame.style.width = `${width}%`;
+      heroFrame.style.height = `${height}%`;
+      heroFrame.style.borderRadius = `${radius}px`;
+      heroFrame.style.transform = `translate(-50%, calc(-50% + ${yShift * 0.15}%))`;
+
+      collageCards.forEach((card) => {
+        const [dx, dy] = card.dataset.direction.split(',').map(Number);
+        const dist = lerp(120, 0, progress);
+        card.style.transform = `translate3d(${dx * dist}%, ${dy * dist}%, 0) scale(${lerp(0.85, 1, progress)})`;
+        card.style.opacity = String(lerp(0, 1, clamp((progress - 0.15) / 0.35, 0, 1)));
+      });
+
+      const reveal = progress >= 0.5;
+      [heroTitle, heroSub, heroKicker, heroGrad, statsBar].forEach((el) => {
+        el.style.opacity = reveal ? '1' : '0';
+      });
+    }
+
+    window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('resize', onScroll);
+    onScroll();
+
+    /* Menu overlay + image swap */
+    const menu = document.getElementById('menuOverlay');
+    const menuPreview = document.getElementById('menuPreview');
+    const openMenu = () => {
+      menu.classList.add('open');
+      menu.setAttribute('aria-hidden', 'false');
+      document.getElementById('burger').setAttribute('aria-expanded', 'true');
+      document.body.style.overflow = 'hidden';
+    };
+    const closeMenu = () => {
+      menu.classList.remove('open');
+      menu.setAttribute('aria-hidden', 'true');
+      document.getElementById('burger').setAttribute('aria-expanded', 'false');
+      document.body.style.overflow = '';
+      menuPreview.classList.remove('visible');
+    };
+    document.getElementById('burger').addEventListener('click', openMenu);
+    document.getElementById('menuClose').addEventListener('click', closeMenu);
+    document.querySelectorAll('.menu-link').forEach((link) => {
+      link.addEventListener('mouseenter', () => {
+        menuPreview.src = link.dataset.image;
+        menuPreview.classList.add('visible');
+      });
+      link.addEventListener('click', closeMenu);
+    });
+
+    /* Observe fade */
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach((e) => {
+        if (e.isIntersecting) {
+          e.target.classList.add('in');
+          io.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.2 });
+    document.querySelectorAll('.observe-fade').forEach((el) => io.observe(el));
+
+    /* Health slider */
+    const track = document.getElementById('slideTrack');
+    const cards = [...document.querySelectorAll('.slide-card')];
+    const dotsWrap = document.getElementById('slideDots');
+    let index = 0;
+    let timer;
+
+    cards.forEach((_, i) => {
+      const dot = document.createElement('button');
+      dot.type = 'button';
+      dot.className = 'h-2 w-2 rounded-full bg-neutral-300';
+      dot.setAttribute('aria-label', `Slide ${i + 1}`);
+      dot.addEventListener('click', () => goTo(i));
+      dotsWrap.appendChild(dot);
+    });
+
+    function goTo(i) {
+      index = (i + cards.length) % cards.length;
+      const cardWidth = cards[0].getBoundingClientRect().width;
+      const gap = 24;
+      track.style.transform = `translate3d(-${index * (cardWidth + gap)}px, 0, 0)`;
+      [...dotsWrap.children].forEach((d, di) => {
+        d.classList.toggle('bg-green-600', di === index);
+        d.classList.toggle('bg-neutral-300', di !== index);
+      });
+    }
+
+    function startAuto() {
+      stopAuto();
+      timer = setInterval(() => goTo(index + 1), 5000);
+    }
+    function stopAuto() { if (timer) clearInterval(timer); }
+
+    document.getElementById('slidePrev').addEventListener('click', () => goTo(index - 1));
+    document.getElementById('slideNext').addEventListener('click', () => goTo(index + 1));
+    const wrap = document.getElementById('sliderWrap');
+    wrap.addEventListener('mouseenter', stopAuto);
+    wrap.addEventListener('mouseleave', startAuto);
+    window.addEventListener('resize', () => goTo(index));
+    goTo(0);
+    startAuto();
+  </script>
+</body>
+</html>
