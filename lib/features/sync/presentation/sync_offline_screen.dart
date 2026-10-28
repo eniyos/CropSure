@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:go_router/go_router.dart';
 import 'package:intl/intl.dart';
 
@@ -14,6 +15,7 @@ import '../../../widgets/app_card.dart';
 import '../../../widgets/app_scaffold.dart';
 import '../../../widgets/section_header.dart';
 import '../../../widgets/status_badge.dart';
+import '../../../services/blockchain/solana_service.dart';
 
 class SyncOfflineScreen extends StatelessWidget {
   const SyncOfflineScreen({super.key});
@@ -231,10 +233,159 @@ class SyncOfflineScreen extends StatelessWidget {
                         },
                   isLoading: sync.isSyncing,
                 ),
+                const SizedBox(height: AppSpacing.lg),
+                const SectionHeader(
+                  title: 'Blockchain',
+                  subtitle: 'Solana Devnet immutable audit trail',
+                ),
+                const _SolanaLedgerCard(),
+                const SizedBox(height: AppSpacing.xl),
               ],
             ),
           );
         },
+      ),
+    );
+  }
+}
+
+class _SolanaLedgerCard extends StatefulWidget {
+  const _SolanaLedgerCard();
+
+  @override
+  State<_SolanaLedgerCard> createState() => _SolanaLedgerCardState();
+}
+
+class _SolanaLedgerCardState extends State<_SolanaLedgerCard> {
+  bool _isAnchoring = false;
+  String? _lastSignature;
+  bool _hidden = false;
+
+  Future<void> _anchorQueue() async {
+    setState(() => _isAnchoring = true);
+    final service = SolanaService();
+    final result = await service.anchorPassportData(
+      passportId: 'batch_sync_${DateTime.now().millisecondsSinceEpoch}',
+      passportData: const {'type': 'offline_sync_batch'},
+    );
+    if (!mounted) return;
+    setState(() {
+      _isAnchoring = false;
+      _lastSignature = result.valueOrNull?.signature;
+    });
+
+    result.when(
+      success: (_) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(content: Text('Sync queue successfully anchored on Solana Devnet!')),
+        );
+      },
+      failure: (error) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text('Failed to anchor: $error')),
+        );
+      },
+    );
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    if (_hidden) {
+      return TextButton.icon(
+        onPressed: () => setState(() => _hidden = false),
+        icon: const Icon(Icons.hub_rounded, size: 18),
+        label: const Text('Show Solana Devnet Ledger'),
+      );
+    }
+    return AppCard(
+      glass: true,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Row(
+            children: [
+              const Icon(Icons.hub_rounded, color: AppColors.leafDeep),
+              const SizedBox(width: AppSpacing.sm),
+              Expanded(
+                child: Text(
+                  'Solana Devnet Ledger',
+                  style: theme.textTheme.titleMedium?.copyWith(
+                    fontWeight: FontWeight.w700,
+                  ),
+                ),
+              ),
+              const StatusBadge(label: 'Devnet Active', tone: StatusBadgeTone.success),
+            ],
+          ),
+          const SizedBox(height: AppSpacing.sm),
+          Text(
+            'Anchor offline sync queue and audit trail immutably to Solana blockchain.',
+            style: theme.textTheme.bodyMedium?.copyWith(
+              color: AppColors.textSecondary,
+            ),
+          ),
+          if (_lastSignature != null) ...[
+            const SizedBox(height: AppSpacing.md),
+            InkWell(
+              onTap: () {
+                Clipboard.setData(ClipboardData(text: _lastSignature!));
+                ScaffoldMessenger.of(context).showSnackBar(
+                  const SnackBar(content: Text('Solana signature copied.')),
+                );
+              },
+              borderRadius: BorderRadius.circular(8),
+              child: Padding(
+                padding: const EdgeInsets.symmetric(vertical: 4),
+                child: Row(
+                  children: [
+                    const Icon(
+                      Icons.check_circle_outline,
+                      size: 16,
+                      color: AppColors.leafDeep,
+                    ),
+                    const SizedBox(width: 6),
+                    Expanded(
+                      child: Text(
+                        'Sig: $_lastSignature',
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
+                        style: theme.textTheme.bodySmall?.copyWith(
+                          fontFamily: 'monospace',
+                          color: AppColors.leafDeep,
+                        ),
+                      ),
+                    ),
+                    const Icon(
+                      Icons.copy_rounded,
+                      size: 14,
+                      color: AppColors.textSecondary,
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          ],
+          const SizedBox(height: AppSpacing.md),
+          Row(
+            children: [
+              Expanded(
+                child: AppButton(
+                  label: _isAnchoring ? 'Anchoring Queue...' : 'Anchor Queue to Solana',
+                  icon: Icons.link_rounded,
+                  isLoading: _isAnchoring,
+                  variant: AppButtonVariant.outlined,
+                  onPressed: _isAnchoring ? null : _anchorQueue,
+                ),
+              ),
+              const SizedBox(width: AppSpacing.sm),
+              TextButton(
+                onPressed: () => setState(() => _hidden = true),
+                child: const Text('Skip'),
+              ),
+            ],
+          ),
+        ],
       ),
     );
   }

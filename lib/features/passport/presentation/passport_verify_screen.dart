@@ -190,7 +190,9 @@ class _PassportVerifyScreenState extends State<PassportVerifyScreen> {
                           const SizedBox(height: AppSpacing.md),
                           AppButton(
                             label: 'Open passport',
-                            variant: AppButtonVariant.outlined,
+                            variant: successWithPassport
+                                ? AppButtonVariant.forest
+                                : AppButtonVariant.outlined,
                             onPressed: () => context.push(
                               AppRoutes.passportDetailsPath(
                                 result.passport!.id,

@@ -103,12 +103,14 @@ class _CropDetailsScreenState extends State<CropDetailsScreen> {
               );
             case LoadState.success:
               final crop = _controller.selected!;
-              return ResponsiveContent(
-                child: ListView(
-                  physics: const BouncingScrollPhysics(
-                    parent: AlwaysScrollableScrollPhysics(),
-                  ),
-                  children: [
+              return RefreshIndicator(
+                onRefresh: () => _controller.loadCrop(widget.cropId),
+                child: ResponsiveContent(
+                  child: ListView(
+                    physics: const BouncingScrollPhysics(
+                      parent: AlwaysScrollableScrollPhysics(),
+                    ),
+                    children: [
                     ScrollReveal(
                       child: ClipRRect(
                         borderRadius:
@@ -305,7 +307,8 @@ class _CropDetailsScreenState extends State<CropDetailsScreen> {
                     ),
                   ],
                 ),
-              );
+              ),
+            );
           }
         },
       ),

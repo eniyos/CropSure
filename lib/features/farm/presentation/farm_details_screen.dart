@@ -100,8 +100,10 @@ class _FarmDetailsScreenState extends State<FarmDetailsScreen> {
               );
             case LoadState.success:
               final farm = _controller.selected!;
-              return ResponsiveContent(
-                child: ListView(
+              return RefreshIndicator(
+                onRefresh: () => _controller.loadFarm(widget.farmId),
+                child: ResponsiveContent(
+                  child: ListView(
                   physics: const BouncingScrollPhysics(
                     parent: AlwaysScrollableScrollPhysics(),
                   ),
@@ -246,7 +248,8 @@ class _FarmDetailsScreenState extends State<FarmDetailsScreen> {
                     ),
                   ],
                 ),
-              );
+              ),
+            );
           }
         },
       ),

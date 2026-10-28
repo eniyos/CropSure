@@ -22,6 +22,7 @@ import '../../../widgets/scroll_reveal.dart';
 import '../../../widgets/section_header.dart';
 import '../../../widgets/status_badge.dart';
 import '../controllers/passport_controller.dart';
+import '../../../services/blockchain/solana_service.dart';
 
 StatusBadgeTone _tone(PassportVerificationStatus status) => switch (status) {
       PassportVerificationStatus.verified => StatusBadgeTone.success,
@@ -58,6 +59,9 @@ class PassportDetailsScreen extends StatefulWidget {
 
 class _PassportDetailsScreenState extends State<PassportDetailsScreen> {
   late final PassportController _controller;
+  bool _isAnchoring = false;
+  String? _solanaSignature;
+  bool _skipSolana = false;
 
   @override
   void initState() {
@@ -74,11 +78,45 @@ class _PassportDetailsScreenState extends State<PassportDetailsScreen> {
     }
   }
 
-  Future<void> _copyCode(String code) async {
-    await Clipboard.setData(ClipboardData(text: code));
+  Future<void> _copyText(String text, String message) async {
+    await Clipboard.setData(ClipboardData(text: text));
     if (!mounted) return;
     ScaffoldMessenger.of(context).showSnackBar(
-      const SnackBar(content: Text('Verification code copied.')),
+      SnackBar(content: Text(message)),
+    );
+  }
+
+  Future<void> _copyCode(String code) => _copyText(code, 'Verification code copied.');
+
+  Future<void> _anchorToSolana(CropPassport passport) async {
+    setState(() => _isAnchoring = true);
+    final solanaService = SolanaService();
+    final result = await solanaService.anchorPassportData(
+      passportId: passport.id,
+      passportData: {
+        'cropLabel': passport.cropLabel,
+        'farmName': passport.farmName,
+        'verificationCode': passport.verificationCode,
+        'issuedAt': passport.issuedAt.toIso8601String(),
+      },
+    );
+    if (!mounted) return;
+    setState(() {
+      _isAnchoring = false;
+      _solanaSignature = result.valueOrNull?.signature;
+    });
+
+    result.when(
+      success: (_) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(content: Text('Successfully anchored passport on Solana Devnet!')),
+        );
+      },
+      failure: (error) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text('Failed to anchor: $error')),
+        );
+      },
     );
   }
 
@@ -318,6 +356,49 @@ class _PassportDetailsScreenState extends State<PassportDetailsScreen> {
                                       ),
                                     ),
                                   ),
+                                  const SizedBox(height: AppSpacing.sm),
+                                  if (!_skipSolana && _solanaSignature == null) ...[
+                                    AppButton(
+                                      label: _isAnchoring ? 'Anchoring to Solana...' : 'Anchor to Solana Devnet',
+                                      variant: AppButtonVariant.filled,
+                                      icon: Icons.link_rounded,
+                                      isLoading: _isAnchoring,
+                                      onPressed: _isAnchoring ? null : () => _anchorToSolana(passport),
+                                    ),
+                                    const SizedBox(height: AppSpacing.xs),
+                                    TextButton(
+                                      onPressed: () => setState(() => _skipSolana = true),
+                                      child: Text(
+                                        'Skip Solana anchoring',
+                                        style: theme.textTheme.bodySmall?.copyWith(
+                                          color: AppColors.textSecondary,
+                                        ),
+                                      ),
+                                    ),
+                                  ] else if (_solanaSignature != null) ...[
+                                    AppButton(
+                                      label: 'Anchored on Solana ✓ (Copy Sig)',
+                                      variant: AppButtonVariant.outlined,
+                                      icon: Icons.check_circle_outline,
+                                      onPressed: () => _copyText(
+                                        _solanaSignature!,
+                                        'Solana transaction signature copied.',
+                                      ),
+                                    ),
+                                    const SizedBox(height: AppSpacing.xs),
+                                    Text(
+                                      'Sig: ${_solanaSignature!.length > 16 ? '${_solanaSignature!.substring(0, 16)}...' : _solanaSignature}',
+                                      style: theme.textTheme.bodySmall?.copyWith(
+                                        color: AppColors.textSecondary,
+                                        fontFamily: 'monospace',
+                                      ),
+                                    ),
+                                  ] else ...[
+                                    TextButton(
+                                      onPressed: () => setState(() => _skipSolana = false),
+                                      child: const Text('Enable Solana Devnet Anchoring'),
+                                    ),
+                                  ],
                                 ],
                               ),
                             ),
@@ -334,14 +415,25 @@ class _PassportDetailsScreenState extends State<PassportDetailsScreen> {
                               eyebrow: 'Trail',
                               title: 'Passport timeline',
                             ),
-                            ...detail.timeline.map(
-                              (event) => Padding(
-                                padding: const EdgeInsets.only(
-                                  bottom: AppSpacing.sm,
+                            if (detail.timeline.isEmpty)
+                              AppCard(
+                                glass: true,
+                                child: Text(
+                                  'No timeline events recorded yet.',
+                                  style: theme.textTheme.bodyMedium?.copyWith(
+                                    color: AppColors.textSecondary,
+                                  ),
                                 ),
-                                child: _TimelineTile(event: event),
+                              )
+                            else
+                              ...detail.timeline.map(
+                                (event) => Padding(
+                                  padding: const EdgeInsets.only(
+                                    bottom: AppSpacing.sm,
+                                  ),
+                                  child: _TimelineTile(event: event),
+                                ),
                               ),
-                            ),
                           ],
                         ),
                       ),
