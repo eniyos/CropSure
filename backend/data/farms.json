@@ -1,0 +1,20 @@
+[
+  {
+    "id": "farm-03775c3b",
+    "name": "Coffee",
+    "location": "Kodaikanal",
+    "area_hectares": 1.0,
+    "notes": null,
+    "created_at": "2026-11-04T16:55:58.756980+00:00",
+    "updated_at": "2026-11-04T16:55:58.756980+00:00"
+  },
+  {
+    "id": "farm-001",
+    "name": "Green Valley Estate",
+    "location": "Nashik, Maharashtra",
+    "area_hectares": 4.5,
+    "notes": "Primary tomato and crop plots.",
+    "created_at": "2026-10-01T10:00:00Z",
+    "updated_at": "2026-11-01T10:00:00Z"
+  }
+]

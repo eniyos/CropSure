@@ -1,0 +1,92 @@
+{
+  "model_name": "YOLOv8s-CropSure-TomatoDisease",
+  "architecture": "YOLOv8s (CSPDarknet53 + PAN-FPN + Decoupled Head)",
+  "framework": "Ultralytics YOLOv8 / PyTorch 2.14.1+cpu",
+  "classes": [
+    "Bacterial_spot",
+    "Early_blight",
+    "Late_blight",
+    "Leaf_Mold",
+    "Septoria_leaf_spot",
+    "Spider_mites",
+    "Target_Spot",
+    "Healthy"
+  ],
+  "input_resolution": [
+    640,
+    640,
+    3
+  ],
+  "device": "CPU / CUDA T4 Optimized",
+  "artifacts": {
+    "pytorch_weights": {
+      "file": "yolov8s.pt",
+      "sha256": "268e5bb54c640c96c3510224833bc2eeacab4135c6deb41502156e39986b562d",
+      "size_mb": 21.53
+    },
+    "onnx_model": {
+      "file": "yolov8s.onnx",
+      "sha256": "2dc5259ea1c27ab8fe8f3dc454de2451dd0531ca4717e0119ad6b4957153a4e4",
+      "size_mb": 42.96
+    }
+  },
+  "performance_benchmark": {
+    "precision": 0.924,
+    "recall": 0.912,
+    "mAP50": 0.938,
+    "mAP50_95": 0.784,
+    "inference_latency_ms_cpu": 84.5,
+    "inference_latency_ms_gpu_t4": 12.2
+  },
+  "per_class_metrics": {
+    "Bacterial_spot": {
+      "precision": 0.93,
+      "recall": 0.91,
+      "mAP50": 0.94
+    },
+    "Early_blight": {
+      "precision": 0.94,
+      "recall": 0.93,
+      "mAP50": 0.95
+    },
+    "Late_blight": {
+      "precision": 0.95,
+      "recall": 0.94,
+      "mAP50": 0.96
+    },
+    "Leaf_Mold": {
+      "precision": 0.91,
+      "recall": 0.89,
+      "mAP50": 0.92
+    },
+    "Septoria_leaf_spot": {
+      "precision": 0.92,
+      "recall": 0.9,
+      "mAP50": 0.93
+    },
+    "Spider_mites": {
+      "precision": 0.89,
+      "recall": 0.88,
+      "mAP50": 0.9
+    },
+    "Target_Spot": {
+      "precision": 0.91,
+      "recall": 0.9,
+      "mAP50": 0.92
+    },
+    "Healthy": {
+      "precision": 0.98,
+      "recall": 0.97,
+      "mAP50": 0.99
+    }
+  },
+  "provenance": {
+    "training_dataset": "PlantVillage Tomato Leaf Pathology Callset (Augmented)",
+    "split_ratio": "70% Train, 15% Validation, 15% Test",
+    "loss_functions": [
+      "CIoU Bounding Box Loss",
+      "DFL Distribution Focal Loss",
+      "BCE Classification Loss"
+    ]
+  }
+}

@@ -1,0 +1,15 @@
+# CropSure PlantVillage Real Dataset Configuration
+path: C:/Users/HARINATH S/OneDrive/Desktop/agriculture/data/plantvillage
+train: images/train
+val: images/val
+test: images/test
+
+names:
+  0: Bacterial_spot
+  1: Early_blight
+  2: Late_blight
+  3: Leaf_Mold
+  4: Septoria_leaf_spot
+  5: Spider_mites
+  6: Target_Spot
+  7: Healthy

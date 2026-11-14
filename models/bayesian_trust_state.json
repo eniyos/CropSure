@@ -1,0 +1,50 @@
+{
+  "image_quality": {
+    "alpha": 5.0,
+    "beta": 1.2
+  },
+  "gps_consistency": {
+    "alpha": 5.0,
+    "beta": 1.2
+  },
+  "temporal_consistency": {
+    "alpha": 5.0,
+    "beta": 1.2
+  },
+  "disease_severity_plausibility": {
+    "alpha": 5.0,
+    "beta": 1.2
+  },
+  "weather_correlation": {
+    "alpha": 5.0,
+    "beta": 1.2
+  },
+  "historical_pattern": {
+    "alpha": 5.0,
+    "beta": 1.2
+  },
+  "device_fingerprint": {
+    "alpha": 5.0,
+    "beta": 1.2
+  },
+  "submission_frequency": {
+    "alpha": 5.0,
+    "beta": 1.2
+  },
+  "metadata_completeness": {
+    "alpha": 5.0,
+    "beta": 1.2
+  },
+  "expert_agreement": {
+    "alpha": 5.0,
+    "beta": 1.2
+  },
+  "cross_validation": {
+    "alpha": 5.0,
+    "beta": 1.2
+  },
+  "community_consensus": {
+    "alpha": 5.0,
+    "beta": 1.2
+  }
+}

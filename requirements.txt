@@ -1,0 +1,17 @@
+flask==3.1.1
+flask-cors==5.0.1
+numpy==1.26.4
+pandas==2.2.3
+scikit-learn==1.6.1
+joblib==1.4.2
+torch==2.5.1
+torchvision==0.20.1
+ultralytics==8.3.50
+opencv-python-headless==4.10.0.84
+Pillow==11.0.0
+scipy==1.14.1
+matplotlib==3.9.3
+onnx==1.17.0
+onnxruntime==1.20.1
+pytest==8.3.4
+gunicorn==23.0.0

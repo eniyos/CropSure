@@ -1,0 +1,8 @@
+Bacterial_spot
+Early_blight
+Late_blight
+Leaf_Mold
+Septoria_leaf_spot
+Spider_mites
+Target_Spot
+Healthy

@@ -1,0 +1,101 @@
+{
+  "model": "ResNet-18 Tomato Foliar Pathology Classifier",
+  "tflite_file": "models\\tflite\\tomato_classifier.tflite",
+  "file_size_mb": 42.65,
+  "total_test_samples": 8,
+  "top1_agreement_pct": 100.0,
+  "average_cosine_similarity": 1.0,
+  "average_max_absolute_error": 0.0,
+  "cpu_latency_mean_ms": 105.57,
+  "cpu_latency_p95_ms": 108.96,
+  "detailed_results": [
+    {
+      "image": "bacterial_spot_sample.jpg",
+      "pytorch_pred": "Bacterial_spot",
+      "pytorch_conf": 0.37317389249801636,
+      "tflite_pred": "Bacterial_spot",
+      "tflite_conf": 0.3731726109981537,
+      "agreement": true,
+      "max_abs_err": 1.4603137969970703e-06,
+      "mean_abs_err": 5.373440217226744e-07,
+      "cosine_similarity": 1.0000001192092896
+    },
+    {
+      "image": "early_blight_sample.jpg",
+      "pytorch_pred": "Early_blight",
+      "pytorch_conf": 0.9999843835830688,
+      "tflite_pred": "Early_blight",
+      "tflite_conf": 0.9999845027923584,
+      "agreement": true,
+      "max_abs_err": 1.1920928955078125e-07,
+      "mean_abs_err": 1.4902861167342962e-08,
+      "cosine_similarity": 1.0
+    },
+    {
+      "image": "healthy_leaf_sample.jpg",
+      "pytorch_pred": "Late_blight",
+      "pytorch_conf": 0.9997976422309875,
+      "tflite_pred": "Late_blight",
+      "tflite_conf": 0.9997976422309875,
+      "agreement": true,
+      "max_abs_err": 4.511093720793724e-10,
+      "mean_abs_err": 1.0339817890780978e-10,
+      "cosine_similarity": 1.0
+    },
+    {
+      "image": "late_blight_sample.jpg",
+      "pytorch_pred": "Leaf_Mold",
+      "pytorch_conf": 0.7178488969802856,
+      "tflite_pred": "Leaf_Mold",
+      "tflite_conf": 0.7178497314453125,
+      "agreement": true,
+      "max_abs_err": 8.344650268554688e-07,
+      "mean_abs_err": 1.9708022591657937e-07,
+      "cosine_similarity": 1.0000001192092896
+    },
+    {
+      "image": "leaf_mold_sample.jpg",
+      "pytorch_pred": "Septoria_leaf_spot",
+      "pytorch_conf": 0.9986968636512756,
+      "tflite_pred": "Septoria_leaf_spot",
+      "tflite_conf": 0.9986969828605652,
+      "agreement": true,
+      "max_abs_err": 1.1920928955078125e-07,
+      "mean_abs_err": 1.5244324913510354e-08,
+      "cosine_similarity": 1.0
+    },
+    {
+      "image": "septoria_sample.jpg",
+      "pytorch_pred": "Spider_mites",
+      "pytorch_conf": 0.9987128973007202,
+      "tflite_pred": "Spider_mites",
+      "tflite_conf": 0.9987128973007202,
+      "agreement": true,
+      "max_abs_err": 2.8812792152166367e-09,
+      "mean_abs_err": 1.0246594683849253e-09,
+      "cosine_similarity": 1.0
+    },
+    {
+      "image": "spider_mites_sample.jpg",
+      "pytorch_pred": "Target_Spot",
+      "pytorch_conf": 0.9999822378158569,
+      "tflite_pred": "Target_Spot",
+      "tflite_conf": 0.9999823570251465,
+      "agreement": true,
+      "max_abs_err": 1.1920928955078125e-07,
+      "mean_abs_err": 1.4913434043251073e-08,
+      "cosine_similarity": 1.0
+    },
+    {
+      "image": "target_spot_sample.jpg",
+      "pytorch_pred": "Healthy",
+      "pytorch_conf": 0.9995332956314087,
+      "tflite_pred": "Healthy",
+      "tflite_conf": 0.9995332956314087,
+      "agreement": true,
+      "max_abs_err": 7.34871719032526e-10,
+      "mean_abs_err": 2.2788526621297933e-10,
+      "cosine_similarity": 1.0
+    }
+  ]
+}

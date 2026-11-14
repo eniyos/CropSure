@@ -1,0 +1,30 @@
+[
+  {
+    "id": "crop-bc0481b2",
+    "farm_id": "farm-001",
+    "farm_name": "Green Valley Estate",
+    "crop_type": "Coffee Plant",
+    "variety": "Arabica \u2013 S.795",
+    "planting_date": "2026-11-04T22:26:07.754",
+    "growth_stage": "fruiting",
+    "health_status": "healthy",
+    "area_hectares": 1.0,
+    "notes": null,
+    "trust_score": 85.0,
+    "created_at": "2026-11-04T17:55:58.709576+00:00",
+    "updated_at": "2026-11-04T17:55:58.709576+00:00"
+  },
+  {
+    "id": "crop-001",
+    "farm_id": "farm-001",
+    "farm_name": "Green Valley Estate",
+    "crop_type": "Tomato",
+    "variety": "Roma VF",
+    "planting_date": "2026-09-15T00:00:00Z",
+    "growth_stage": "fruiting",
+    "health_status": "healthy",
+    "area_hectares": 2.0,
+    "trust_score": 88.0,
+    "created_at": "2026-09-15T00:00:00Z"
+  }
+]

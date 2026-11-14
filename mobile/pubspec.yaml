@@ -1,0 +1,40 @@
+name: cropsure_mobile
+description: "CropSure - AI Agricultural Disease Diagnosis, Progression Forecasting, and Crop Trust Platform"
+publish_to: "none"
+version: 1.0.0+1
+
+environment:
+  sdk: ">=3.0.0 <4.0.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+  tflite_flutter: ^0.10.4
+  image_picker: ^1.1.2
+  image: ^4.3.0
+  http: ^1.2.2
+  provider: ^6.1.2
+  fl_chart: ^0.69.0
+  path_provider: ^2.1.4
+  shared_preferences: ^2.3.2
+  cupertino_icons: ^1.0.8
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^4.0.0
+
+flutter:
+  uses-material-design: true
+
+  assets:
+    - assets/models/tomato_classifier.tflite
+    - assets/models/labels.txt
+    - assets/samples/bacterial_spot_sample.jpg
+    - assets/samples/early_blight_sample.jpg
+    - assets/samples/healthy_leaf_sample.jpg
+    - assets/samples/late_blight_sample.jpg
+    - assets/samples/leaf_mold_sample.jpg
+    - assets/samples/septoria_sample.jpg
+    - assets/samples/spider_mites_sample.jpg
+    - assets/samples/target_spot_sample.jpg
