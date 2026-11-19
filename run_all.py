@@ -33,7 +33,7 @@ def main():
     npm_cmd = "npm.cmd" if os.name == "nt" else "npm"
 
     # Launch Backend
-    print("\n[1/3] Launching Backend API server on http://localhost:5000...")
+    print("\n[1/3] Launching Backend API server on http://localhost:5005...")
     backend_proc = subprocess.Popen(
         [sys.executable, str(BACKEND_SCRIPT)],
         cwd=str(ROOT_DIR),
@@ -68,9 +68,9 @@ def main():
     print("  [SUCCESS] CropSure Platform is RUNNING!")
     print("  * Frontend Web UI:  http://localhost:3000")
     print("  * Backup Port UI:   http://localhost:3001")
-    print("  * Backend REST API: http://localhost:5000")
-    print("  * API Health Check: http://localhost:5000/api/health")
-    print("  * Model Telemetry:  http://localhost:5000/api/models/status")
+    print("  * Backend REST API: http://localhost:5005")
+    print("  * API Health Check: http://localhost:5005/api/health")
+    print("  * Model Telemetry:  http://localhost:5005/api/models/status")
     print("=" * 65)
     print("  Press Ctrl+C to stop all services safely.\n")
 

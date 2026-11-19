@@ -201,7 +201,7 @@ export default function AboutPage() {
 
           <div className="flex flex-wrap gap-2 text-xs">
             <a
-              href="http://localhost:5000/api/health"
+              href="http://localhost:5005/api/health"
               target="_blank"
               rel="noreferrer"
               className="inline-flex items-center gap-1.5 px-3 py-2 rounded-xl bg-gray-100 hover:bg-gray-200 text-gray-800 font-semibold transition-colors"
@@ -210,7 +210,7 @@ export default function AboutPage() {
               <ExternalLink className="w-3.5 h-3.5" />
             </a>
             <a
-              href="http://localhost:5000/docs"
+              href="http://localhost:5005/docs"
               target="_blank"
               rel="noreferrer"
               className="inline-flex items-center gap-1.5 px-3 py-2 rounded-xl bg-emerald-50 hover:bg-emerald-100 text-[#2D6A4F] font-semibold border border-emerald-200 transition-colors"

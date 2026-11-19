@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-// All API calls go to http://localhost:5000/api (or /api via Vite proxy)
+// All API calls go to http://localhost:5005/api (or /api via Vite proxy)
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || '/api';
 
 const apiClient = axios.create({
@@ -66,8 +66,9 @@ const MOCK_DISEASES = [
 ];
 
 export const mockAnalysisResponse = (imageName = 'leaf_sample.jpg') => {
-  // Deterministic or pseudo-random selection
-  const disease = MOCK_DISEASES[0]; // Tomato Early Blight
+  // Select disease deterministically based on image name
+  const hash = String(imageName).split('').reduce((acc, c) => acc + c.charCodeAt(0), 0);
+  const disease = MOCK_DISEASES[hash % MOCK_DISEASES.length];
   return {
     success: true,
     detection: {
@@ -155,9 +156,7 @@ export const apiService = {
     formData.append('image', imageFile);
 
     try {
-      const response = await apiClient.post('/analyze', formData, {
-        headers: { 'Content-Type': 'multipart/form-data' },
-      });
+      const response = await apiClient.post('/analyze', formData);
       const data = response.data;
       if (data && data.detection) {
         const primaryCond = data.detection.primary_condition || 'Early_blight';
@@ -175,47 +174,71 @@ export const apiService = {
         const lossPct = data.yield_loss?.yield_loss_pct || 24.5;
         const lossUsd = data.yield_loss?.revenue_loss_usd_ha || 1420;
 
+        const isHealthy = primaryCond.toLowerCase().includes('healthy');
+        const meta = data.detection.disease_metadata || {};
+        const pathogen = meta.pathogen || data.detection.pathogen || (isHealthy ? 'None (Healthy Plant Tissue)' : 'Alternaria solani');
+        const symptoms = meta.type 
+          ? `${meta.type} pathology. Optimal pathogen development temperature: ${meta.optimal_temp_c ? meta.optimal_temp_c[0] + '°C - ' + meta.optimal_temp_c[1] + '°C' : '20°C - 30°C'}.` 
+          : (isHealthy ? 'Vibrant chlorophyll green, uniform leaf turgor, zero necrotic or chlorotic lesions identified.' : 'Foliar lesions with characteristic surrounding margins.');
+        const recommendation = meta.recommended_treatment || (isHealthy ? 'Maintain balanced N-P-K fertilization and routine scouting.' : 'Apply targeted protective fungicide or bactericide.');
+        const urgency = isHealthy ? 'None' : (sevScore > 50 ? 'High' : (sevScore > 20 ? 'Medium' : 'Low'));
+
         return {
           success: true,
           detection: {
-            disease: `Tomato ${formattedCond}`,
-            pathogen: data.detection.pathogen || 'Alternaria solani',
+            disease: isHealthy ? 'Tomato Healthy' : `Tomato ${formattedCond}`,
+            pathogen: pathogen,
             confidence: conf,
             accuracy: accStr,
             model_accuracy_pct: accPct,
             map50: map50,
             severity_score: +sevScore.toFixed(1),
             severity_category: sevLevel,
-            symptoms: data.detection.symptoms || 'Foliar lesions with characteristic chlorotic surrounding margins.',
-            recommendation: data.detection.treatment || 'Apply targeted protective fungicide (chlorothalonil or copper).',
-            urgency: sevScore > 50 ? 'High' : 'Medium',
+            symptoms: symptoms,
+            recommendation: recommendation,
+            urgency: urgency,
             affected_area_pct: +sevScore.toFixed(1),
             timestamp: data.timestamp || new Date().toISOString()
           },
           gradcam: {
             explanation_available: true,
             heatmap_url: data.explainability?.overlay_base64 || null,
-            focal_features: [
+            focal_features: isHealthy ? [
+              { feature: 'Uniform Chlorophyll Matrix', weight: 0.82 },
+              { feature: 'Intact Vein Morphology', weight: 0.18 }
+            ] : [
               { feature: 'High Activation Lesion Core', weight: 0.52 },
               { feature: 'Perilesional Chlorosis', weight: 0.31 },
               { feature: 'Vein Margin Transition', weight: 0.17 }
             ],
-            description: 'Grad-CAM gradient backpropagation highlights localized disease foci.'
+            description: isHealthy 
+              ? 'Grad-CAM confirmational saliency: clean foliage with zero localized necrotic hotspots.' 
+              : 'Grad-CAM gradient backpropagation highlights localized disease foci.'
           },
           forecast: {
             days: [0, 3, 7, 14, 21, 30],
-            projected_severity: [sevScore, sevScore * 1.1, sevScore * 1.3, sevScore * 1.6, sevScore * 1.8, sevScore * 2.0].map(v => Math.min(100, +v.toFixed(1))),
-            upper_confidence_band: [sevScore, sevScore * 1.2, sevScore * 1.45, sevScore * 1.8, sevScore * 2.0, 100].map(v => Math.min(100, +v.toFixed(1))),
-            lower_confidence_band: [sevScore, sevScore * 1.0, sevScore * 1.15, sevScore * 1.35, sevScore * 1.5, sevScore * 1.6].map(v => Math.min(100, +v.toFixed(1))),
-            without_intervention: [sevScore, sevScore * 1.25, sevScore * 1.55, sevScore * 1.9, 95, 99].map(v => Math.min(100, +v.toFixed(1))),
-            with_treatment: [sevScore, sevScore * 0.9, sevScore * 0.65, sevScore * 0.4, sevScore * 0.25, sevScore * 0.15].map(v => Math.min(100, +v.toFixed(1))),
-            r0_effective: 1.84,
-            doubling_time_days: 9.2
+            projected_severity: isHealthy
+              ? [sevScore, sevScore, sevScore, sevScore, sevScore, sevScore].map(v => +v.toFixed(1))
+              : [sevScore, sevScore * 1.1, sevScore * 1.3, sevScore * 1.6, sevScore * 1.8, sevScore * 2.0].map(v => Math.min(100, +v.toFixed(1))),
+            upper_confidence_band: isHealthy
+              ? [sevScore, sevScore + 0.2, sevScore + 0.4, sevScore + 0.5, sevScore + 0.6, sevScore + 0.8].map(v => +v.toFixed(1))
+              : [sevScore, sevScore * 1.2, sevScore * 1.45, sevScore * 1.8, sevScore * 2.0, 100].map(v => Math.min(100, +v.toFixed(1))),
+            lower_confidence_band: isHealthy
+              ? [sevScore, sevScore, sevScore, sevScore, sevScore, sevScore].map(v => +v.toFixed(1))
+              : [sevScore, sevScore * 1.0, sevScore * 1.15, sevScore * 1.35, sevScore * 1.5, sevScore * 1.6].map(v => Math.min(100, +v.toFixed(1))),
+            without_intervention: isHealthy
+              ? [sevScore, sevScore, sevScore, sevScore, sevScore, sevScore].map(v => +v.toFixed(1))
+              : [sevScore, sevScore * 1.25, sevScore * 1.55, sevScore * 1.9, 95, 99].map(v => Math.min(100, +v.toFixed(1))),
+            with_treatment: isHealthy
+              ? [sevScore, sevScore, sevScore, sevScore, sevScore, sevScore].map(v => +v.toFixed(1))
+              : [sevScore, sevScore * 0.9, sevScore * 0.65, sevScore * 0.4, sevScore * 0.25, sevScore * 0.15].map(v => Math.min(100, +v.toFixed(1))),
+            r0_effective: isHealthy ? 0.0 : 1.84,
+            doubling_time_days: isHealthy ? 0 : 9.2
           },
           yield_impact: {
-            estimated_yield_loss_pct: +lossPct.toFixed(1),
-            potential_loss_range: [+(lossPct * 0.85).toFixed(1), +(lossPct * 1.2).toFixed(1)],
-            estimated_economic_impact_per_hectare: Math.round(lossUsd),
+            estimated_yield_loss_pct: isHealthy ? 0.0 : +lossPct.toFixed(1),
+            potential_loss_range: isHealthy ? [0.0, 0.5] : [+(lossPct * 0.85).toFixed(1), +(lossPct * 1.2).toFixed(1)],
+            estimated_economic_impact_per_hectare: isHealthy ? 0 : Math.round(lossUsd),
             currency: 'USD',
             critical_period: 'Flowering to fruit set',
             feature_importance: [
