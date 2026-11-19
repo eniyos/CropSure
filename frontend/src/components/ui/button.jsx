@@ -16,7 +16,7 @@ const buttonVariants = cva(
         default:
           "bg-[#0d5c46] text-white shadow-xs hover:bg-[#0a4837] active:scale-[0.98] active:shadow-[inset_0_2px_4px_rgba(0,0,0,0.2)]",
         destructive:
-          "bg-rose-600 text-white shadow-xs hover:bg-rose-700 focus-visible:ring-rose-500/20 active:scale-[0.98]",
+          "bg-red-600 text-white shadow-xs hover:bg-red-700 focus-visible:ring-red-500/20 active:scale-[0.98]",
         outline:
           "border border-slate-200/90 bg-white/70 backdrop-blur-xs text-slate-800 shadow-xs hover:bg-slate-100/80 hover:border-slate-300 dark:border-slate-700 dark:bg-slate-800/50 dark:hover:bg-slate-700/50 active:scale-[0.98]",
         secondary:

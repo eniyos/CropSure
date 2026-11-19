@@ -116,7 +116,7 @@ export default function ModelsPage() {
                 <div className="text-lg font-bold font-mono text-slate-900 mt-0.5">32.2 ms</div>
                 <span className="text-xs text-emerald-700 font-mono font-medium">Sub-50ms SLA Target</span>
               </div>
-              <div className="w-8 h-8 rounded-lg bg-amber-50 flex items-center justify-center text-amber-700">
+              <div className="w-8 h-8 rounded-lg bg-[#0d5c46]/10 flex items-center justify-center text-[#0d5c46]">
                 <Clock className="w-4 h-4" />
               </div>
             </div>
@@ -140,7 +140,7 @@ export default function ModelsPage() {
                 <div className="text-lg font-bold font-mono text-slate-900 mt-0.5">4 / 4 Threads</div>
                 <span className="text-xs text-slate-500 font-mono">Zero Request Queue</span>
               </div>
-              <div className="w-8 h-8 rounded-lg bg-sky-50 flex items-center justify-center text-sky-700">
+              <div className="w-8 h-8 rounded-lg bg-slate-100 flex items-center justify-center text-slate-700">
                 <Server className="w-4 h-4" />
               </div>
             </div>

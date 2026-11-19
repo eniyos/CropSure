@@ -15,11 +15,11 @@ export default function ConfidenceBar({
   let barColor = 'bg-[#0d5c46]'; // high confidence
   let textColor = 'text-[#0d5c46]';
   if (pct < 60) {
-    barColor = 'bg-rose-500';
-    textColor = 'text-rose-600';
+    barColor = 'bg-red-600';
+    textColor = 'text-red-600';
   } else if (pct < 80) {
-    barColor = 'bg-amber-500';
-    textColor = 'text-amber-600';
+    barColor = 'bg-slate-500';
+    textColor = 'text-slate-700';
   }
 
   return (

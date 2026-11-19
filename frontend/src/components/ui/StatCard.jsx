@@ -53,7 +53,7 @@ export default function StatCard({
                   ? 'text-[#0d5c46]'
                   : trend.direction === 'neutral'
                   ? 'text-slate-500'
-                  : 'text-rose-600'
+                  : 'text-red-600'
               }`}
             >
               {trend.direction === 'up' && <TrendingUp className="w-3.5 h-3.5" />}

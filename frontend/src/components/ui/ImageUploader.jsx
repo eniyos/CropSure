@@ -148,7 +148,7 @@ export default function ImageUploader({
                 isDragActive
                   ? 'border-[#0d5c46] bg-[#0d5c46]/5 shadow-inner'
                   : isDragReject
-                  ? 'border-rose-400 bg-rose-50/50'
+                  ? 'border-red-400 bg-red-50/50'
                   : 'border-slate-300 hover:border-[#0d5c46] hover:bg-slate-50'
               }`}
             >
@@ -174,7 +174,7 @@ export default function ImageUploader({
               <motion.div
                 initial={{ opacity: 0, y: -6 }}
                 animate={{ opacity: 1, y: 0 }}
-                className="mt-3 flex items-center gap-2 text-xs text-rose-600 bg-rose-50 border border-rose-200 p-2.5 rounded-lg"
+                className="mt-3 flex items-center gap-2 text-xs text-red-600 bg-red-50 border border-red-200 p-2.5 rounded-lg"
               >
                 <AlertCircle className="w-4 h-4 shrink-0" />
                 <span>{error}</span>
@@ -230,7 +230,7 @@ export default function ImageUploader({
               <button
                 type="button"
                 onClick={onClear}
-                className="flex items-center gap-1 text-xs text-slate-400 hover:text-rose-600 transition-colors px-2 py-1 rounded-md hover:bg-rose-50"
+                className="flex items-center gap-1 text-xs text-slate-400 hover:text-red-600 transition-colors px-2 py-1 rounded-md hover:bg-red-50"
               >
                 <X className="w-3.5 h-3.5" />
                 <span>Remove</span>

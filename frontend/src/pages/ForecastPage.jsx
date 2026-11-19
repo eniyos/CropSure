@@ -161,7 +161,7 @@ export default function ForecastPage() {
             <div className="text-2xl font-bold font-mono tracking-tight text-slate-900">
               {day30Data.favorable}%
             </div>
-            <div className="text-xs text-rose-600 font-mono flex items-center gap-1">
+            <div className="text-xs text-red-600 font-mono flex items-center gap-1">
               <span>Severe necrotic loss</span>
             </div>
           </CardContent>
@@ -262,7 +262,7 @@ export default function ForecastPage() {
             <div className="space-y-1.5">
               <div className="flex justify-between items-center text-xs">
                 <label className="font-semibold text-slate-700 flex items-center gap-1">
-                  <Thermometer className="w-3.5 h-3.5 text-amber-600" />
+                  <Thermometer className="w-3.5 h-3.5 text-[#0d5c46]" />
                   <span>Ambient Temperature</span>
                 </label>
                 <span className="font-mono font-bold text-slate-800">{temperature}°C</span>
@@ -286,10 +286,10 @@ export default function ForecastPage() {
             <div className="space-y-1.5">
               <div className="flex justify-between items-center text-xs">
                 <label className="font-semibold text-slate-700 flex items-center gap-1">
-                  <Droplets className="w-3.5 h-3.5 text-sky-600" />
+                  <Droplets className="w-3.5 h-3.5 text-[#0d5c46]" />
                   <span>Relative Humidity (RH)</span>
                 </label>
-                <span className="font-mono font-bold text-sky-700">{humidity}%</span>
+                <span className="font-mono font-bold text-slate-800">{humidity}%</span>
               </div>
               <input
                 type="range"
@@ -432,8 +432,8 @@ export default function ForecastPage() {
             <TableHeader className="bg-slate-50/80 border-b border-slate-200">
               <TableRow>
                 <TableHead className="font-mono text-xs uppercase text-slate-500">Milestone</TableHead>
-                <TableHead className="font-mono text-xs uppercase text-rose-700">Favorable (Aggressive)</TableHead>
-                <TableHead className="font-mono text-xs uppercase text-amber-700">Baseline Conditions</TableHead>
+                <TableHead className="font-mono text-xs uppercase text-red-700">Favorable (Aggressive)</TableHead>
+                <TableHead className="font-mono text-xs uppercase text-slate-600">Baseline Conditions</TableHead>
                 <TableHead className="font-mono text-xs uppercase text-slate-600">Unfavorable (Dry/Cool)</TableHead>
                 <TableHead className="font-mono text-xs uppercase text-[#0d5c46]">Treated (Foliar Spray)</TableHead>
                 <TableHead className="font-mono text-xs uppercase text-slate-500">Net Preservation</TableHead>
@@ -448,10 +448,10 @@ export default function ForecastPage() {
                     <TableCell className="font-semibold text-slate-900 font-display">
                       Day {targetDay}
                     </TableCell>
-                    <TableCell className="text-rose-600 font-mono font-medium">
+                    <TableCell className="text-red-600 font-mono font-medium">
                       {row.favorable}%
                     </TableCell>
-                    <TableCell className="text-amber-600 font-mono font-medium">
+                    <TableCell className="text-slate-600 font-mono font-medium">
                       {row.baseline}%
                     </TableCell>
                     <TableCell className="text-slate-500 font-mono">

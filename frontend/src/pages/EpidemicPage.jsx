@@ -118,9 +118,9 @@ export default function EpidemicPage() {
             <CardContent className="p-4 space-y-1">
               <div className="text-xs font-medium text-slate-500 flex items-center justify-between">
                 <span>Peak Severity (Untreated)</span>
-                <TrendingUp className="w-3.5 h-3.5 text-rose-500" />
+                <TrendingUp className="w-3.5 h-3.5 text-red-500" />
               </div>
-              <div className="text-2xl font-bold font-mono tracking-tight text-rose-700">
+              <div className="text-2xl font-bold font-mono tracking-tight text-red-700">
                 {simResults.metrics.peak_severity || 89.4}%
               </div>
               <div className="text-xs text-slate-500 font-mono">
@@ -133,7 +133,7 @@ export default function EpidemicPage() {
             <CardContent className="p-4 space-y-1">
               <div className="text-xs font-medium text-slate-500 flex items-center justify-between">
                 <span>Time to 50% Infection</span>
-                <Clock className="w-3.5 h-3.5 text-amber-500" />
+                <Clock className="w-3.5 h-3.5 text-[#0d5c46]" />
               </div>
               <div className="text-2xl font-bold font-mono tracking-tight text-slate-900">
                 {simResults.metrics.time_to_50pct_days || 36} <span className="text-sm font-normal text-slate-500">Days</span>
@@ -202,7 +202,7 @@ export default function EpidemicPage() {
             <div className="bg-slate-50 p-3 rounded-lg border border-slate-200/80 space-y-1.5">
               <div className="flex justify-between items-center text-xs">
                 <span className="text-slate-600 font-medium flex items-center gap-1">
-                  <Thermometer className="w-3.5 h-3.5 text-amber-600" />
+                  <Thermometer className="w-3.5 h-3.5 text-[#0d5c46]" />
                   <span>Temp</span>
                 </span>
                 <span className="font-mono font-bold text-slate-900">{temp}°C</span>
@@ -222,7 +222,7 @@ export default function EpidemicPage() {
             <div className="bg-slate-50 p-3 rounded-lg border border-slate-200/80 space-y-1.5">
               <div className="flex justify-between items-center text-xs">
                 <span className="text-slate-600 font-medium flex items-center gap-1">
-                  <Droplets className="w-3.5 h-3.5 text-sky-600" />
+                  <Droplets className="w-3.5 h-3.5 text-[#0d5c46]" />
                   <span>RH</span>
                 </span>
                 <span className="font-mono font-bold text-slate-900">{humidity}%</span>
@@ -242,7 +242,7 @@ export default function EpidemicPage() {
             <div className="bg-slate-50 p-3 rounded-lg border border-slate-200/80 space-y-1.5">
               <div className="flex justify-between items-center text-xs">
                 <span className="text-slate-600 font-medium flex items-center gap-1">
-                  <CloudRain className="w-3.5 h-3.5 text-blue-600" />
+                  <CloudRain className="w-3.5 h-3.5 text-[#0d5c46]" />
                   <span>Precip</span>
                 </span>
                 <span className="font-mono font-bold text-slate-900">{precip}mm</span>
@@ -325,12 +325,12 @@ export default function EpidemicPage() {
                 <span>Untreated Baseline</span>
               </label>
 
-              <label className="flex items-center gap-1.5 cursor-pointer text-rose-700">
+              <label className="flex items-center gap-1.5 cursor-pointer text-red-700">
                 <input
                   type="checkbox"
                   checked={showFavorable}
                   onChange={() => setShowFavorable(!showFavorable)}
-                  className="accent-rose-600 rounded"
+                  className="accent-red-600 rounded"
                 />
                 <span>Favorable Microclimate</span>
               </label>
@@ -355,12 +355,12 @@ export default function EpidemicPage() {
                 <span>Fungicide (Day {treatmentDay})</span>
               </label>
 
-              <label className="flex items-center gap-1.5 cursor-pointer text-sky-700">
+              <label className="flex items-center gap-1.5 cursor-pointer text-[#0d5c46]">
                 <input
                   type="checkbox"
                   checked={showConfidence}
                   onChange={() => setShowConfidence(!showConfidence)}
-                  className="accent-sky-600 rounded"
+                  className="accent-[#0d5c46] rounded"
                 />
                 <span>95% CI Area</span>
               </label>

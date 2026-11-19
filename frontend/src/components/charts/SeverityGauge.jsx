@@ -18,18 +18,14 @@ export default function SeverityGauge({
   let category = 'Mild';
   let badgeBg = 'bg-[#0d5c46]/10 text-[#0d5c46] border-[#0d5c46]/20';
 
-  if (clampedValue > 75) {
+  if (clampedValue > 50) {
     color = '#dc2626'; // red
     category = 'Critical';
-    badgeBg = 'bg-rose-50 text-rose-700 border-rose-200';
-  } else if (clampedValue > 50) {
-    color = '#ea580c'; // orange
-    category = 'Severe';
-    badgeBg = 'bg-orange-50 text-orange-700 border-orange-200';
-  } else if (clampedValue >= 20) {
-    color = '#d97706'; // amber
+    badgeBg = 'bg-red-50 text-red-700 border-red-200';
+  } else if (clampedValue >= 25) {
+    color = '#475569'; // slate
     category = 'Moderate';
-    badgeBg = 'bg-amber-50 text-amber-700 border-amber-200';
+    badgeBg = 'bg-slate-100 text-slate-700 border-slate-200';
   }
 
   // SVG parameters

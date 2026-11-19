@@ -399,7 +399,7 @@ export default function AnalyzePage() {
         >
           {/* Executive Clinical Summary Banner */}
           <Card className="overflow-hidden">
-            <div className={`h-1.5 w-full ${isHealthy ? 'bg-[#0d5c46]' : 'bg-amber-600'}`} />
+            <div className={`h-1.5 w-full ${isHealthy ? 'bg-[#0d5c46]' : 'bg-[#dc2626]'}`} />
             <CardContent className="p-6">
               <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-6">
                 <div>
@@ -452,7 +452,7 @@ export default function AnalyzePage() {
                     <span className="text-[10px] font-mono uppercase tracking-wider text-slate-500 block">
                       Estimated Harvest Loss
                     </span>
-                    <span className={`font-mono text-lg font-bold ${isHealthy ? 'text-emerald-700' : 'text-amber-700'}`}>
+                    <span className={`font-mono text-lg font-bold ${isHealthy ? 'text-[#0d5c46]' : 'text-[#dc2626]'}`}>
                       {results.yield_impact.estimated_yield_loss_pct}%
                     </span>
                   </div>
@@ -539,7 +539,7 @@ export default function AnalyzePage() {
                           <div>
                             <span className="text-slate-400 block text-[10px] uppercase font-mono">Urgency</span>
                             <span className={`font-semibold px-2 py-0.5 rounded text-[11px] inline-block ${
-                              isHealthy ? 'text-emerald-700 bg-emerald-50' : 'text-amber-800 bg-amber-50'
+                              isHealthy ? 'text-[#0d5c46] bg-[#e6f0ed]' : 'text-red-700 bg-red-50 border border-red-200/60'
                             }`}>
                               {results.detection.urgency}
                             </span>
@@ -668,7 +668,7 @@ export default function AnalyzePage() {
                       </span>
                       <div className="w-full h-80 rounded-lg overflow-hidden bg-slate-900 border border-slate-200 relative">
                         <canvas ref={canvasRef} className="w-full h-full object-cover" />
-                        <div className="absolute top-2 left-2 px-2 py-0.5 rounded bg-black/70 text-amber-400 text-[10px] font-mono flex items-center gap-1">
+                        <div className="absolute top-2 left-2 px-2 py-0.5 rounded bg-slate-900/80 text-white text-[10px] font-mono flex items-center gap-1 border border-white/20">
                           <Activity className="w-3 h-3" />
                           <span>ResNet-18 Gradients</span>
                         </div>
@@ -807,7 +807,7 @@ export default function AnalyzePage() {
                           <span className="text-[10px] font-mono uppercase tracking-wider text-slate-500 block">
                             Estimated Yield Loss
                           </span>
-                          <div className={`font-mono text-3xl font-bold ${isHealthy ? 'text-emerald-700' : 'text-amber-800'}`}>
+                          <div className={`font-mono text-3xl font-bold ${isHealthy ? 'text-[#0d5c46]' : 'text-red-600'}`}>
                             {results.yield_impact.estimated_yield_loss_pct}%
                           </div>
                           <span className="text-[11px] text-slate-500">
@@ -946,10 +946,10 @@ export default function AnalyzePage() {
                   {/* Left Column (7 cols) */}
                   <div className="lg:col-span-7 space-y-4">
                     {/* SHA-256 Fingerprint */}
-                    <div className="p-4 rounded-lg bg-slate-900/90 border border-slate-800 space-y-2">
+                    <div className="p-4 rounded-xl bg-slate-50 border border-slate-200/90 space-y-2">
                       <div className="flex items-center justify-between">
-                        <div className="flex items-center gap-1.5 text-xs font-bold uppercase tracking-wider text-slate-300">
-                          <Lock className="w-3.5 h-3.5 text-emerald-400" />
+                        <div className="flex items-center gap-1.5 text-xs font-bold uppercase tracking-wider text-slate-700">
+                          <Lock className="w-3.5 h-3.5 text-[#0d5c46]" />
                           <span>Specimen Digital Fingerprint (SHA-256)</span>
                         </div>
                         <Button
@@ -957,25 +957,25 @@ export default function AnalyzePage() {
                           size="sm"
                           effect="ripple"
                           onClick={() => handleCopy(results.blockchain?.specimen_sha256 || results.image_metadata?.sha256, 'hash')}
-                          className="h-7 text-xs font-mono text-slate-400 hover:text-white hover:bg-slate-800"
+                          className="h-7 text-xs font-mono text-slate-500 hover:text-slate-900 hover:bg-slate-200/60"
                         >
-                          {copiedHash ? <Check className="w-3.5 h-3.5 text-emerald-400" /> : <Copy className="w-3.5 h-3.5" />}
+                          {copiedHash ? <Check className="w-3.5 h-3.5 text-[#0d5c46]" /> : <Copy className="w-3.5 h-3.5" />}
                           <span className="ml-1">{copiedHash ? 'Copied' : 'Copy'}</span>
                         </Button>
                       </div>
-                      <div className="font-mono text-xs text-emerald-400 break-all bg-black/60 p-2.5 rounded border border-slate-800 select-all">
+                      <div className="font-mono text-xs text-slate-800 break-all bg-white p-2.5 rounded border border-slate-200 select-all">
                         {results.blockchain?.specimen_sha256 || results.image_metadata?.sha256 || 'e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855'}
                       </div>
-                      <p className="text-[11px] text-slate-400">
+                      <p className="text-[11px] text-slate-500">
                         Cryptographic binding between uploaded foliage and diagnostic prediction. Precludes alteration for phytosanitary export and insurance claims.
                       </p>
                     </div>
 
                     {/* Solana Transaction Signature */}
-                    <div className="p-4 rounded-lg bg-slate-900/90 border border-slate-800 space-y-2">
+                    <div className="p-4 rounded-xl bg-slate-50 border border-slate-200/90 space-y-2">
                       <div className="flex items-center justify-between">
-                        <div className="flex items-center gap-1.5 text-xs font-bold uppercase tracking-wider text-slate-300">
-                          <Link2 className="w-3.5 h-3.5 text-purple-400" />
+                        <div className="flex items-center gap-1.5 text-xs font-bold uppercase tracking-wider text-slate-700">
+                          <Link2 className="w-3.5 h-3.5 text-[#0d5c46]" />
                           <span>Solana Devnet Transaction Signature</span>
                         </div>
                         <div className="flex items-center gap-2">
@@ -984,9 +984,9 @@ export default function AnalyzePage() {
                             size="sm"
                             effect="ripple"
                             onClick={() => handleCopy(results.blockchain?.tx_signature, 'tx')}
-                            className="h-7 text-xs font-mono text-slate-400 hover:text-white hover:bg-slate-800"
+                            className="h-7 text-xs font-mono text-slate-500 hover:text-slate-900 hover:bg-slate-200/60"
                           >
-                            {copiedTx ? <Check className="w-3.5 h-3.5 text-emerald-400" /> : <Copy className="w-3.5 h-3.5" />}
+                            {copiedTx ? <Check className="w-3.5 h-3.5 text-[#0d5c46]" /> : <Copy className="w-3.5 h-3.5" />}
                             <span className="ml-1">{copiedTx ? 'Copied' : 'Copy'}</span>
                           </Button>
                           {results.blockchain?.explorer_url && (
@@ -1005,12 +1005,12 @@ export default function AnalyzePage() {
                           )}
                         </div>
                       </div>
-                      <div className="font-mono text-xs text-slate-300 break-all bg-black/60 p-2.5 rounded border border-slate-800 select-all">
+                      <div className="font-mono text-xs text-slate-800 break-all bg-white p-2.5 rounded border border-slate-200 select-all">
                         {results.blockchain?.tx_signature || 'Anchor pending or confirmed via validator'}
                       </div>
 
-                      <div className="flex items-center justify-between pt-2 border-t border-slate-800">
-                        <span className="text-[11px] text-slate-400">
+                      <div className="flex items-center justify-between pt-2 border-t border-slate-200">
+                        <span className="text-[11px] text-slate-500">
                           Verify validator inclusion &amp; block timestamp
                         </span>
                         <SheenPillButton
@@ -1026,8 +1026,8 @@ export default function AnalyzePage() {
                       </div>
 
                       {verificationResult && (
-                        <div className="p-3 rounded bg-slate-900 border border-emerald-600/40 text-xs space-y-1">
-                          <div className="flex items-center justify-between text-emerald-400 font-bold">
+                        <div className="p-3 rounded-lg bg-[#e6f0ed] border border-[#0d5c46]/20 text-xs space-y-1">
+                          <div className="flex items-center justify-between text-[#0d5c46] font-bold">
                             <span className="flex items-center gap-1">
                               <CheckCircle2 className="w-3.5 h-3.5" />
                               <span>Validator Consensus Confirmed</span>

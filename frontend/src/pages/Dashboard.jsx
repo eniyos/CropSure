@@ -462,7 +462,7 @@ export default function Dashboard() {
                 45
               </span>
               <div className="flex items-center gap-2">
-                <span className="inline-flex items-center gap-0.5 text-xs font-medium tabular-nums text-rose-600">
+                <span className="inline-flex items-center gap-0.5 text-xs font-medium tabular-nums text-red-600">
                   <ArrowDown className="size-3.5" /> 6.2%
                 </span>
                 <span className="font-mono text-xs text-muted-foreground tabular-nums">48 in prior week</span>
@@ -632,10 +632,10 @@ export default function Dashboard() {
                       <Badge variant="outline" className={`gap-1.5 text-xs font-mono font-medium border-transparent ${
                         item.category === 'critical'
                           ? 'bg-destructive/10 text-destructive'
-                          : 'bg-amber-500/10 text-amber-700'
+                          : 'bg-slate-100 text-slate-700'
                       }`}>
                         <span className={`size-1.5 rounded-full ${
-                          item.category === 'critical' ? 'bg-destructive' : 'bg-amber-500'
+                          item.category === 'critical' ? 'bg-destructive' : 'bg-slate-400'
                         }`} />
                         {item.status}
                       </Badge>

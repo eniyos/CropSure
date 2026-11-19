@@ -10,24 +10,24 @@ export default function StatusBadge({
 }) {
   const variantStyles = {
     success: {
-      bg: 'bg-emerald-50 border-emerald-200 text-emerald-800',
-      dot: 'bg-emerald-500',
-      pulseDot: 'bg-emerald-400'
+      bg: 'bg-[#e6f0ed] border-[#0d5c46]/20 text-[#0d5c46]',
+      dot: 'bg-[#0d5c46]',
+      pulseDot: 'bg-[#0d5c46]/70'
     },
     warning: {
-      bg: 'bg-amber-50 border-amber-200 text-amber-800',
-      dot: 'bg-amber-500',
-      pulseDot: 'bg-amber-400'
+      bg: 'bg-red-50 border-red-200 text-red-700',
+      dot: 'bg-red-500',
+      pulseDot: 'bg-red-400'
     },
     error: {
-      bg: 'bg-rose-50 border-rose-200 text-rose-800',
-      dot: 'bg-rose-500',
-      pulseDot: 'bg-rose-400'
+      bg: 'bg-red-50 border-red-200 text-red-700',
+      dot: 'bg-red-500',
+      pulseDot: 'bg-red-400'
     },
     info: {
-      bg: 'bg-sky-50 border-sky-200 text-sky-800',
-      dot: 'bg-sky-500',
-      pulseDot: 'bg-sky-400'
+      bg: 'bg-slate-100 border-slate-200 text-slate-700',
+      dot: 'bg-slate-500',
+      pulseDot: 'bg-slate-400'
     },
     neutral: {
       bg: 'bg-slate-100 border-slate-200 text-slate-700',
