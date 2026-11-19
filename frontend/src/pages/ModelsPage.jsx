@@ -1,21 +1,20 @@
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import {
-  Cpu,
   Server,
-  Activity,
-  HardDrive,
   Clock,
-  CheckCircle2,
-  AlertCircle,
   RefreshCw,
   Zap,
-  Sliders,
   ShieldCheck,
-  Layers,
-  ArrowUpRight
+  CheckCircle2,
+  HardDrive,
+  Cpu,
 } from 'lucide-react';
-import StatusBadge from '../components/ui/StatusBadge';
+import { Card, CardHeader, CardTitle, CardDescription, CardContent } from '@/components/ui/card';
+import { Badge } from '@/components/ui/badge';
+import { Button } from '@/components/ui/button';
+import { Progress } from '@/components/ui/progress';
+import { Separator } from '@/components/ui/separator';
 import apiService from '../services/api';
 
 export default function ModelsPage() {
@@ -47,165 +46,200 @@ export default function ModelsPage() {
   return (
     <div className="space-y-6 pb-12">
       {/* Header */}
-      <div className="bg-white rounded-2xl p-6 border border-gray-100 shadow-sm flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-2 border-b border-slate-200">
         <div>
           <div className="flex items-center gap-2 mb-1">
-            <span className="w-2.5 h-2.5 rounded-full bg-[#2D6A4F] animate-pulse" />
-            <span className="text-xs font-bold text-[#2D6A4F] uppercase tracking-wider">
+            <span className="w-2 h-2 rounded-full bg-[#0d5c46]" />
+            <span className="text-xs font-mono uppercase tracking-wider text-slate-500">
               Neural Ensemble Health &amp; Model Registry
             </span>
           </div>
-          <h2 className="text-2xl font-extrabold text-gray-900 tracking-tight">
+          <h1 className="text-2xl font-bold font-display tracking-tight text-slate-900">
             Production Model Infrastructure
-          </h2>
-          <p className="text-xs sm:text-sm text-gray-500 max-w-2xl mt-0.5">
+          </h1>
+          <p className="text-sm text-slate-500 mt-0.5">
             Real-time runtime metrics, memory allocation, latency benchmarks, and architectural specifications for all 6 CropSure intelligence engines.
           </p>
         </div>
 
-        <button
-          onClick={handleRefresh}
-          disabled={refreshing}
-          className="flex items-center gap-2 px-4 py-2.5 rounded-xl text-xs font-bold text-[#2D6A4F] bg-emerald-50 hover:bg-emerald-100/70 border border-emerald-200 transition-colors shrink-0 cursor-pointer"
-        >
-          <RefreshCw className={`w-3.5 h-3.5 ${refreshing ? 'animate-spin' : ''}`} />
-          <span>Ping Models</span>
-        </button>
+        <div className="flex items-center gap-2 shrink-0">
+          <Button
+            variant="outline"
+            onClick={handleRefresh}
+            disabled={refreshing}
+            className="h-9 px-3.5 text-xs font-mono border-slate-200 text-slate-700 bg-white hover:bg-slate-50"
+          >
+            <RefreshCw className={`w-3.5 h-3.5 mr-2 ${refreshing ? 'animate-spin' : ''}`} />
+            Ping Cluster
+          </Button>
+          <Badge className="bg-[#e6f0ed] text-[#0d5c46] hover:bg-[#e6f0ed] border border-[#0d5c46]/20 font-mono text-xs">
+            6/6 Online
+          </Badge>
+        </div>
       </div>
 
       {/* Cluster Resource Overview */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-        <div className="bg-white p-5 rounded-2xl border border-gray-100 shadow-sm">
-          <div className="flex justify-between items-start">
-            <div>
-              <span className="text-xs font-bold uppercase tracking-wider text-gray-400">
-                Inference GPU
-              </span>
-              <div className="text-xl font-black text-gray-900 mt-1">NVIDIA RTX 4090</div>
-              <span className="text-xs text-emerald-700 font-semibold">1,380 MB / 24,576 MB</span>
+        <Card className="border-slate-200/80 shadow-xs bg-white">
+          <CardContent className="p-4 space-y-2">
+            <div className="flex justify-between items-start">
+              <div>
+                <span className="text-xs font-mono uppercase tracking-wider text-slate-400">
+                  Inference Device
+                </span>
+                <div className="text-lg font-bold font-display text-slate-900 mt-0.5">Apple Silicon Neural Engine</div>
+                <span className="text-xs text-[#0d5c46] font-mono font-medium">MPS Unified Memory</span>
+              </div>
+              <div className="w-8 h-8 rounded-lg bg-[#e6f0ed] flex items-center justify-center text-[#0d5c46]">
+                <Cpu className="w-4 h-4" />
+              </div>
             </div>
-            <div className="w-10 h-10 rounded-xl bg-emerald-50 flex items-center justify-center text-[#2D6A4F]">
-              <Zap className="w-5 h-5" />
+            <div className="space-y-1">
+              <div className="flex justify-between text-[11px] font-mono text-slate-500">
+                <span>VRAM Allocation</span>
+                <span>1,380 MB / 16,384 MB</span>
+              </div>
+              <Progress value={8.4} className="h-1.5 bg-slate-100" />
             </div>
-          </div>
-          <div className="w-full h-1.5 rounded-full bg-gray-100 mt-3 overflow-hidden">
-            <div className="h-full bg-[#2D6A4F] rounded-full" style={{ width: '12%' }} />
-          </div>
-        </div>
+          </CardContent>
+        </Card>
 
-        <div className="bg-white p-5 rounded-2xl border border-gray-100 shadow-sm">
-          <div className="flex justify-between items-start">
-            <div>
-              <span className="text-xs font-bold uppercase tracking-wider text-gray-400">
-                Inference Latency (Avg)
-              </span>
-              <div className="text-xl font-black text-gray-900 mt-1">32.2 ms</div>
-              <span className="text-xs text-emerald-700 font-semibold">Sub-50ms SLA Target Met</span>
+        <Card className="border-slate-200/80 shadow-xs bg-white">
+          <CardContent className="p-4 space-y-2">
+            <div className="flex justify-between items-start">
+              <div>
+                <span className="text-xs font-mono uppercase tracking-wider text-slate-400">
+                  Pipeline Latency (Avg)
+                </span>
+                <div className="text-lg font-bold font-mono text-slate-900 mt-0.5">32.2 ms</div>
+                <span className="text-xs text-emerald-700 font-mono font-medium">Sub-50ms SLA Target</span>
+              </div>
+              <div className="w-8 h-8 rounded-lg bg-amber-50 flex items-center justify-center text-amber-700">
+                <Clock className="w-4 h-4" />
+              </div>
             </div>
-            <div className="w-10 h-10 rounded-xl bg-amber-50 flex items-center justify-center text-[#C9952B]">
-              <Clock className="w-5 h-5" />
+            <div className="space-y-1">
+              <div className="flex justify-between text-[11px] font-mono text-slate-500">
+                <span>Latency Budget</span>
+                <span>32.2ms / 100ms</span>
+              </div>
+              <Progress value={32.2} className="h-1.5 bg-slate-100" />
             </div>
-          </div>
-          <div className="w-full h-1.5 rounded-full bg-gray-100 mt-3 overflow-hidden">
-            <div className="h-full bg-amber-500 rounded-full" style={{ width: '32%' }} />
-          </div>
-        </div>
+          </CardContent>
+        </Card>
 
-        <div className="bg-white p-5 rounded-2xl border border-gray-100 shadow-sm">
-          <div className="flex justify-between items-start">
-            <div>
-              <span className="text-xs font-bold uppercase tracking-wider text-gray-400">
-                Active Workers
-              </span>
-              <div className="text-xl font-black text-gray-900 mt-1">4 / 4 Threads</div>
-              <span className="text-xs text-gray-500 font-semibold">Zero Request Queue</span>
+        <Card className="border-slate-200/80 shadow-xs bg-white">
+          <CardContent className="p-4 space-y-2">
+            <div className="flex justify-between items-start">
+              <div>
+                <span className="text-xs font-mono uppercase tracking-wider text-slate-400">
+                  Worker Pool
+                </span>
+                <div className="text-lg font-bold font-mono text-slate-900 mt-0.5">4 / 4 Threads</div>
+                <span className="text-xs text-slate-500 font-mono">Zero Request Queue</span>
+              </div>
+              <div className="w-8 h-8 rounded-lg bg-sky-50 flex items-center justify-center text-sky-700">
+                <Server className="w-4 h-4" />
+              </div>
             </div>
-            <div className="w-10 h-10 rounded-xl bg-sky-50 flex items-center justify-center text-sky-700">
-              <Server className="w-5 h-5" />
+            <div className="space-y-1">
+              <div className="flex justify-between text-[11px] font-mono text-slate-500">
+                <span>Pool Saturation</span>
+                <span>25%</span>
+              </div>
+              <Progress value={25} className="h-1.5 bg-slate-100" />
             </div>
-          </div>
-          <div className="w-full h-1.5 rounded-full bg-gray-100 mt-3 overflow-hidden">
-            <div className="h-full bg-sky-600 rounded-full" style={{ width: '25%' }} />
-          </div>
-        </div>
+          </CardContent>
+        </Card>
 
-        <div className="bg-white p-5 rounded-2xl border border-gray-100 shadow-sm">
-          <div className="flex justify-between items-start">
-            <div>
-              <span className="text-xs font-bold uppercase tracking-wider text-gray-400">
-                Bayesian Calibration
-              </span>
-              <div className="text-xl font-black text-gray-900 mt-1">ECE 0.024</div>
-              <span className="text-xs text-emerald-700 font-semibold">Optimal Confidence Fit</span>
+        <Card className="border-slate-200/80 shadow-xs bg-white">
+          <CardContent className="p-4 space-y-2">
+            <div className="flex justify-between items-start">
+              <div>
+                <span className="text-xs font-mono uppercase tracking-wider text-slate-400">
+                  Bayesian Calibration
+                </span>
+                <div className="text-lg font-bold font-mono text-slate-900 mt-0.5">ECE 0.024</div>
+                <span className="text-xs text-[#0d5c46] font-mono font-medium">Optimal Confidence Fit</span>
+              </div>
+              <div className="w-8 h-8 rounded-lg bg-[#e6f0ed] flex items-center justify-center text-[#0d5c46]">
+                <ShieldCheck className="w-4 h-4" />
+              </div>
             </div>
-            <div className="w-10 h-10 rounded-xl bg-emerald-50 flex items-center justify-center text-[#2D6A4F]">
-              <ShieldCheck className="w-5 h-5" />
+            <div className="space-y-1">
+              <div className="flex justify-between text-[11px] font-mono text-slate-500">
+                <span>Reliability Score</span>
+                <span>97.6%</span>
+              </div>
+              <Progress value={97.6} className="h-1.5 bg-slate-100" />
             </div>
-          </div>
-          <div className="w-full h-1.5 rounded-full bg-gray-100 mt-3 overflow-hidden">
-            <div className="h-full bg-emerald-600 rounded-full" style={{ width: '92%' }} />
-          </div>
-        </div>
+          </CardContent>
+        </Card>
       </div>
 
       {/* 6 Models Grid */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
         {(Array.isArray(models) ? models : []).map((model, idx) => (
           <motion.div
             key={model.id}
-            initial={{ opacity: 0, y: 15 }}
+            initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.4, delay: idx * 0.08 }}
-            className="bg-white rounded-2xl p-6 border border-gray-100 shadow-sm hover:shadow-md transition-all flex flex-col justify-between"
+            transition={{ duration: 0.3, delay: idx * 0.05 }}
           >
-            <div>
-              <div className="flex items-start justify-between gap-3 mb-3">
-                <div className="flex items-center gap-2">
-                  <div className="w-9 h-9 rounded-xl bg-[#2D6A4F]/10 flex items-center justify-center text-[#2D6A4F] shrink-0 font-bold text-xs">
-                    0{idx + 1}
-                  </div>
-                  <div>
-                    <h3 className="font-bold text-sm text-gray-900 leading-snug">
-                      {model.name}
-                    </h3>
-                    <span className="text-[11px] text-[#2D6A4F] font-semibold">
-                      {model.type}
+            <Card className="border-slate-200/80 shadow-xs bg-white h-full flex flex-col justify-between hover:border-slate-300 transition-colors">
+              <CardHeader className="pb-3 border-b border-slate-100">
+                <div className="flex items-start justify-between gap-3">
+                  <div className="flex items-center gap-2.5">
+                    <span className="w-6 h-6 rounded-md bg-slate-100 text-slate-700 font-mono text-xs flex items-center justify-center font-bold">
+                      0{idx + 1}
                     </span>
+                    <div>
+                      <CardTitle className="text-sm font-semibold tracking-tight text-slate-900 font-display">
+                        {model.name}
+                      </CardTitle>
+                      <span className="text-xs font-mono text-[#0d5c46]">
+                        {model.type}
+                      </span>
+                    </div>
+                  </div>
+                  <Badge variant="outline" className="font-mono text-[10px] bg-emerald-50 text-emerald-700 border-emerald-200 flex items-center gap-1">
+                    <span className="w-1.5 h-1.5 rounded-full bg-emerald-600 animate-pulse" />
+                    Active
+                  </Badge>
+                </div>
+              </CardHeader>
+
+              <CardContent className="pt-3 pb-3 space-y-3 flex-1">
+                <p className="text-xs text-slate-600 leading-relaxed">
+                  {model.description}
+                </p>
+
+                {/* Specs & Benchmarks Table */}
+                <div className="grid grid-cols-2 gap-2 text-xs">
+                  <div className="p-2.5 rounded-lg bg-[#e6f0ed]/60 border border-[#0d5c46]/20">
+                    <span className="text-[10px] font-mono uppercase text-slate-500 block">Benchmark Accuracy</span>
+                    <span className="font-mono font-bold text-[#0d5c46] text-sm">{model.accuracy}</span>
+                  </div>
+                  <div className="p-2.5 rounded-lg bg-slate-50 border border-slate-200/80">
+                    <span className="text-[10px] font-mono uppercase text-slate-500 block">Inference Latency</span>
+                    <span className="font-mono font-bold text-slate-900 text-sm">{model.latency}</span>
+                  </div>
+                  <div className="p-2.5 rounded-lg bg-slate-50 border border-slate-200/80">
+                    <span className="text-[10px] font-mono uppercase text-slate-500 block">Memory Allocation</span>
+                    <span className="font-mono font-medium text-slate-700">{model.memoryUsage}</span>
+                  </div>
+                  <div className="p-2.5 rounded-lg bg-slate-50 border border-slate-200/80">
+                    <span className="text-[10px] font-mono uppercase text-slate-500 block">Weights Size</span>
+                    <span className="font-mono font-medium text-slate-700">{model.size}</span>
                   </div>
                 </div>
+              </CardContent>
 
-                <StatusBadge status="success" label="Active" size="sm" pulse />
+              <div className="px-5 py-3 border-t border-slate-100 bg-slate-50/50 flex items-center justify-between text-[11px] font-mono text-slate-400">
+                <span>Version: <strong className="text-slate-700 font-semibold">{model.version}</strong></span>
+                <span>Trained: {model.lastTrained}</span>
               </div>
-
-              <p className="text-xs text-gray-600 leading-relaxed mb-4">
-                {model.description}
-              </p>
-
-              {/* Specs & Benchmarks Table */}
-              <div className="grid grid-cols-2 gap-2 text-xs mb-4">
-                <div className="p-2.5 rounded-xl bg-emerald-50/80 border border-emerald-200/80">
-                  <span className="text-[10px] uppercase font-bold text-emerald-800 block">Accuracy / Benchmark</span>
-                  <span className="font-mono font-bold text-emerald-950">{model.accuracy}</span>
-                </div>
-                <div className="p-2.5 rounded-xl bg-[#FAFAF5] border border-gray-100">
-                  <span className="text-[10px] uppercase font-bold text-gray-400 block">Inference Latency</span>
-                  <span className="font-mono font-bold text-gray-900">{model.latency}</span>
-                </div>
-                <div className="p-2.5 rounded-xl bg-[#FAFAF5] border border-gray-100">
-                  <span className="text-[10px] uppercase font-bold text-gray-400 block">Memory Footprint</span>
-                  <span className="font-mono font-bold text-gray-700">{model.memoryUsage}</span>
-                </div>
-                <div className="p-2.5 rounded-xl bg-[#FAFAF5] border border-gray-100">
-                  <span className="text-[10px] uppercase font-bold text-gray-400 block">Weights Size</span>
-                  <span className="font-mono font-bold text-gray-700">{model.size}</span>
-                </div>
-              </div>
-            </div>
-
-            <div className="pt-3 border-t border-gray-100 flex items-center justify-between text-[11px] text-gray-400">
-              <span>Version: <strong className="text-gray-700 font-mono">{model.version}</strong></span>
-              <span>Updated: {model.lastTrained}</span>
-            </div>
+            </Card>
           </motion.div>
         ))}
       </div>
