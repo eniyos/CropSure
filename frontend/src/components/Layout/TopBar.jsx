@@ -1,6 +1,6 @@
 import React from 'react';
-import { useLocation, Link } from 'react-router-dom';
-import { Menu, Bell, ScanSearch } from 'lucide-react';
+import { useLocation } from 'react-router-dom';
+import { Menu, Bell } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 
 const PAGE_TITLES = {
@@ -20,7 +20,7 @@ export default function TopBar({ onOpenSidebar }) {
   };
 
   return (
-    <header className="h-16 bg-white/80 backdrop-blur-md border-b border-slate-200/80 shadow-xs sticky top-0 z-30 flex items-center justify-between px-4 sm:px-6 font-sans">
+    <header className="h-16 bg-white border-b border-slate-200/80 shadow-xs sticky top-0 z-30 flex items-center justify-between px-4 sm:px-6 font-sans">
       {/* Left: Hamburger & Dynamic Title */}
       <div className="flex items-center gap-3">
         <Button
@@ -45,20 +45,6 @@ export default function TopBar({ onOpenSidebar }) {
 
       {/* Right Actions */}
       <div className="flex items-center gap-3">
-        {/* Quick Specimen Scan Button */}
-        <Button
-          asChild
-          variant="outline"
-          size="sm"
-          effect="glow"
-          className="hidden md:inline-flex bg-white/70 backdrop-blur-md border-slate-200/90 hover:border-[#0d5c46]/40 text-[#0d5c46] font-medium text-xs shadow-xs"
-        >
-          <Link to="/analyze">
-            <ScanSearch className="w-3.5 h-3.5 mr-1" />
-            <span>Quick Scan</span>
-          </Link>
-        </Button>
-
         {/* Live Engine Status Badge */}
         <div className="hidden sm:flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-slate-50 border border-slate-200 text-slate-700 text-xs font-mono font-medium">
           <span className="w-2 h-2 rounded-full bg-[#0d5c46]" />

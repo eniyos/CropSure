@@ -2,13 +2,12 @@ import React, { useState } from 'react';
 import { Outlet } from 'react-router-dom';
 import Sidebar from './Sidebar';
 import TopBar from './TopBar';
-import { DotGridPattern } from '@/components/background-pattern/dot-grid-pattern';
 
 export default function Layout() {
   const [sidebarOpen, setSidebarOpen] = useState(false);
 
   return (
-    <DotGridPattern className="min-h-screen flex flex-col antialiased font-sans">
+    <div className="min-h-screen bg-[#f8fafc] text-slate-900 flex flex-col antialiased font-sans">
       {/* Sidebar navigation */}
       <Sidebar
         isOpen={sidebarOpen}
@@ -24,7 +23,7 @@ export default function Layout() {
         </main>
 
         {/* Clean Professional Footer */}
-        <footer className="py-4 px-6 border-t border-slate-200/80 text-center text-xs text-slate-500 bg-white/80 backdrop-blur-md">
+        <footer className="py-4 px-6 border-t border-slate-200/80 text-center text-xs text-slate-500 bg-white">
           <div className="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-2">
             <span className="font-medium text-slate-600">
               CropSure &bull; Agricultural Pathology &amp; Forecasting &copy; {new Date().getFullYear()}
@@ -35,6 +34,6 @@ export default function Layout() {
           </div>
         </footer>
       </div>
-    </DotGridPattern>
+    </div>
   );
 }
