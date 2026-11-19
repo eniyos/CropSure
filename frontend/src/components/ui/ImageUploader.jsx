@@ -263,18 +263,18 @@ export default function ImageUploader({
                 </div>
 
                 <div className="grid grid-cols-2 gap-2 text-xs pt-2">
-                  <div className="bg-[#FAFAF5] p-2.5 rounded-lg border border-gray-100">
-                    <span className="text-gray-400 block text-[10px] uppercase font-semibold">Format</span>
-                    <span className="text-gray-800 font-medium">RGB (3 channels)</span>
+                  <div className="bg-stone-50 p-2.5 rounded-lg border border-stone-200/80">
+                    <span className="text-stone-400 block text-[10px] uppercase font-mono font-semibold">Format</span>
+                    <span className="text-stone-800 font-medium">RGB Color Spectrum</span>
                   </div>
-                  <div className="bg-[#FAFAF5] p-2.5 rounded-lg border border-gray-100">
-                    <span className="text-gray-400 block text-[10px] uppercase font-semibold">Target Spec</span>
-                    <span className="text-gray-800 font-medium">Solanaceae Foliage</span>
+                  <div className="bg-stone-50 p-2.5 rounded-lg border border-stone-200/80">
+                    <span className="text-stone-400 block text-[10px] uppercase font-mono font-semibold">Target Specimen</span>
+                    <span className="text-stone-800 font-medium">Solanaceae Foliage</span>
                   </div>
                 </div>
 
-                <p className="text-[11px] text-gray-500 pt-1">
-                  Ready to stream to EfficientNet-B4 + Grad-CAM explanation + Van der Plank epidemic projection models.
+                <p className="text-[11px] text-stone-500 pt-1">
+                  Ready to stream to YOLOv8s Pathology Detector + Grad-CAM Saliency Engine + Solana Devnet Ledger.
                 </p>
               </div>
             </div>

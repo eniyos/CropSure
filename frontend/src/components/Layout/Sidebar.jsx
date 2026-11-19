@@ -43,16 +43,16 @@ export default function Sidebar({ isOpen, onClose }) {
         {/* Brand Header */}
         <div className="h-16 flex items-center justify-between px-6 border-b border-[#2D6A4F]/50">
           <NavLink to="/" className="flex items-center gap-3 group" onClick={onClose}>
-            <div className="w-9 h-9 rounded-xl bg-gradient-to-tr from-[#52B788] to-[#D4A843] flex items-center justify-center text-[#1B4332] shadow-md group-hover:scale-105 transition-transform">
-              <Sprout className="w-5 h-5 stroke-[2.5]" />
+            <div className="w-8 h-8 rounded-lg bg-[#52B788] flex items-center justify-center text-[#1B4332] shadow-sm group-hover:scale-105 transition-transform">
+              <Sprout className="w-4 h-4 stroke-[2.5]" />
             </div>
             <div className="flex flex-col">
-              <span className="font-extrabold text-lg tracking-tight text-white flex items-center gap-1.5">
+              <span className="font-display font-bold text-lg tracking-tight text-white flex items-center gap-1.5">
                 CropSure
-                <span className="w-1.5 h-1.5 rounded-full bg-[#D4A843]" />
+                <span className="w-1.5 h-1.5 rounded-full bg-emerald-400" />
               </span>
-              <span className="text-[10px] uppercase tracking-widest text-[#74C69D] font-semibold -mt-1">
-                Agri AI Intelligence
+              <span className="text-[10px] uppercase font-mono tracking-widest text-[#74C69D] font-semibold -mt-1">
+                Foliar Intelligence
               </span>
             </div>
           </NavLink>

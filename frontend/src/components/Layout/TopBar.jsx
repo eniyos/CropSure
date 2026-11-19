@@ -19,22 +19,22 @@ export default function TopBar({ onOpenSidebar }) {
   };
 
   return (
-    <header className="h-16 bg-white border-b border-gray-100 shadow-xs sticky top-0 z-30 flex items-center justify-between px-4 sm:px-6">
+    <header className="h-16 bg-white border-b border-stone-200/80 shadow-xs sticky top-0 z-30 flex items-center justify-between px-4 sm:px-6 font-sans">
       {/* Left: Hamburger & Dynamic Title */}
       <div className="flex items-center gap-3">
         <button
           onClick={onOpenSidebar}
-          className="p-2 rounded-lg text-gray-600 hover:bg-gray-100 lg:hidden"
+          className="p-2 rounded-lg text-stone-600 hover:bg-stone-100 lg:hidden"
           aria-label="Open sidebar"
         >
           <Menu className="w-5 h-5" />
         </button>
 
         <div className="flex flex-col">
-          <h1 className="text-base sm:text-lg font-bold text-gray-900 tracking-tight leading-tight">
+          <h1 className="font-display text-base sm:text-lg font-bold text-stone-900 tracking-tight leading-tight">
             {currentMeta.title}
           </h1>
-          <p className="text-xs text-gray-500 hidden sm:block">
+          <p className="text-xs text-stone-500 hidden sm:block">
             {currentMeta.subtitle}
           </p>
         </div>
@@ -42,21 +42,10 @@ export default function TopBar({ onOpenSidebar }) {
 
       {/* Right Actions */}
       <div className="flex items-center gap-3">
-        {/* Decorative Global Search */}
-        <div className="relative hidden md:block w-56">
-          <Search className="w-4 h-4 text-gray-400 absolute left-3 top-1/2 -translate-y-1/2" />
-          <input
-            type="text"
-            placeholder="Search diseases, models..."
-            className="w-full bg-[#FAFAF5] text-xs text-gray-800 pl-9 pr-3 py-1.5 rounded-lg border border-gray-200 focus:outline-none focus:border-[#2D6A4F] focus:bg-white transition-all"
-            readOnly
-          />
-        </div>
-
         {/* Live Engine Status Badge */}
-        <div className="hidden sm:flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-emerald-50 border border-emerald-200 text-emerald-800 text-xs font-medium">
-          <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
-          <span>Inference Ready</span>
+        <div className="hidden sm:flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-emerald-50 border border-emerald-200 text-emerald-800 text-xs font-mono font-medium">
+          <span className="w-2 h-2 rounded-full bg-emerald-600 animate-pulse" />
+          <span>Inference Suite Ready</span>
         </div>
 
         {/* Notification Bell */}
