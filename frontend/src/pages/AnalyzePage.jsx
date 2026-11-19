@@ -16,7 +16,6 @@ import {
   TrendingUp,
   Activity,
   Layers,
-  Sparkles,
   Info
 } from 'lucide-react';
 import {
@@ -350,17 +349,17 @@ export default function AnalyzePage() {
               <Button
                 onClick={handleAnalyze}
                 disabled={analyzing}
-                className="w-full sm:w-auto px-6 py-2.5 bg-[#1B4332] hover:bg-[#2D6A4F] text-white font-bold text-sm tracking-wide shadow-sm"
+                className="w-full sm:w-auto px-6 py-2.5 bg-[#0d5c46] hover:bg-[#084534] text-white font-medium text-xs tracking-wider uppercase shadow-xs cursor-pointer"
               >
                 {analyzing ? (
                   <>
-                    <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin mr-2" />
-                    <span>Executing Inference Suite...</span>
+                    <div className="w-3.5 h-3.5 border-2 border-white border-t-transparent rounded-full animate-spin mr-2" />
+                    <span>Evaluating Specimen...</span>
                   </>
                 ) : (
                   <>
                     <ScanSearch className="w-4 h-4 mr-2" />
-                    <span>Run Multimodal Pathology Pipeline</span>
+                    <span>Analyze Foliar Specimen</span>
                   </>
                 )}
               </Button>
@@ -368,11 +367,11 @@ export default function AnalyzePage() {
           )}
 
           {analyzing && (
-            <div className="py-8 bg-stone-50 rounded-xl border border-stone-200/60 mt-4">
+            <div className="py-8 bg-slate-50 rounded-xl border border-slate-200/60 mt-4">
               <LoadingSpinner
                 size="lg"
-                label="Analyzing Multimodal Foliar Spectrum"
-                subtext="Extracting CNN activation maps, solving Van der Plank epidemiological ODEs, and minting Solana Devnet proof..."
+                label="Analyzing Foliar Pathology"
+                subtext="Detecting lesions, computing epidemiological trajectories, and anchoring Solana Devnet passport..."
               />
             </div>
           )}
@@ -648,7 +647,7 @@ export default function AnalyzePage() {
                       <div className="w-full h-80 rounded-lg overflow-hidden bg-stone-900 border border-stone-200 relative">
                         <canvas ref={canvasRef} className="w-full h-full object-cover" />
                         <div className="absolute top-2 left-2 px-2 py-0.5 rounded bg-black/70 text-amber-400 text-[10px] font-mono flex items-center gap-1">
-                          <Sparkles className="w-3 h-3" />
+                          <Activity className="w-3 h-3" />
                           <span>ResNet-18 Gradients</span>
                         </div>
                       </div>
@@ -704,8 +703,8 @@ export default function AnalyzePage() {
                                 <stop offset="95%" stopColor="#DC2626" stopOpacity={0.0}/>
                               </linearGradient>
                               <linearGradient id="colorTreated" x1="0" y1="0" x2="0" y2="1">
-                                <stop offset="5%" stopColor="#1B4332" stopOpacity={0.25}/>
-                                <stop offset="95%" stopColor="#1B4332" stopOpacity={0.0}/>
+                                <stop offset="5%" stopColor="#0d5c46" stopOpacity={0.25}/>
+                                <stop offset="95%" stopColor="#0d5c46" stopOpacity={0.0}/>
                               </linearGradient>
                             </defs>
                             <CartesianGrid strokeDasharray="3 3" stroke="#F1F5F9" />
@@ -727,7 +726,7 @@ export default function AnalyzePage() {
                               type="monotone"
                               dataKey="treated"
                               name="With Prescribed Fungicide"
-                              stroke="#1B4332"
+                              stroke="#0d5c46"
                               strokeWidth={2}
                               fillOpacity={1}
                               fill="url(#colorTreated)"
@@ -1084,7 +1083,7 @@ export default function AnalyzePage() {
                 <AccordionTrigger className="text-xs font-mono font-bold text-stone-800 hover:no-underline py-4">
                   <div className="flex items-center gap-2">
                     <FileText className="w-4 h-4 text-stone-500" />
-                    <span>Neural Pipeline JSON Telemetry (Audit Trail &amp; Provenance Record)</span>
+                    <span>Diagnostic Pipeline JSON Telemetry (Audit Trail &amp; Provenance Record)</span>
                   </div>
                 </AccordionTrigger>
                 <AccordionContent className="pb-4">

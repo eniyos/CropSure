@@ -9,18 +9,17 @@ import {
   Info,
   Sprout,
   X,
-  ShieldCheck,
-  ChevronRight
+  ChevronRight,
+  ShieldCheck
 } from 'lucide-react';
-import { motion } from 'framer-motion';
 
 const NAV_ITEMS = [
-  { path: '/', label: 'Dashboard', icon: LayoutDashboard },
-  { path: '/analyze', label: 'Disease Analysis', icon: ScanSearch, badge: 'AI Core' },
+  { path: '/', label: 'Overview', icon: LayoutDashboard },
+  { path: '/analyze', label: 'Pathology Diagnosis', icon: ScanSearch },
   { path: '/forecast', label: 'Disease Forecast', icon: LineChart },
-  { path: '/epidemic', label: 'Epidemic Sim', icon: FlaskConical },
-  { path: '/models', label: 'Model Status', icon: Cpu, badge: '6/6' },
-  { path: '/about', label: 'About & Arch', icon: Info },
+  { path: '/epidemic', label: 'Epidemic Simulation', icon: FlaskConical },
+  { path: '/models', label: 'Model Infrastructure', icon: Cpu, badge: '6/6' },
+  { path: '/about', label: 'System Architecture', icon: Info },
 ];
 
 export default function Sidebar({ isOpen, onClose }) {
@@ -30,36 +29,35 @@ export default function Sidebar({ isOpen, onClose }) {
       {isOpen && (
         <div
           onClick={onClose}
-          className="fixed inset-0 z-40 bg-black/50 backdrop-blur-xs lg:hidden transition-opacity"
+          className="fixed inset-0 z-40 bg-slate-900/40 backdrop-blur-xs lg:hidden transition-opacity"
         />
       )}
 
       {/* Sidebar Container */}
       <aside
-        className={`fixed top-0 bottom-0 left-0 z-50 w-64 bg-[#1B4332] text-white flex flex-col border-r border-[#2D6A4F]/40 shadow-xl lg:shadow-none transition-transform duration-300 ease-in-out ${
+        className={`fixed top-0 bottom-0 left-0 z-50 w-64 bg-white text-slate-900 flex flex-col border-r border-slate-200/80 shadow-xs lg:shadow-none transition-transform duration-200 ease-in-out font-sans ${
           isOpen ? 'translate-x-0' : '-translate-x-full lg:translate-x-0'
         }`}
       >
         {/* Brand Header */}
-        <div className="h-16 flex items-center justify-between px-6 border-b border-[#2D6A4F]/50">
+        <div className="h-16 flex items-center justify-between px-5 border-b border-slate-200/80">
           <NavLink to="/" className="flex items-center gap-3 group" onClick={onClose}>
-            <div className="w-8 h-8 rounded-lg bg-[#52B788] flex items-center justify-center text-[#1B4332] shadow-sm group-hover:scale-105 transition-transform">
-              <Sprout className="w-4 h-4 stroke-[2.5]" />
+            <div className="w-9 h-9 rounded-xl bg-[#0d5c46] flex items-center justify-center text-white shadow-xs group-hover:scale-105 transition-transform shrink-0">
+              <Sprout className="w-5 h-5 stroke-[2.2]" />
             </div>
             <div className="flex flex-col">
-              <span className="font-display font-bold text-lg tracking-tight text-white flex items-center gap-1.5">
+              <span className="font-display font-bold text-base tracking-tight text-slate-900 leading-none">
                 CropSure
-                <span className="w-1.5 h-1.5 rounded-full bg-emerald-400" />
               </span>
-              <span className="text-[10px] uppercase font-mono tracking-widest text-[#74C69D] font-semibold -mt-1">
-                Foliar Intelligence
+              <span className="text-[11px] font-mono text-slate-400 mt-1">
+                Foliar Pathology
               </span>
             </div>
           </NavLink>
 
           <button
             onClick={onClose}
-            className="p-1.5 rounded-lg text-[#74C69D] hover:text-white hover:bg-[#2D6A4F] lg:hidden transition-colors"
+            className="p-1.5 rounded-lg text-slate-400 hover:text-slate-700 hover:bg-slate-100 lg:hidden transition-colors"
             aria-label="Close menu"
           >
             <X className="w-5 h-5" />
@@ -67,9 +65,9 @@ export default function Sidebar({ isOpen, onClose }) {
         </div>
 
         {/* Navigation Links */}
-        <nav className="flex-1 px-3 py-6 space-y-1.5 overflow-y-auto">
+        <nav className="flex-1 px-3 py-5 space-y-1 overflow-y-auto">
           <div className="px-3 pb-2">
-            <span className="text-[10px] font-bold uppercase tracking-wider text-[#74C69D]/80">
+            <span className="text-[11px] font-mono uppercase tracking-wider text-slate-400 font-semibold">
               Platform Modules
             </span>
           </div>
@@ -82,19 +80,19 @@ export default function Sidebar({ isOpen, onClose }) {
                 to={item.path}
                 onClick={onClose}
                 className={({ isActive }) =>
-                  `flex items-center justify-between px-3.5 py-2.5 rounded-xl font-medium text-sm transition-all duration-150 group ${
+                  `flex items-center justify-between px-3.5 py-2.5 rounded-xl text-xs font-medium transition-colors ${
                     isActive
-                      ? 'bg-[#2D6A4F] text-white shadow-sm font-semibold'
-                      : 'text-gray-200 hover:text-white hover:bg-[#2D6A4F]/40'
+                      ? 'bg-slate-100 text-[#0d5c46] font-semibold'
+                      : 'text-slate-600 hover:text-slate-900 hover:bg-slate-50'
                   }`
                 }
               >
                 {({ isActive }) => (
                   <>
-                    <div className="flex items-center gap-3">
+                    <div className="flex items-center gap-2.5">
                       <Icon
                         className={`w-4 h-4 transition-colors ${
-                          isActive ? 'text-[#D4A843]' : 'text-[#74C69D] group-hover:text-white'
+                          isActive ? 'text-[#0d5c46]' : 'text-slate-400'
                         }`}
                       />
                       <span>{item.label}</span>
@@ -103,16 +101,16 @@ export default function Sidebar({ isOpen, onClose }) {
                     <div className="flex items-center gap-1.5">
                       {item.badge && (
                         <span
-                          className={`text-[10px] px-2 py-0.5 rounded-full font-semibold ${
+                          className={`text-[10px] font-mono px-2 py-0.5 rounded-md font-semibold ${
                             isActive
-                              ? 'bg-[#1B4332] text-[#D4A843] border border-[#D4A843]/30'
-                              : 'bg-[#2D6A4F]/60 text-emerald-200'
+                              ? 'bg-[#0d5c46] text-white'
+                              : 'bg-slate-100 text-slate-600'
                           }`}
                         >
                           {item.badge}
                         </span>
                       )}
-                      {isActive && <ChevronRight className="w-3.5 h-3.5 text-[#D4A843]" />}
+                      {isActive && <ChevronRight className="w-3.5 h-3.5 text-[#0d5c46]" />}
                     </div>
                   </>
                 )}
@@ -121,24 +119,16 @@ export default function Sidebar({ isOpen, onClose }) {
           })}
         </nav>
 
-        {/* Model Pipeline Banner */}
-        <div className="p-4 mx-3 mb-4 rounded-xl bg-[#2D6A4F]/40 border border-[#52B788]/20">
-          <div className="flex items-center gap-2 mb-1.5">
-            <ShieldCheck className="w-4 h-4 text-[#D4A843]" />
-            <span className="text-xs font-semibold text-white">CropSure Guard</span>
+        {/* Footer Station Status */}
+        <div className="p-4 border-t border-slate-200/80 space-y-2 bg-slate-50/50">
+          <div className="flex items-center justify-between text-xs font-mono">
+            <span className="text-slate-400">Station</span>
+            <span className="text-slate-700 font-semibold">Field Sector A</span>
           </div>
-          <p className="text-[11px] text-[#95D5B2] leading-relaxed">
-            Neural ensemble calibrated on 54,000+ leaf spectra with Bayesian trust scoring.
-          </p>
-        </div>
-
-        {/* Footer with version */}
-        <div className="p-4 border-t border-[#2D6A4F]/40 flex items-center justify-between text-[11px] text-[#74C69D]">
-          <div className="flex items-center gap-1.5">
-            <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
-            <span>Systems Online</span>
+          <div className="flex items-center justify-between text-xs font-mono">
+            <span className="text-slate-400">Solana Devnet</span>
+            <span className="text-[#0d5c46] font-semibold">Synced</span>
           </div>
-          <span className="font-mono text-gray-300">v2.4.0</span>
         </div>
       </aside>
     </>

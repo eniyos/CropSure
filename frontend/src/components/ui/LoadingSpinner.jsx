@@ -11,9 +11,9 @@ export default function LoadingSpinner({
 }) {
   const sizeMap = {
     sm: { container: 'w-6 h-6', icon: 'w-3.5 h-3.5', ring: 'border-2' },
-    md: { container: 'w-12 h-12', icon: 'w-6 h-6', ring: 'border-3' },
-    lg: { container: 'w-16 h-16', icon: 'w-8 h-8', ring: 'border-4' },
-    xl: { container: 'w-24 h-24', icon: 'w-12 h-12', ring: 'border-4' },
+    md: { container: 'w-12 h-12', icon: 'w-6 h-6', ring: 'border-2' },
+    lg: { container: 'w-16 h-16', icon: 'w-8 h-8', ring: 'border-3' },
+    xl: { container: 'w-24 h-24', icon: 'w-12 h-12', ring: 'border-3' },
   };
 
   const selectedSize = sizeMap[size] || sizeMap.md;
@@ -21,34 +21,26 @@ export default function LoadingSpinner({
   const content = (
     <div className={`flex flex-col items-center justify-center gap-3 ${className}`}>
       <div className={`relative ${selectedSize.container} flex items-center justify-center`}>
-        {/* Outer glowing orbital ring */}
+        {/* Subtle background track */}
+        <div className={`absolute inset-0 rounded-full border-slate-200 ${selectedSize.ring}`} />
+
+        {/* Precision viridian spinner */}
         <motion.div
           animate={{ rotate: 360 }}
-          transition={{ duration: 1.6, repeat: Infinity, ease: 'linear' }}
-          className={`absolute inset-0 rounded-full border-t-[#2D6A4F] border-r-[#52B788] border-b-transparent border-l-transparent ${selectedSize.ring}`}
-        />
-        
-        {/* Second counter-rotating accent ring */}
-        <motion.div
-          animate={{ rotate: -360 }}
-          transition={{ duration: 2.4, repeat: Infinity, ease: 'linear' }}
-          className={`absolute inset-1 rounded-full border-t-[#D4A843] border-b-[#74C69D] border-r-transparent border-l-transparent opacity-80 ${selectedSize.ring}`}
+          transition={{ duration: 1.2, repeat: Infinity, ease: 'linear' }}
+          className={`absolute inset-0 rounded-full border-t-[#0d5c46] border-r-transparent border-b-transparent border-l-transparent ${selectedSize.ring}`}
         />
 
-        {/* Center pulsing leaf/sprout icon */}
-        <motion.div
-          animate={{ scale: [0.85, 1.1, 0.85] }}
-          transition={{ duration: 1.8, repeat: Infinity, ease: 'easeInOut' }}
-          className="text-[#2D6A4F]"
-        >
+        {/* Center calm leaf icon */}
+        <div className="text-[#0d5c46]">
           <Sprout className={selectedSize.icon} />
-        </motion.div>
+        </div>
       </div>
 
       {label && (
         <div className="text-center">
-          <p className="text-sm font-semibold text-gray-800 tracking-wide">{label}</p>
-          {subtext && <p className="text-xs text-gray-500 mt-0.5">{subtext}</p>}
+          <p className="text-sm font-semibold text-slate-800 tracking-tight">{label}</p>
+          {subtext && <p className="text-xs font-mono text-slate-500 mt-0.5">{subtext}</p>}
         </div>
       )}
     </div>

@@ -51,14 +51,14 @@ export default function ModelsPage() {
           <div className="flex items-center gap-2 mb-1">
             <span className="w-2 h-2 rounded-full bg-[#0d5c46]" />
             <span className="text-xs font-mono uppercase tracking-wider text-slate-500">
-              Neural Ensemble Health &amp; Model Registry
+              Model Architecture &amp; Pipeline Registry
             </span>
           </div>
           <h1 className="text-2xl font-bold font-display tracking-tight text-slate-900">
             Production Model Infrastructure
           </h1>
           <p className="text-sm text-slate-500 mt-0.5">
-            Real-time runtime metrics, memory allocation, latency benchmarks, and architectural specifications for all 6 CropSure intelligence engines.
+            Real-time runtime metrics, memory allocation, latency benchmarks, and architectural specifications for all 6 CropSure diagnostic engines.
           </p>
         </div>
 

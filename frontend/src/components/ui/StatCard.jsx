@@ -18,19 +18,19 @@ export default function StatCard({
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.4, delay }}
       whileHover={{ y: -2 }}
-      className={`bg-white rounded-xl p-5 border border-gray-100 shadow-sm hover:shadow-md transition-all duration-200 relative overflow-hidden ${className}`}
+      className={`bg-white rounded-xl p-5 border border-slate-200/80 shadow-xs hover:shadow-sm transition-all duration-200 relative overflow-hidden ${className}`}
     >
       <div className="flex items-start justify-between">
         <div className="flex flex-col">
-          <span className="text-xs font-semibold text-gray-500 uppercase tracking-wider mb-1">
+          <span className="text-xs font-semibold text-slate-500 uppercase tracking-wider mb-1">
             {label}
           </span>
           <div className="flex items-baseline gap-2">
-            <span className="text-2xl font-bold text-gray-900 tracking-tight">
+            <span className="text-2xl font-bold font-display text-slate-900 tracking-tight">
               {value}
             </span>
             {subvalue && (
-              <span className="text-xs text-gray-500 font-medium">
+              <span className="text-xs text-slate-500 font-medium font-mono">
                 {subvalue}
               </span>
             )}
@@ -38,21 +38,21 @@ export default function StatCard({
         </div>
 
         {Icon && (
-          <div className="w-11 h-11 rounded-xl bg-[#2D6A4F]/10 flex items-center justify-center text-[#2D6A4F] shrink-0">
+          <div className="w-10 h-10 rounded-xl bg-[#0d5c46]/10 border border-[#0d5c46]/15 flex items-center justify-center text-[#0d5c46] shrink-0">
             <Icon className="w-5 h-5" />
           </div>
         )}
       </div>
 
       {(trend || badge) && (
-        <div className="mt-4 pt-3 border-t border-gray-50 flex items-center justify-between text-xs">
+        <div className="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between text-xs">
           {trend && (
             <div
-              className={`flex items-center gap-1 font-medium ${
+              className={`flex items-center gap-1 font-medium font-mono ${
                 trend.positive
-                  ? 'text-emerald-700'
+                  ? 'text-[#0d5c46]'
                   : trend.direction === 'neutral'
-                  ? 'text-gray-500'
+                  ? 'text-slate-500'
                   : 'text-rose-600'
               }`}
             >
@@ -64,7 +64,7 @@ export default function StatCard({
           )}
 
           {badge && (
-            <span className="px-2 py-0.5 rounded-full bg-emerald-50 text-emerald-800 text-[11px] font-medium border border-emerald-100">
+            <span className="px-2 py-0.5 rounded-full bg-slate-100 text-slate-700 text-[11px] font-mono font-medium border border-slate-200">
               {badge}
             </span>
           )}

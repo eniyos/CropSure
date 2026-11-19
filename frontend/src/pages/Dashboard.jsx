@@ -30,7 +30,6 @@ import {
   ExternalLink,
   Lock,
   Clock,
-  Sparkles,
   Search,
   Filter
 } from 'lucide-react';
