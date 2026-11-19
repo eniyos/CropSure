@@ -2,13 +2,13 @@ import React, { useState } from 'react';
 import { Outlet } from 'react-router-dom';
 import Sidebar from './Sidebar';
 import TopBar from './TopBar';
-import { TropicalTideBackground } from '@/components/background-gradient/tropical-tide-background';
+import { ArcBandsBackground } from '@/components/background-gradient/arc-bands-background';
 
 export default function Layout() {
   const [sidebarOpen, setSidebarOpen] = useState(false);
 
   return (
-    <TropicalTideBackground className="min-h-screen flex flex-col antialiased font-sans">
+    <ArcBandsBackground className="min-h-screen flex flex-col antialiased font-sans">
       {/* Sidebar navigation */}
       <Sidebar
         isOpen={sidebarOpen}
@@ -35,6 +35,6 @@ export default function Layout() {
           </div>
         </footer>
       </div>
-    </TropicalTideBackground>
+    </ArcBandsBackground>
   );
 }
