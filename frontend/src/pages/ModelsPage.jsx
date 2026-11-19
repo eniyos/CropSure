@@ -13,6 +13,7 @@ import {
 import { Card, CardHeader, CardTitle, CardDescription, CardContent } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
+import { SheenPillButton } from '@/components/buttons/sheen-pill-button';
 import { Progress } from '@/components/ui/progress';
 import { Separator } from '@/components/ui/separator';
 import apiService from '../services/api';
@@ -63,16 +64,16 @@ export default function ModelsPage() {
         </div>
 
         <div className="flex items-center gap-2 shrink-0">
-          <Button
-            variant="outline"
-            effect="lift"
+          <SheenPillButton
             onClick={handleRefresh}
             disabled={refreshing}
-            className="h-9 px-3.5 text-xs font-mono border-slate-200 text-slate-700 bg-white hover:bg-slate-50"
+            width={138}
+            height={36}
+            className="text-xs font-mono"
           >
-            <RefreshCw className={`w-3.5 h-3.5 mr-2 ${refreshing ? 'animate-spin' : ''}`} />
-            Ping Cluster
-          </Button>
+            <RefreshCw className={`w-3.5 h-3.5 text-emerald-700 ${refreshing ? 'animate-spin' : ''}`} />
+            <span>Ping Cluster</span>
+          </SheenPillButton>
           <Badge className="bg-[#e6f0ed] text-[#0d5c46] hover:bg-[#e6f0ed] border border-[#0d5c46]/20 font-mono text-xs">
             6/6 Online
           </Badge>
@@ -81,7 +82,7 @@ export default function ModelsPage() {
 
       {/* Cluster Resource Overview */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-        <Card className="border-slate-200/80 shadow-xs bg-white">
+        <Card>
           <CardContent className="p-4 space-y-2">
             <div className="flex justify-between items-start">
               <div>
@@ -105,7 +106,7 @@ export default function ModelsPage() {
           </CardContent>
         </Card>
 
-        <Card className="border-slate-200/80 shadow-xs bg-white">
+        <Card>
           <CardContent className="p-4 space-y-2">
             <div className="flex justify-between items-start">
               <div>
@@ -129,7 +130,7 @@ export default function ModelsPage() {
           </CardContent>
         </Card>
 
-        <Card className="border-slate-200/80 shadow-xs bg-white">
+        <Card>
           <CardContent className="p-4 space-y-2">
             <div className="flex justify-between items-start">
               <div>
@@ -153,7 +154,7 @@ export default function ModelsPage() {
           </CardContent>
         </Card>
 
-        <Card className="border-slate-200/80 shadow-xs bg-white">
+        <Card>
           <CardContent className="p-4 space-y-2">
             <div className="flex justify-between items-start">
               <div>
@@ -187,7 +188,7 @@ export default function ModelsPage() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.3, delay: idx * 0.05 }}
           >
-            <Card className="border-slate-200/80 shadow-xs bg-white h-full flex flex-col justify-between hover:border-slate-300 transition-colors">
+            <Card className="h-full flex flex-col justify-between hover:border-slate-300 transition-colors">
               <CardHeader className="pb-3 border-b border-slate-100">
                 <div className="flex items-start justify-between gap-3">
                   <div className="flex items-center gap-2.5">

@@ -27,6 +27,7 @@ import {
 import { Card, CardHeader, CardTitle, CardDescription, CardContent } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
+import { SheenPillButton } from '@/components/buttons/sheen-pill-button';
 import { Separator } from '@/components/ui/separator';
 import apiService from '../services/api';
 
@@ -113,7 +114,7 @@ export default function EpidemicPage() {
       {/* KPI Overview Strip */}
       {simResults && simResults.metrics && (
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-          <Card className="border-slate-200/80 shadow-xs bg-white">
+          <Card>
             <CardContent className="p-4 space-y-1">
               <div className="text-xs font-medium text-slate-500 flex items-center justify-between">
                 <span>Peak Severity (Untreated)</span>
@@ -128,7 +129,7 @@ export default function EpidemicPage() {
             </CardContent>
           </Card>
 
-          <Card className="border-slate-200/80 shadow-xs bg-white">
+          <Card>
             <CardContent className="p-4 space-y-1">
               <div className="text-xs font-medium text-slate-500 flex items-center justify-between">
                 <span>Time to 50% Infection</span>
@@ -143,7 +144,7 @@ export default function EpidemicPage() {
             </CardContent>
           </Card>
 
-          <Card className="border-slate-200/80 shadow-xs bg-white">
+          <Card>
             <CardContent className="p-4 space-y-1">
               <div className="text-xs font-medium text-slate-500 flex items-center justify-between">
                 <span>Cumulative AUDPC</span>
@@ -158,7 +159,7 @@ export default function EpidemicPage() {
             </CardContent>
           </Card>
 
-          <Card className="border-slate-200/80 shadow-xs bg-white">
+          <Card>
             <CardContent className="p-4 space-y-1">
               <div className="text-xs font-medium text-slate-500 flex items-center justify-between">
                 <span>Intervention Efficacy</span>
@@ -176,7 +177,7 @@ export default function EpidemicPage() {
       )}
 
       {/* Parameter Controls Panel */}
-      <Card className="border-slate-200/80 shadow-xs bg-white">
+      <Card>
         <CardHeader className="pb-3 border-b border-slate-100">
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-2">
@@ -365,30 +366,32 @@ export default function EpidemicPage() {
               </label>
             </div>
 
-            <Button
+            <SheenPillButton
               onClick={executeSimulation}
               disabled={loading}
-              className="bg-[#0d5c46] hover:bg-[#094333] text-white font-medium text-xs shadow-xs px-5 h-9 shrink-0"
+              width={190}
+              height={36}
+              className="shrink-0 text-xs"
             >
               {loading ? (
                 <>
-                  <div className="w-3.5 h-3.5 border-2 border-white border-t-transparent rounded-full animate-spin mr-2" />
-                  Simulating...
+                  <div className="w-3.5 h-3.5 border-2 border-slate-700 border-t-transparent rounded-full animate-spin mr-1" />
+                  <span>Simulating...</span>
                 </>
               ) : (
                 <>
-                  <Play className="w-3.5 h-3.5 mr-2 fill-white" />
-                  Run Differential Solver
+                  <Play className="w-3.5 h-3.5 text-emerald-700 fill-emerald-700" />
+                  <span>Run Differential Solver</span>
                 </>
               )}
-            </Button>
+            </SheenPillButton>
           </div>
         </CardContent>
       </Card>
 
       {/* 90-Day Simulation Chart */}
       {simResults && simResults.timeline && (
-        <Card className="border-slate-200/80 shadow-xs bg-white">
+        <Card>
           <CardHeader className="pb-3 border-b border-slate-100">
             <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
               <div>

@@ -18,7 +18,7 @@ export default function StatCard({
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.4, delay }}
       whileHover={{ y: -2 }}
-      className={`bg-white rounded-xl p-5 border border-slate-200/80 shadow-xs hover:shadow-sm transition-all duration-200 relative overflow-hidden ${className}`}
+      className={`bg-white/95 backdrop-blur-[6px] rounded-2xl p-5 border border-slate-200/85 [box-shadow:inset_1px_-1px_1px_rgba(255,255,255,0.95),inset_-1px_1px_1px_rgba(255,255,255,0.95),0_4px_16px_rgba(15,23,42,0.04)] hover:[box-shadow:inset_1px_-1px_1px_rgba(255,255,255,0.95),inset_-1px_1px_1px_rgba(255,255,255,0.95),0_6px_20px_rgba(15,23,42,0.07)] transition-all duration-200 relative overflow-hidden ${className}`}
     >
       <div className="flex items-start justify-between">
         <div className="flex flex-col">

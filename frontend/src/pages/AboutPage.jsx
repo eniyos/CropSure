@@ -16,6 +16,7 @@ import {
   Code2
 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
+import { SheenPillButton } from '@/components/buttons/sheen-pill-button';
 
 const TECH_STACK = [
   { category: 'Diagnostic Vision & Localization', techs: ['PyTorch 2.5', 'EfficientNet-B4', 'Grad-CAM', 'Torchvision', 'Scikit-learn'] },
@@ -66,7 +67,7 @@ export default function AboutPage() {
   return (
     <div className="space-y-8 pb-12">
       {/* Hero Description */}
-      <div className="bg-white rounded-2xl p-6 sm:p-8 border border-slate-200/80 shadow-xs relative overflow-hidden">
+      <div className="bg-white/95 backdrop-blur-[6px] rounded-2xl p-6 sm:p-8 border border-slate-200/85 [box-shadow:inset_1px_-1px_1px_rgba(255,255,255,0.95),inset_-1px_1px_1px_rgba(255,255,255,0.95),0_4px_16px_rgba(15,23,42,0.04)] relative overflow-hidden">
         <div className="max-w-3xl">
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-slate-100 text-slate-700 text-xs font-semibold mb-3 border border-slate-200/80">
             <Sprout className="w-3.5 h-3.5 text-[#0d5c46]" />
@@ -85,7 +86,7 @@ export default function AboutPage() {
       </div>
 
       {/* Styled Architecture Diagram */}
-      <div className="bg-white rounded-2xl p-6 sm:p-8 border border-slate-200/80 shadow-xs">
+      <div className="bg-white/95 backdrop-blur-[6px] rounded-2xl p-6 sm:p-8 border border-slate-200/85 [box-shadow:inset_1px_-1px_1px_rgba(255,255,255,0.95),inset_-1px_1px_1px_rgba(255,255,255,0.95),0_4px_16px_rgba(15,23,42,0.04)]">
         <div className="flex items-center justify-between mb-6">
           <div>
             <h3 className="text-lg font-bold font-display text-slate-900 tracking-tight">
@@ -142,7 +143,7 @@ export default function AboutPage() {
       </div>
 
       {/* Technology Stack Grid */}
-      <div className="bg-white rounded-2xl p-6 sm:p-8 border border-slate-200/80 shadow-xs">
+      <div className="bg-white/95 backdrop-blur-[6px] rounded-2xl p-6 sm:p-8 border border-slate-200/85 [box-shadow:inset_1px_-1px_1px_rgba(255,255,255,0.95),inset_-1px_1px_1px_rgba(255,255,255,0.95),0_4px_16px_rgba(15,23,42,0.04)]">
         <h3 className="text-lg font-bold font-display text-slate-900 tracking-tight mb-2">
           Enterprise Technology Stack
         </h3>
@@ -171,7 +172,7 @@ export default function AboutPage() {
 
       {/* Team / Research Station Credits & Documentation Links */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-        <div className="bg-white rounded-2xl p-6 border border-slate-200/80 shadow-xs">
+        <div className="bg-white/95 backdrop-blur-[6px] rounded-2xl p-6 border border-slate-200/85 [box-shadow:inset_1px_-1px_1px_rgba(255,255,255,0.95),inset_-1px_1px_1px_rgba(255,255,255,0.95),0_4px_16px_rgba(15,23,42,0.04)]">
           <div className="flex items-center gap-2 mb-3">
             <Award className="w-5 h-5 text-[#0d5c46]" />
             <h3 className="text-base font-bold text-slate-900 tracking-tight">
@@ -187,7 +188,7 @@ export default function AboutPage() {
           </div>
         </div>
 
-        <div className="bg-white rounded-2xl p-6 border border-slate-200/80 shadow-xs flex flex-col justify-between">
+        <div className="bg-white/95 backdrop-blur-[6px] rounded-2xl p-6 border border-slate-200/85 [box-shadow:inset_1px_-1px_1px_rgba(255,255,255,0.95),inset_-1px_1px_1px_rgba(255,255,255,0.95),0_4px_16px_rgba(15,23,42,0.04)] flex flex-col justify-between">
           <div>
             <div className="flex items-center gap-2 mb-3">
               <BookOpen className="w-5 h-5 text-[#0d5c46]" />
@@ -201,37 +202,30 @@ export default function AboutPage() {
           </div>
 
           <div className="flex flex-wrap gap-2 text-xs">
-            <Button
-              asChild
-              variant="outline"
-              size="sm"
-              effect="lift"
-              className="bg-slate-100 hover:bg-slate-200 text-slate-800 font-semibold"
+            <SheenPillButton
+              as="a"
+              href="http://localhost:5005/api/health"
+              target="_blank"
+              rel="noreferrer"
+              width={168}
+              height={36}
+              className="text-xs font-semibold"
             >
-              <a
-                href="http://localhost:5005/api/health"
-                target="_blank"
-                rel="noreferrer"
-              >
-                <span>API Health Endpoint</span>
-                <ExternalLink className="w-3.5 h-3.5 ml-1.5" />
-              </a>
-            </Button>
-            <Button
-              asChild
-              size="sm"
-              effect="shimmer"
-              className="bg-[#0d5c46] hover:bg-[#0a4837] text-white font-semibold shadow-xs"
+              <span>API Health Endpoint</span>
+              <ExternalLink className="w-3.5 h-3.5 ml-1 text-slate-500" />
+            </SheenPillButton>
+            <SheenPillButton
+              as="a"
+              href="http://localhost:5005/docs"
+              target="_blank"
+              rel="noreferrer"
+              width={178}
+              height={36}
+              className="text-xs font-semibold"
             >
-              <a
-                href="http://localhost:5005/docs"
-                target="_blank"
-                rel="noreferrer"
-              >
-                <span>FastAPI Swagger Docs</span>
-                <ExternalLink className="w-3.5 h-3.5 ml-1.5" />
-              </a>
-            </Button>
+              <span>FastAPI Swagger Docs</span>
+              <ExternalLink className="w-3.5 h-3.5 ml-1 text-emerald-700" />
+            </SheenPillButton>
           </div>
         </div>
       </div>

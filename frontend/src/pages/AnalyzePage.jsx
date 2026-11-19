@@ -285,35 +285,33 @@ export default function AnalyzePage() {
 
         {results && (
           <div className="flex items-center gap-2 shrink-0">
-            <Button
-              variant="outline"
-              size="sm"
-              effect="ripple"
+            <SheenPillButton
+              width={142}
+              height={34}
               onClick={() => {
                 const summaryText = `CropSure Diagnosis: ${results.detection.disease} (${results.detection.pathogen})\nSeverity: ${results.detection.severity_score}%\nAccuracy: ${results.detection.accuracy}\nPassport ID: ${results.blockchain?.passport_id}\nSolana TX: ${results.blockchain?.tx_signature}`;
                 handleCopy(summaryText, 'summary');
               }}
-              className="gap-1.5 text-xs font-medium bg-white/70 backdrop-blur-xs"
+              className="gap-1 text-xs"
             >
               {copiedSummary ? <Check className="w-3.5 h-3.5 text-emerald-600" /> : <Copy className="w-3.5 h-3.5 text-slate-500" />}
               <span>{copiedSummary ? 'Dossier Copied' : 'Copy Summary'}</span>
-            </Button>
-            <Button
-              variant="secondary"
-              size="sm"
-              effect="lift"
+            </SheenPillButton>
+            <SheenPillButton
+              width={196}
+              height={34}
               onClick={handleClear}
-              className="gap-1.5 text-xs font-semibold text-emerald-950 bg-emerald-100/70 hover:bg-emerald-200/80"
+              className="gap-1 text-xs"
             >
-              <RefreshCw className="w-3.5 h-3.5" />
+              <RefreshCw className="w-3.5 h-3.5 text-emerald-700" />
               <span>Evaluate New Specimen</span>
-            </Button>
+            </SheenPillButton>
           </div>
         )}
       </div>
 
       {/* INTAKE / UPLOADER CARD */}
-      <Card className="border border-slate-200/80 shadow-xs bg-white">
+      <Card>
         <CardHeader className="pb-3 border-b border-slate-100">
           <div className="flex items-center justify-between">
             <div>
@@ -400,7 +398,7 @@ export default function AnalyzePage() {
           className="space-y-6"
         >
           {/* Executive Clinical Summary Banner */}
-          <Card className="border-slate-300 shadow-sm bg-white overflow-hidden">
+          <Card className="overflow-hidden">
             <div className={`h-1.5 w-full ${isHealthy ? 'bg-[#0d5c46]' : 'bg-amber-600'}`} />
             <CardContent className="p-6">
               <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-6">
@@ -488,7 +486,7 @@ export default function AnalyzePage() {
               <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
                 {/* Visual Specimen Card (5 cols) */}
                 <div className="lg:col-span-5 space-y-4">
-                  <Card className="border border-slate-200 shadow-xs">
+                  <Card>
                     <CardHeader className="pb-3 border-b border-slate-100">
                       <div className="flex items-center justify-between">
                         <CardTitle className="font-display text-sm font-bold text-slate-900">
@@ -541,7 +539,7 @@ export default function AnalyzePage() {
 
                 {/* Agronomic Prescriptions & Symptoms (7 cols) */}
                 <div className="lg:col-span-7 space-y-4">
-                  <Card className="border border-slate-200 shadow-xs">
+                  <Card>
                     <CardHeader className="pb-3 border-b border-slate-100">
                       <CardTitle className="font-display text-sm font-bold text-slate-900">
                         Prescribed Clinical Agronomic Action
@@ -603,7 +601,7 @@ export default function AnalyzePage() {
 
             {/* TAB 2: GRAD-CAM SALIENCY */}
             <TabsContent value="gradcam" className="space-y-6">
-              <Card className="border border-slate-200 shadow-xs">
+              <Card>
                 <CardHeader className="pb-3 border-b border-slate-100">
                   <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
                     <div>
@@ -682,7 +680,7 @@ export default function AnalyzePage() {
               <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
                 {/* 30-Day Projections (7 cols) */}
                 <div className="lg:col-span-7 space-y-4">
-                  <Card className="border border-slate-200 shadow-xs">
+                  <Card>
                     <CardHeader className="pb-3 border-b border-slate-100">
                       <div className="flex items-center justify-between">
                         <div>
@@ -775,7 +773,7 @@ export default function AnalyzePage() {
 
                 {/* Yield Loss & Economics (5 cols) */}
                 <div className="lg:col-span-5 space-y-4">
-                  <Card className="border border-slate-200 shadow-xs">
+                  <Card>
                     <CardHeader className="pb-3 border-b border-slate-100">
                       <CardTitle className="font-display text-sm font-bold text-slate-900">
                         Harvest Yield Loss &amp; Economic Exposure
@@ -837,7 +835,7 @@ export default function AnalyzePage() {
 
             {/* TAB 4: BAYESIAN TRUST */}
             <TabsContent value="trust" className="space-y-6">
-              <Card className="border border-slate-200 shadow-xs">
+              <Card>
                 <CardHeader className="pb-3 border-b border-slate-100">
                   <div className="flex items-center justify-between">
                     <div>
@@ -973,18 +971,18 @@ export default function AnalyzePage() {
                             <span className="ml-1">{copiedTx ? 'Copied' : 'Copy'}</span>
                           </Button>
                           {results.blockchain?.explorer_url && (
-                            <Button
-                              variant="outline"
-                              size="sm"
-                              effect="lift"
-                              asChild
-                              className="h-7 text-xs font-semibold text-emerald-300 border-emerald-700/60 hover:bg-emerald-950/50"
+                            <SheenPillButton
+                              as="a"
+                              href={results.blockchain.explorer_url}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              width={106}
+                              height={30}
+                              className="text-xs"
                             >
-                              <a href={results.blockchain.explorer_url} target="_blank" rel="noopener noreferrer">
-                                <span>Explorer</span>
-                                <ExternalLink className="w-3 h-3 ml-1" />
-                              </a>
-                            </Button>
+                              <span>Explorer</span>
+                              <ExternalLink className="w-3 h-3 ml-1" />
+                            </SheenPillButton>
                           )}
                         </div>
                       </div>
@@ -996,17 +994,16 @@ export default function AnalyzePage() {
                         <span className="text-[11px] text-slate-400">
                           Verify validator inclusion &amp; block timestamp
                         </span>
-                        <Button
-                          variant="secondary"
-                          size="sm"
-                          effect="glow"
+                        <SheenPillButton
+                          width={154}
+                          height={30}
                           onClick={() => handleVerifyOnChain(results.blockchain?.tx_signature)}
                           disabled={verifyingOnChain || !results.blockchain?.tx_signature}
-                          className="h-7 text-xs font-semibold text-emerald-300 bg-emerald-950 hover:bg-emerald-900 border border-emerald-700/50"
+                          className="text-xs"
                         >
                           <RefreshCw className={`w-3 h-3 mr-1 ${verifyingOnChain ? 'animate-spin' : ''}`} />
                           <span>{verifyingOnChain ? 'Verifying Block...' : 'Verify on Devnet'}</span>
-                        </Button>
+                        </SheenPillButton>
                       </div>
 
                       {verificationResult && (
@@ -1086,7 +1083,7 @@ export default function AnalyzePage() {
           </Tabs>
 
           {/* AUDIT LOG ACCORDION */}
-          <Card className="border border-slate-200 bg-white shadow-xs">
+          <Card>
             <Accordion type="single" collapsible className="w-full">
               <AccordionItem value="json-audit" className="border-none px-4">
                 <AccordionTrigger className="text-xs font-mono font-bold text-slate-800 hover:no-underline py-4">

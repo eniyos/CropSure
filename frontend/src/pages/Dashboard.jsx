@@ -283,7 +283,7 @@ export default function Dashboard() {
       <div className="grid gap-4 lg:grid-cols-3">
         {/* Card 1: Main Metric & Diurnal Hourly Area Chart (2 cols) */}
         <AnimatedCard className="lg:col-span-2" delay={0.05}>
-          <Card className="rounded-2xl border border-border/70 shadow-xs bg-card p-0 overflow-hidden h-full flex flex-col justify-between">
+          <Card className="p-0 overflow-hidden h-full flex flex-col justify-between">
             <div className="flex items-start justify-between gap-2 p-5 pb-0">
               <div className="flex items-center gap-2 text-sm font-medium text-foreground">
                 <Leaf className="size-4 text-[#0d5c46]" />
@@ -345,7 +345,7 @@ export default function Dashboard() {
 
         {/* Card 2: Net Foliar Health Rate (1 col) */}
         <AnimatedCard delay={0.1}>
-          <Card className="rounded-2xl border border-border/70 shadow-xs bg-card p-5 flex flex-col justify-between h-full">
+          <Card className="p-5 flex flex-col justify-between h-full">
             <div className="flex items-start justify-between gap-2">
               <div className="flex items-center gap-2 text-sm font-medium text-foreground">
                 <RefreshCw className="size-4 text-[#0d5c46]" />
@@ -403,7 +403,7 @@ export default function Dashboard() {
       <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
         {/* Metric 1: Monitored Canopy Sectors */}
         <AnimatedCard delay={0.15}>
-          <Card className="rounded-2xl border border-border/70 shadow-xs bg-card p-5 flex flex-col justify-between h-full">
+          <Card className="p-5 flex flex-col justify-between h-full">
             <div className="flex items-start justify-between gap-2">
               <div className="flex items-center gap-2 text-sm font-medium text-foreground">
                 <Layers className="size-4 text-[#0d5c46]" />
@@ -449,7 +449,7 @@ export default function Dashboard() {
 
         {/* Metric 2: Weekly New Diagnoses (Pill Bars) */}
         <AnimatedCard delay={0.2}>
-          <Card className="rounded-2xl border border-border/70 shadow-xs bg-card p-5 flex flex-col justify-between h-full">
+          <Card className="p-5 flex flex-col justify-between h-full">
             <div className="flex items-start justify-between gap-2">
               <div className="flex items-center gap-2 text-sm font-medium text-foreground">
                 <Activity className="size-4 text-[#0d5c46]" />
@@ -487,7 +487,7 @@ export default function Dashboard() {
 
         {/* Metric 3: Ensemble Pathology Confidence */}
         <AnimatedCard delay={0.25}>
-          <Card className="rounded-2xl border border-border/70 shadow-xs bg-card p-5 flex flex-col justify-between h-full">
+          <Card className="p-5 flex flex-col justify-between h-full">
             <div className="flex items-start justify-between gap-2">
               <div className="flex items-center gap-2 text-sm font-medium text-foreground">
                 <ShieldCheck className="size-4 text-[#0d5c46]" />
@@ -527,7 +527,7 @@ export default function Dashboard() {
 
         {/* Metric 4: Multi-Tier Facility Distribution */}
         <AnimatedCard delay={0.3}>
-          <Card className="rounded-2xl border border-border/70 shadow-xs bg-card p-5 flex flex-col justify-between h-full">
+          <Card className="p-5 flex flex-col justify-between h-full">
             <div className="flex items-start justify-between gap-2">
               <div className="flex items-center gap-2 text-sm font-medium text-foreground">
                 <Cpu className="size-4 text-[#0d5c46]" />
@@ -579,7 +579,7 @@ export default function Dashboard() {
       <div className="grid gap-4 xl:grid-cols-3">
         {/* Left: Animated FilterGrid actionable list (2 cols) */}
         <AnimatedCard className="xl:col-span-2" delay={0.35}>
-          <Card className="rounded-2xl border border-border/70 shadow-xs bg-card p-5 h-full flex flex-col justify-between">
+          <Card className="p-5 h-full flex flex-col justify-between">
             <div>
               <div className="flex items-start justify-between gap-2 pb-1">
                 <div className="flex items-center gap-2 text-base font-semibold text-foreground font-display">
@@ -646,17 +646,15 @@ export default function Dashboard() {
                       <span className="text-muted-foreground">{item.threshold}</span>
                     </div>
 
-                    <Button
-                      variant="outline"
-                      size="sm"
-                      effect="lift"
-                      asChild
-                      className="w-28 shrink-0 h-8 text-xs font-medium border-border/80 hover:bg-muted bg-white/60 backdrop-blur-xs"
-                    >
-                      <Link to="/analyze">
+                    <Link to="/analyze" className="shrink-0">
+                      <SheenPillButton
+                        width={118}
+                        height={32}
+                        className="text-xs"
+                      >
                         {item.action}
-                      </Link>
-                    </Button>
+                      </SheenPillButton>
+                    </Link>
                   </div>
                 )}
               />
@@ -671,7 +669,7 @@ export default function Dashboard() {
 
         {/* Right: Diurnal Spore Activity Matrix (1 col) */}
         <AnimatedCard delay={0.4}>
-          <Card className="rounded-2xl border border-border/70 shadow-xs bg-card p-5 flex flex-col justify-between h-full">
+          <Card className="p-5 flex flex-col justify-between h-full">
             <div>
               <div className="flex items-start justify-between gap-2 pb-1">
                 <div className="flex items-center gap-2 text-sm font-semibold text-foreground font-display">
@@ -726,7 +724,7 @@ export default function Dashboard() {
 
       {/* ROW 4: Solana Devnet On-Chain Passports Ledger */}
       <AnimatedCard delay={0.45}>
-        <Card className="rounded-2xl border border-border/70 shadow-xs bg-card overflow-hidden">
+        <Card className="overflow-hidden">
           <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 p-5 pb-3 border-b border-border/60">
             <div>
               <div className="flex items-center gap-2">
@@ -742,22 +740,18 @@ export default function Dashboard() {
               </p>
             </div>
 
-            <Button
-              variant="outline"
-              size="sm"
-              effect="lift"
-              asChild
-              className="font-mono text-xs text-muted-foreground hover:text-foreground shrink-0 h-8 bg-white/60 backdrop-blur-xs"
+            <SheenPillButton
+              as="a"
+              href="https://explorer.solana.com/?cluster=devnet"
+              target="_blank"
+              rel="noopener noreferrer"
+              width={146}
+              height={32}
+              className="font-mono text-xs text-muted-foreground hover:text-foreground shrink-0"
             >
-              <a
-                href="https://explorer.solana.com/?cluster=devnet"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <span>Solana Explorer</span>
-                <ExternalLink className="w-3 h-3 ml-1.5" />
-              </a>
-            </Button>
+              <span>Solana Explorer</span>
+              <ExternalLink className="w-3 h-3 ml-1" />
+            </SheenPillButton>
           </div>
 
           <div className="overflow-x-auto">
