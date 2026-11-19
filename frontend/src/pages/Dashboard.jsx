@@ -38,6 +38,7 @@ import {
 import { Card, CardHeader, CardTitle, CardDescription, CardContent } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
+import { SheenPillButton } from '@/components/buttons/sheen-pill-button';
 import { Avatar, AvatarImage, AvatarFallback } from '@/components/ui/avatar';
 import { Progress } from '@/components/ui/progress';
 
@@ -265,16 +266,16 @@ export default function Dashboard() {
             ))}
           </div>
 
-          <Button
-            asChild
-            effect="shimmer"
-            className="rounded-full bg-[#0d5c46] hover:bg-[#084534] text-white font-medium text-xs shadow-xs px-4 h-9"
-          >
-            <Link to="/analyze">
-              <ScanSearch className="w-3.5 h-3.5 mr-1.5" />
+          <Link to="/analyze">
+            <SheenPillButton
+              width={180}
+              height={38}
+              className="border-slate-300/80 bg-white shadow-xs hover:border-[#0d5c46]/40"
+            >
+              <ScanSearch className="w-3.5 h-3.5 text-[#0d5c46]" />
               <span>Evaluate Specimen</span>
-            </Link>
-          </Button>
+            </SheenPillButton>
+          </Link>
         </div>
       </div>
 

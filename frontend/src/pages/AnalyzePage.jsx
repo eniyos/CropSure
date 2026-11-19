@@ -40,6 +40,7 @@ import apiService from '../services/api';
 import { Card, CardHeader, CardTitle, CardDescription, CardContent } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
+import { SheenPillButton } from '@/components/buttons/sheen-pill-button';
 import { Tabs, TabsList, TabsTrigger, TabsContent } from '@/components/ui/tabs';
 import { Separator } from '@/components/ui/separator';
 import { Progress } from '@/components/ui/progress';
@@ -348,26 +349,25 @@ export default function AnalyzePage() {
                 Loaded specimen: <span className="font-mono font-semibold text-slate-900">{selectedImageData.name}</span>. Ready for multi-model inference.
               </div>
 
-              <Button
+              <SheenPillButton
                 onClick={handleAnalyze}
                 disabled={analyzing}
-                effect="shimmer"
-                material="tinted"
-                tint="#0d5c46"
-                className="w-full sm:w-auto px-6 py-2.5 text-white font-medium text-xs tracking-wider uppercase shadow-xs cursor-pointer"
+                width={240}
+                height={44}
+                className="w-full sm:w-auto border-slate-300/80 bg-white shadow-xs hover:border-[#0d5c46]/40 cursor-pointer"
               >
                 {analyzing ? (
-                  <>
-                    <div className="w-3.5 h-3.5 border-2 border-white border-t-transparent rounded-full animate-spin mr-2" />
+                  <span className="flex items-center gap-2">
+                    <div className="w-3.5 h-3.5 border-2 border-slate-600 border-t-transparent rounded-full animate-spin" />
                     <span>Evaluating Specimen...</span>
-                  </>
+                  </span>
                 ) : (
-                  <>
-                    <ScanSearch className="w-4 h-4 mr-2" />
+                  <span className="flex items-center gap-2">
+                    <ScanSearch className="w-4 h-4 text-[#0d5c46]" />
                     <span>Analyze Foliar Specimen</span>
-                  </>
+                  </span>
                 )}
-              </Button>
+              </SheenPillButton>
             </motion.div>
           )}
 

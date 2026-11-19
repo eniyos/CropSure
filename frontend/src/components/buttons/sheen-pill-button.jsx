@@ -6,21 +6,22 @@ import { cn } from "@/lib/cn";
 const SHEEN_PILL_RADIUS = 9999;
 
 const SHEEN_SHELL =
-  "group relative inline-flex shrink-0 cursor-pointer items-center justify-center gap-4 overflow-hidden border border-double border-[rgba(51,51,51,0.08)] bg-[rgba(255,255,255,0.08)] backdrop-blur-[5px] brightness-[1.05]";
+  "group relative inline-flex shrink-0 cursor-pointer items-center justify-center gap-2 overflow-hidden border border-double border-[rgba(51,51,51,0.08)] bg-[rgba(255,255,255,0.08)] backdrop-blur-[5px] brightness-[1.05]";
 
 const SHEEN_SHELL_SHADOW =
-  "[box-shadow:inset_2px_-2px_1px_-1px_rgba(255,255,255,0.9),inset_-2px_2px_1px_-1px_rgba(255,255,255,0.9),inset_6px_-6px_1px_-6px_rgba(255,255,255,0.55),inset_-6px_6px_1px_-6px_rgba(255,255,255,0.55),inset_0_0_2px_rgba(0,0,0,0.8),0_4px_8px_rgba(0,0,0,0.2)]";
+  "[box-shadow:inset_2px_-2px_1px_-1px_rgba(255,255,255,0.9),inset_-2px_2px_1px_-1px_rgba(255,255,255,0.9),inset_6px_-6px_1px_-6px_rgba(255,255,255,0.55),inset_-6px_6px_1px_-6px_rgba(255,255,255,0.55),inset_0_0_2px_rgba(0,0,0,0.8),0_4px_8px_rgba(0,0,0,0.15)]";
 
 const SHEEN_SHELL_HOVER_SHADOW =
-  "hover:[box-shadow:inset_2px_-2px_1px_-1px_rgba(255,255,255,0.95),inset_-2px_2px_1px_-1px_rgba(255,255,255,0.95),inset_6px_-6px_1px_-6px_rgba(255,255,255,0.65),inset_-6px_6px_1px_-6px_rgba(255,255,255,0.65),inset_0_0_2px_rgba(0,0,0,0.65),0_6px_12px_rgba(0,0,0,0.22)]";
+  "hover:[box-shadow:inset_2px_-2px_1px_-1px_rgba(255,255,255,0.95),inset_-2px_2px_1px_-1px_rgba(255,255,255,0.95),inset_6px_-6px_1px_-6px_rgba(255,255,255,0.65),inset_-6px_6px_1px_-6px_rgba(255,255,255,0.65),inset_0_0_2px_rgba(0,0,0,0.65),0_6px_12px_rgba(0,0,0,0.18)]";
 
 export const SheenPillButton = forwardRef(
   (
     {
       children,
       className,
+      labelClassName,
       width = 180,
-      height = 60,
+      height = 50,
       highlight = 15,
       type = "button",
       disabled,
@@ -29,10 +30,10 @@ export const SheenPillButton = forwardRef(
     },
     ref
   ) => {
-    const shadeVeilWidth = width - 16;
-    const shadeVeilHeight = height - 16;
-    const rimWireWidth = width - 9;
-    const rimWireHeight = height - 9;
+    const shadeVeilWidth = Math.max(0, width - 16);
+    const shadeVeilHeight = Math.max(0, height - 16);
+    const rimWireWidth = Math.max(0, width - 9);
+    const rimWireHeight = Math.max(0, height - 9);
 
     return (
       <button
@@ -93,11 +94,15 @@ export const SheenPillButton = forwardRef(
 
         <span
           data-layer="sheen-label-well"
-          className="relative z-30 flex h-full w-full items-center justify-center gap-4 px-[0.8rem]"
+          className="relative z-30 flex h-full w-full items-center justify-center gap-2 px-[0.8rem]"
         >
           <span
             data-layer="sheen-label"
-            className="text-lg leading-none whitespace-nowrap text-[#3e3e3e] filter-[drop-shadow(0_25px_3px_rgba(102,102,102,0.15))] transition-[color,filter,transform] duration-250 ease-linear group-hover:translate-y-[-0.5px] group-hover:text-neutral-800 group-hover:filter-[drop-shadow(0_28px_4px_rgba(102,102,102,0.2))] motion-reduce:transition-none motion-reduce:group-hover:translate-y-0 font-medium"
+            className={cn(
+              "leading-none whitespace-nowrap text-slate-800 filter-[drop-shadow(0_12px_3px_rgba(15,23,42,0.1))] transition-[color,filter,transform] duration-250 ease-linear group-hover:translate-y-[-0.5px] group-hover:text-slate-900 motion-reduce:transition-none motion-reduce:group-hover:translate-y-0 font-semibold flex items-center justify-center gap-2",
+              height >= 56 ? "text-base" : "text-xs sm:text-sm",
+              labelClassName
+            )}
           >
             {children}
           </span>
