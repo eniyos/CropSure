@@ -462,22 +462,46 @@ export default function AnalyzePage() {
           </Card>
 
           {/* WORKSTATION TABS */}
-          <Tabs defaultValue="pathology" className="w-full">
-            <TabsList className="grid grid-cols-2 md:grid-cols-5 h-auto p-1 bg-slate-200/60 rounded-xl mb-4">
-              <TabsTrigger value="pathology" className="text-xs font-semibold py-2">
-                Pathology &amp; Protocol
+          <Tabs defaultValue="pathology" className="w-full space-y-6">
+            <TabsList className="w-full flex flex-wrap sm:flex-nowrap items-stretch gap-1.5 p-1.5 bg-slate-100/90 border border-slate-200/85 rounded-2xl [box-shadow:inset_1px_-1px_1px_rgba(255,255,255,0.95),inset_-1px_1px_1px_rgba(255,255,255,0.95),0_2px_8px_rgba(15,23,42,0.03)] overflow-x-auto">
+              <TabsTrigger
+                value="pathology"
+                className="flex-1 min-w-[150px] py-2.5 px-3 rounded-xl text-xs font-semibold flex items-center justify-center gap-2 whitespace-nowrap cursor-pointer"
+              >
+                <Activity className="w-4 h-4 text-[#0d5c46] shrink-0" />
+                <span>Pathology &amp; Protocol</span>
               </TabsTrigger>
-              <TabsTrigger value="gradcam" className="text-xs font-semibold py-2">
-                Neural Saliency (Grad-CAM)
+
+              <TabsTrigger
+                value="gradcam"
+                className="flex-1 min-w-[160px] py-2.5 px-3 rounded-xl text-xs font-semibold flex items-center justify-center gap-2 whitespace-nowrap cursor-pointer"
+              >
+                <ScanSearch className="w-4 h-4 text-emerald-600 shrink-0" />
+                <span>Neural Saliency <span className="opacity-75 font-mono text-[10px] hidden xl:inline">(Grad-CAM)</span></span>
               </TabsTrigger>
-              <TabsTrigger value="projections" className="text-xs font-semibold py-2">
-                Epidemic &amp; Yield Loss
+
+              <TabsTrigger
+                value="projections"
+                className="flex-1 min-w-[150px] py-2.5 px-3 rounded-xl text-xs font-semibold flex items-center justify-center gap-2 whitespace-nowrap cursor-pointer"
+              >
+                <TrendingUp className="w-4 h-4 text-amber-600 shrink-0" />
+                <span>Epidemic &amp; Yield Loss</span>
               </TabsTrigger>
-              <TabsTrigger value="trust" className="text-xs font-semibold py-2">
-                Bayesian Trust (12 Signals)
+
+              <TabsTrigger
+                value="trust"
+                className="flex-1 min-w-[160px] py-2.5 px-3 rounded-xl text-xs font-semibold flex items-center justify-center gap-2 whitespace-nowrap cursor-pointer"
+              >
+                <ShieldCheck className="w-4 h-4 text-teal-600 shrink-0" />
+                <span>Bayesian Trust <span className="opacity-75 font-mono text-[10px] hidden xl:inline">(12 Signals)</span></span>
               </TabsTrigger>
-              <TabsTrigger value="blockchain" className="text-xs font-semibold py-2">
-                Solana Crop Passport
+
+              <TabsTrigger
+                value="blockchain"
+                className="flex-1 min-w-[150px] py-2.5 px-3 rounded-xl text-xs font-semibold flex items-center justify-center gap-2 whitespace-nowrap cursor-pointer"
+              >
+                <Lock className="w-4 h-4 text-purple-600 shrink-0" />
+                <span>Solana Crop Passport</span>
               </TabsTrigger>
             </TabsList>
 
