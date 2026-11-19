@@ -65,6 +65,7 @@ export default function ModelsPage() {
         <div className="flex items-center gap-2 shrink-0">
           <Button
             variant="outline"
+            effect="lift"
             onClick={handleRefresh}
             disabled={refreshing}
             className="h-9 px-3.5 text-xs font-mono border-slate-200 text-slate-700 bg-white hover:bg-slate-50"

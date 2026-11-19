@@ -15,6 +15,7 @@ import {
   Binary,
   Code2
 } from 'lucide-react';
+import { Button } from '@/components/ui/button';
 
 const TECH_STACK = [
   { category: 'Diagnostic Vision & Localization', techs: ['PyTorch 2.5', 'EfficientNet-B4', 'Grad-CAM', 'Torchvision', 'Scikit-learn'] },
@@ -200,24 +201,37 @@ export default function AboutPage() {
           </div>
 
           <div className="flex flex-wrap gap-2 text-xs">
-            <a
-              href="http://localhost:5005/api/health"
-              target="_blank"
-              rel="noreferrer"
-              className="inline-flex items-center gap-1.5 px-3 py-2 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-800 font-semibold transition-colors"
+            <Button
+              asChild
+              variant="outline"
+              size="sm"
+              effect="lift"
+              className="bg-slate-100 hover:bg-slate-200 text-slate-800 font-semibold"
             >
-              <span>API Health Endpoint</span>
-              <ExternalLink className="w-3.5 h-3.5" />
-            </a>
-            <a
-              href="http://localhost:5005/docs"
-              target="_blank"
-              rel="noreferrer"
-              className="inline-flex items-center gap-1.5 px-3 py-2 rounded-xl bg-[#0d5c46]/10 hover:bg-[#0d5c46]/15 text-[#0d5c46] font-semibold border border-[#0d5c46]/20 transition-colors"
+              <a
+                href="http://localhost:5005/api/health"
+                target="_blank"
+                rel="noreferrer"
+              >
+                <span>API Health Endpoint</span>
+                <ExternalLink className="w-3.5 h-3.5 ml-1.5" />
+              </a>
+            </Button>
+            <Button
+              asChild
+              size="sm"
+              effect="shimmer"
+              className="bg-[#0d5c46] hover:bg-[#0a4837] text-white font-semibold shadow-xs"
             >
-              <span>FastAPI Swagger Docs</span>
-              <ExternalLink className="w-3.5 h-3.5" />
-            </a>
+              <a
+                href="http://localhost:5005/docs"
+                target="_blank"
+                rel="noreferrer"
+              >
+                <span>FastAPI Swagger Docs</span>
+                <ExternalLink className="w-3.5 h-3.5 ml-1.5" />
+              </a>
+            </Button>
           </div>
         </div>
       </div>

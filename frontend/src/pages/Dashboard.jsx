@@ -267,7 +267,8 @@ export default function Dashboard() {
 
           <Button
             asChild
-            className="rounded-xl bg-[#0d5c46] hover:bg-[#084534] text-white font-medium text-xs shadow-xs px-4 h-9"
+            effect="shimmer"
+            className="rounded-full bg-[#0d5c46] hover:bg-[#084534] text-white font-medium text-xs shadow-xs px-4 h-9"
           >
             <Link to="/analyze">
               <ScanSearch className="w-3.5 h-3.5 mr-1.5" />
@@ -647,8 +648,9 @@ export default function Dashboard() {
                     <Button
                       variant="outline"
                       size="sm"
+                      effect="lift"
                       asChild
-                      className="w-28 shrink-0 h-8 text-xs font-medium border-border/80 hover:bg-muted"
+                      className="w-28 shrink-0 h-8 text-xs font-medium border-border/80 hover:bg-muted bg-white/60 backdrop-blur-xs"
                     >
                       <Link to="/analyze">
                         {item.action}
@@ -742,8 +744,9 @@ export default function Dashboard() {
             <Button
               variant="outline"
               size="sm"
+              effect="lift"
               asChild
-              className="font-mono text-xs text-muted-foreground hover:text-foreground shrink-0 h-8"
+              className="font-mono text-xs text-muted-foreground hover:text-foreground shrink-0 h-8 bg-white/60 backdrop-blur-xs"
             >
               <a
                 href="https://explorer.solana.com/?cluster=devnet"

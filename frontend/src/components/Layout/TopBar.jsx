@@ -1,6 +1,7 @@
 import React from 'react';
-import { useLocation } from 'react-router-dom';
-import { Menu, Bell } from 'lucide-react';
+import { useLocation, Link } from 'react-router-dom';
+import { Menu, Bell, ScanSearch } from 'lucide-react';
+import { Button } from '@/components/ui/button';
 
 const PAGE_TITLES = {
   '/': { title: 'Canopy Pathology Overview', subtitle: 'Real-time telemetry and plant health operations' },
@@ -22,13 +23,15 @@ export default function TopBar({ onOpenSidebar }) {
     <header className="h-16 bg-white border-b border-slate-200/80 shadow-xs sticky top-0 z-30 flex items-center justify-between px-4 sm:px-6 font-sans">
       {/* Left: Hamburger & Dynamic Title */}
       <div className="flex items-center gap-3">
-        <button
+        <Button
+          variant="ghost"
+          size="icon-sm"
           onClick={onOpenSidebar}
-          className="p-2 rounded-lg text-slate-600 hover:bg-slate-100 lg:hidden"
+          className="lg:hidden text-slate-600 hover:bg-slate-100"
           aria-label="Open sidebar"
         >
           <Menu className="w-5 h-5" />
-        </button>
+        </Button>
 
         <div className="flex flex-col">
           <h1 className="font-display text-base sm:text-lg font-bold text-slate-900 tracking-tight leading-tight">
@@ -42,21 +45,38 @@ export default function TopBar({ onOpenSidebar }) {
 
       {/* Right Actions */}
       <div className="flex items-center gap-3">
+        {/* Quick Specimen Scan Button */}
+        <Button
+          asChild
+          variant="outline"
+          size="sm"
+          effect="glow"
+          className="hidden md:inline-flex bg-white/70 backdrop-blur-md border-slate-200/90 hover:border-[#0d5c46]/40 text-[#0d5c46] font-medium text-xs shadow-xs"
+        >
+          <Link to="/analyze">
+            <ScanSearch className="w-3.5 h-3.5 mr-1" />
+            <span>Quick Scan</span>
+          </Link>
+        </Button>
+
         {/* Live Engine Status Badge */}
-        <div className="hidden sm:flex items-center gap-1.5 px-2.5 py-1 rounded-md bg-slate-50 border border-slate-200 text-slate-700 text-xs font-mono font-medium">
+        <div className="hidden sm:flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-slate-50 border border-slate-200 text-slate-700 text-xs font-mono font-medium">
           <span className="w-2 h-2 rounded-full bg-[#0d5c46]" />
           <span>Inference Suite Active</span>
         </div>
 
         {/* Notification Bell */}
-        <button
+        <Button
           type="button"
-          className="relative p-2 rounded-lg text-slate-500 hover:text-slate-900 hover:bg-slate-100 transition-colors cursor-pointer"
+          variant="ghost"
+          size="icon-sm"
+          effect="ripple"
+          className="relative text-slate-500 hover:text-slate-900 hover:bg-slate-100 rounded-full"
           title="Telemetry Notifications"
         >
           <Bell className="w-4 h-4" />
           <span className="absolute top-1.5 right-1.5 w-1.5 h-1.5 bg-[#0d5c46] rounded-full" />
-        </button>
+        </Button>
 
         {/* User Profile Avatar */}
         <div className="flex items-center gap-2 pl-2 border-l border-slate-200">

@@ -287,11 +287,12 @@ export default function AnalyzePage() {
             <Button
               variant="outline"
               size="sm"
+              effect="ripple"
               onClick={() => {
                 const summaryText = `CropSure Diagnosis: ${results.detection.disease} (${results.detection.pathogen})\nSeverity: ${results.detection.severity_score}%\nAccuracy: ${results.detection.accuracy}\nPassport ID: ${results.blockchain?.passport_id}\nSolana TX: ${results.blockchain?.tx_signature}`;
                 handleCopy(summaryText, 'summary');
               }}
-              className="gap-1.5 text-xs font-medium"
+              className="gap-1.5 text-xs font-medium bg-white/70 backdrop-blur-xs"
             >
               {copiedSummary ? <Check className="w-3.5 h-3.5 text-emerald-600" /> : <Copy className="w-3.5 h-3.5 text-stone-500" />}
               <span>{copiedSummary ? 'Dossier Copied' : 'Copy Summary'}</span>
@@ -299,6 +300,7 @@ export default function AnalyzePage() {
             <Button
               variant="secondary"
               size="sm"
+              effect="lift"
               onClick={handleClear}
               className="gap-1.5 text-xs font-semibold text-emerald-950 bg-emerald-100/70 hover:bg-emerald-200/80"
             >
@@ -349,7 +351,10 @@ export default function AnalyzePage() {
               <Button
                 onClick={handleAnalyze}
                 disabled={analyzing}
-                className="w-full sm:w-auto px-6 py-2.5 bg-[#0d5c46] hover:bg-[#084534] text-white font-medium text-xs tracking-wider uppercase shadow-xs cursor-pointer"
+                effect="shimmer"
+                material="tinted"
+                tint="#0d5c46"
+                className="w-full sm:w-auto px-6 py-2.5 text-white font-medium text-xs tracking-wider uppercase shadow-xs cursor-pointer"
               >
                 {analyzing ? (
                   <>
@@ -933,6 +938,7 @@ export default function AnalyzePage() {
                         <Button
                           variant="ghost"
                           size="sm"
+                          effect="ripple"
                           onClick={() => handleCopy(results.blockchain?.specimen_sha256 || results.image_metadata?.sha256, 'hash')}
                           className="h-7 text-xs font-mono text-stone-400 hover:text-white hover:bg-stone-800"
                         >
@@ -959,6 +965,7 @@ export default function AnalyzePage() {
                           <Button
                             variant="ghost"
                             size="sm"
+                            effect="ripple"
                             onClick={() => handleCopy(results.blockchain?.tx_signature, 'tx')}
                             className="h-7 text-xs font-mono text-stone-400 hover:text-white hover:bg-stone-800"
                           >
@@ -969,6 +976,7 @@ export default function AnalyzePage() {
                             <Button
                               variant="outline"
                               size="sm"
+                              effect="lift"
                               asChild
                               className="h-7 text-xs font-semibold text-emerald-300 border-emerald-700/60 hover:bg-emerald-950/50"
                             >
@@ -991,6 +999,7 @@ export default function AnalyzePage() {
                         <Button
                           variant="secondary"
                           size="sm"
+                          effect="glow"
                           onClick={() => handleVerifyOnChain(results.blockchain?.tx_signature)}
                           disabled={verifyingOnChain || !results.blockchain?.tx_signature}
                           className="h-7 text-xs font-semibold text-emerald-300 bg-emerald-950 hover:bg-emerald-900 border border-emerald-700/50"
