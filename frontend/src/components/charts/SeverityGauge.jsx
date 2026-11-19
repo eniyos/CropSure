@@ -13,23 +13,23 @@ export default function SeverityGauge({
   // Clamp value between 0 and 100
   const clampedValue = Math.min(100, Math.max(0, Number(value) || 0));
 
-  // Determine severity tier and color
-  let color = '#28A745'; // green (<20%)
+  // Determine severity tier and color aligned with Chronicle palette
+  let color = '#0d5c46'; // viridian (<20%)
   let category = 'Mild';
-  let badgeBg = 'bg-emerald-50 text-emerald-800 border-emerald-200';
+  let badgeBg = 'bg-[#0d5c46]/10 text-[#0d5c46] border-[#0d5c46]/20';
 
   if (clampedValue > 75) {
-    color = '#DC3545'; // red
+    color = '#dc2626'; // red
     category = 'Critical';
-    badgeBg = 'bg-rose-50 text-rose-800 border-rose-200';
+    badgeBg = 'bg-rose-50 text-rose-700 border-rose-200';
   } else if (clampedValue > 50) {
-    color = '#EA580C'; // orange
+    color = '#ea580c'; // orange
     category = 'Severe';
-    badgeBg = 'bg-orange-50 text-orange-800 border-orange-200';
+    badgeBg = 'bg-orange-50 text-orange-700 border-orange-200';
   } else if (clampedValue >= 20) {
-    color = '#F59E0B'; // amber/yellow
+    color = '#d97706'; // amber
     category = 'Moderate';
-    badgeBg = 'bg-amber-50 text-amber-800 border-amber-200';
+    badgeBg = 'bg-amber-50 text-amber-700 border-amber-200';
   }
 
   // SVG parameters
@@ -53,7 +53,7 @@ export default function SeverityGauge({
             cy={size / 2}
             r={radius}
             fill="transparent"
-            stroke="#E5E7EB"
+            stroke="#e2e8f0"
             strokeWidth={strokeWidth}
             strokeDasharray={`${arcLength} ${circumference}`}
             strokeLinecap="round"
@@ -81,16 +81,16 @@ export default function SeverityGauge({
             initial={{ scale: 0.5, opacity: 0 }}
             animate={{ scale: 1, opacity: 1 }}
             transition={{ duration: 0.5, delay: 0.2 }}
-            className="text-3xl font-extrabold tracking-tight text-gray-900"
+            className="text-3xl font-extrabold font-mono tracking-tight text-slate-900"
           >
             {clampedValue.toFixed(1)}%
           </motion.span>
-          <span className="text-[11px] font-semibold text-gray-400 uppercase tracking-wider mt-0.5">
+          <span className="text-[11px] font-semibold text-slate-400 uppercase tracking-wider mt-0.5">
             Leaf Affected
           </span>
 
           {showCategory && (
-            <span className={`mt-1.5 px-2 py-0.5 text-[11px] font-bold uppercase tracking-wider rounded-md border ${badgeBg}`}>
+            <span className={`mt-1.5 px-2 py-0.5 text-[11px] font-mono font-bold uppercase tracking-wider rounded-md border ${badgeBg}`}>
               {category}
             </span>
           )}
@@ -98,8 +98,8 @@ export default function SeverityGauge({
       </div>
 
       <div className="text-center mt-1">
-        <h5 className="text-xs font-semibold text-gray-700 uppercase tracking-wide">{label}</h5>
-        {sublabel && <p className="text-[11px] text-gray-500">{sublabel}</p>}
+        <h5 className="text-xs font-semibold text-slate-700 uppercase tracking-wide">{label}</h5>
+        {sublabel && <p className="text-[11px] text-slate-500 font-mono">{sublabel}</p>}
       </div>
     </div>
   );

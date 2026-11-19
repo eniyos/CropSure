@@ -839,7 +839,7 @@ export default function Dashboard() {
                       {p.slot}
                     </td>
                     <td className="py-3 px-5">
-                      <Badge variant="outline" className="font-mono text-[11px] bg-emerald-50 text-emerald-700 border-emerald-200">
+                      <Badge variant="outline" className="font-mono text-[11px] bg-[#0d5c46]/10 text-[#0d5c46] border-[#0d5c46]/20">
                         &bull; {p.status}
                       </Badge>
                     </td>

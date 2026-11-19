@@ -167,7 +167,7 @@ export default function AnalyzePage() {
         ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
         ctx.fillStyle = 'rgba(40, 167, 69, 0.12)';
         ctx.fillRect(0, 0, canvas.width, canvas.height);
-        ctx.strokeStyle = '#28A745';
+        ctx.strokeStyle = '#0d5c46';
         ctx.lineWidth = 3;
         ctx.strokeRect(8, 8, canvas.width - 16, canvas.height - 16);
         ctx.fillStyle = 'rgba(27, 67, 50, 0.85)';
@@ -266,18 +266,18 @@ export default function AnalyzePage() {
   return (
     <div className="space-y-6 pb-16 font-sans">
       {/* Platform Header */}
-      <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 border-b border-stone-200/80 pb-5">
+      <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 border-b border-slate-200/80 pb-5">
         <div>
-          <div className="flex items-center gap-2 mb-1.5">
-            <span className="w-2 h-2 rounded-full bg-emerald-600 animate-pulse" />
-            <span className="text-xs font-mono font-semibold tracking-wider uppercase text-emerald-800">
+          <div className="flex items-center gap-2 mb-1">
+            <span className="w-2 h-2 rounded-full bg-[#0d5c46]" />
+            <span className="text-xs font-mono uppercase tracking-wider text-slate-500">
               Laboratory Diagnostics &bull; Solanaceae Folium
             </span>
           </div>
-          <h1 className="font-display text-2xl sm:text-3xl font-bold tracking-tight text-stone-900">
+          <h1 className="font-display text-2xl sm:text-3xl font-bold tracking-tight text-slate-900">
             Foliar Pathology &amp; Agronomic Intelligence
           </h1>
-          <p className="text-sm text-stone-600 mt-1 max-w-2xl leading-relaxed">
+          <p className="text-sm text-slate-600 mt-1 max-w-2xl leading-relaxed">
             Multi-spectral convolutional pathology classification, Grad-CAM attention localization, delay-differential epidemic forecasting, and immutable Solana Devnet specimen certification.
           </p>
         </div>
@@ -294,7 +294,7 @@ export default function AnalyzePage() {
               }}
               className="gap-1.5 text-xs font-medium bg-white/70 backdrop-blur-xs"
             >
-              {copiedSummary ? <Check className="w-3.5 h-3.5 text-emerald-600" /> : <Copy className="w-3.5 h-3.5 text-stone-500" />}
+              {copiedSummary ? <Check className="w-3.5 h-3.5 text-emerald-600" /> : <Copy className="w-3.5 h-3.5 text-slate-500" />}
               <span>{copiedSummary ? 'Dossier Copied' : 'Copy Summary'}</span>
             </Button>
             <Button
@@ -312,18 +312,18 @@ export default function AnalyzePage() {
       </div>
 
       {/* INTAKE / UPLOADER CARD */}
-      <Card className="border border-stone-200/80 shadow-xs bg-white">
-        <CardHeader className="pb-3 border-b border-stone-100">
+      <Card className="border border-slate-200/80 shadow-xs bg-white">
+        <CardHeader className="pb-3 border-b border-slate-100">
           <div className="flex items-center justify-between">
             <div>
-              <CardTitle className="font-display text-base font-bold text-stone-900">
+              <CardTitle className="font-display text-base font-bold text-slate-900">
                 1. Specimen Intake &amp; Image Telemetry
               </CardTitle>
-              <CardDescription className="text-xs text-stone-500 mt-0.5">
+              <CardDescription className="text-xs text-slate-500 mt-0.5">
                 Drop high-resolution foliar photography or select benchmark field samples
               </CardDescription>
             </div>
-            <Badge variant="outline" className="font-mono text-[11px] text-stone-600">
+            <Badge variant="outline" className="font-mono text-[11px] text-slate-600">
               RGB / JPEG &bull; 16MB Max
             </Badge>
           </div>
@@ -342,10 +342,10 @@ export default function AnalyzePage() {
             <motion.div
               initial={{ opacity: 0, y: 6 }}
               animate={{ opacity: 1, y: 0 }}
-              className="flex flex-col sm:flex-row items-center justify-between gap-4 pt-4 border-t border-stone-100"
+              className="flex flex-col sm:flex-row items-center justify-between gap-4 pt-4 border-t border-slate-100"
             >
-              <div className="text-xs text-stone-600">
-                Loaded specimen: <span className="font-mono font-semibold text-stone-900">{selectedImageData.name}</span>. Ready for multi-model inference.
+              <div className="text-xs text-slate-600">
+                Loaded specimen: <span className="font-mono font-semibold text-slate-900">{selectedImageData.name}</span>. Ready for multi-model inference.
               </div>
 
               <Button
@@ -400,8 +400,8 @@ export default function AnalyzePage() {
           className="space-y-6"
         >
           {/* Executive Clinical Summary Banner */}
-          <Card className="border-stone-300 shadow-sm bg-white overflow-hidden">
-            <div className={`h-1.5 w-full ${isHealthy ? 'bg-emerald-600' : 'bg-amber-600'}`} />
+          <Card className="border-slate-300 shadow-sm bg-white overflow-hidden">
+            <div className={`h-1.5 w-full ${isHealthy ? 'bg-[#0d5c46]' : 'bg-amber-600'}`} />
             <CardContent className="p-6">
               <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-6">
                 <div>
@@ -409,49 +409,49 @@ export default function AnalyzePage() {
                     <Badge variant={isHealthy ? 'secondary' : 'destructive'} className="text-xs px-2.5 py-0.5">
                       {isHealthy ? 'Optimal Tissue Vitality' : `${results.detection.severity_category} Pathology`}
                     </Badge>
-                    <Badge variant="outline" className="font-mono text-xs text-stone-600">
+                    <Badge variant="outline" className="font-mono text-xs text-slate-600">
                       Accuracy: {results.detection.accuracy || '96.8%'}
                     </Badge>
-                    <Badge variant="outline" className="font-mono text-xs text-stone-600">
+                    <Badge variant="outline" className="font-mono text-xs text-slate-600">
                       Certainty: {(results.detection.confidence * 100).toFixed(1)}%
                     </Badge>
                     {results.blockchain?.passport_id && (
-                      <Badge variant="outline" className="font-mono text-xs text-emerald-800 bg-emerald-50 border-emerald-200">
+                      <Badge variant="outline" className="font-mono text-xs text-[#0d5c46] bg-[#0d5c46]/10 border-[#0d5c46]/20">
                         Passport: {results.blockchain.passport_id}
                       </Badge>
                     )}
                   </div>
 
-                  <h2 className="font-display text-2xl sm:text-3xl font-extrabold text-stone-900 tracking-tight">
+                  <h2 className="font-display text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight">
                     {results.detection.disease}
                   </h2>
-                  <p className="text-sm italic text-stone-500 mt-0.5 font-serif">
+                  <p className="text-sm italic text-slate-500 mt-0.5 font-serif">
                     Taxonomy: {results.detection.pathogen}
                   </p>
                 </div>
 
                 {/* Key Telemetry Badges Strip */}
                 <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 text-xs shrink-0">
-                  <div className="p-3 rounded-lg bg-stone-50 border border-stone-200/80">
-                    <span className="text-[10px] font-mono uppercase tracking-wider text-stone-500 block">
+                  <div className="p-3 rounded-lg bg-slate-50 border border-slate-200/80">
+                    <span className="text-[10px] font-mono uppercase tracking-wider text-slate-500 block">
                       Necrotic Foliar Index
                     </span>
-                    <span className="font-mono text-lg font-bold text-stone-900">
+                    <span className="font-mono text-lg font-bold text-slate-900">
                       {results.detection.severity_score}%
                     </span>
                   </div>
 
-                  <div className="p-3 rounded-lg bg-stone-50 border border-stone-200/80">
-                    <span className="text-[10px] font-mono uppercase tracking-wider text-stone-500 block">
+                  <div className="p-3 rounded-lg bg-slate-50 border border-slate-200/80">
+                    <span className="text-[10px] font-mono uppercase tracking-wider text-slate-500 block">
                       Bayesian Trust Score
                     </span>
-                    <span className="font-mono text-lg font-bold text-emerald-800">
+                    <span className="font-mono text-lg font-bold text-[#0d5c46]">
                       {results.trust_score.overall_score}/100
                     </span>
                   </div>
 
-                  <div className="p-3 rounded-lg bg-stone-50 border border-stone-200/80 col-span-2 sm:col-span-1">
-                    <span className="text-[10px] font-mono uppercase tracking-wider text-stone-500 block">
+                  <div className="p-3 rounded-lg bg-slate-50 border border-slate-200/80 col-span-2 sm:col-span-1">
+                    <span className="text-[10px] font-mono uppercase tracking-wider text-slate-500 block">
                       Estimated Harvest Loss
                     </span>
                     <span className={`font-mono text-lg font-bold ${isHealthy ? 'text-emerald-700' : 'text-amber-700'}`}>
@@ -465,7 +465,7 @@ export default function AnalyzePage() {
 
           {/* WORKSTATION TABS */}
           <Tabs defaultValue="pathology" className="w-full">
-            <TabsList className="grid grid-cols-2 md:grid-cols-5 h-auto p-1 bg-stone-200/60 rounded-xl mb-4">
+            <TabsList className="grid grid-cols-2 md:grid-cols-5 h-auto p-1 bg-slate-200/60 rounded-xl mb-4">
               <TabsTrigger value="pathology" className="text-xs font-semibold py-2">
                 Pathology &amp; Protocol
               </TabsTrigger>
@@ -488,10 +488,10 @@ export default function AnalyzePage() {
               <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
                 {/* Visual Specimen Card (5 cols) */}
                 <div className="lg:col-span-5 space-y-4">
-                  <Card className="border border-stone-200 shadow-xs">
-                    <CardHeader className="pb-3 border-b border-stone-100">
+                  <Card className="border border-slate-200 shadow-xs">
+                    <CardHeader className="pb-3 border-b border-slate-100">
                       <div className="flex items-center justify-between">
-                        <CardTitle className="font-display text-sm font-bold text-stone-900">
+                        <CardTitle className="font-display text-sm font-bold text-slate-900">
                           Specimen Foliar Imaging
                         </CardTitle>
                         <Badge variant="outline" className="font-mono text-[10px]">
@@ -500,7 +500,7 @@ export default function AnalyzePage() {
                       </div>
                     </CardHeader>
                     <CardContent className="pt-4 space-y-4">
-                      <div className="w-full h-72 rounded-lg overflow-hidden bg-stone-900 relative border border-stone-200">
+                      <div className="w-full h-72 rounded-lg overflow-hidden bg-slate-900 relative border border-slate-200">
                         <img
                           src={selectedImageData.previewUrl}
                           alt="Analyzed leaf specimen"
@@ -511,7 +511,7 @@ export default function AnalyzePage() {
                         </div>
                       </div>
 
-                      <div className="p-4 rounded-lg bg-stone-50 border border-stone-100 flex items-center justify-around">
+                      <div className="p-4 rounded-lg bg-slate-50 border border-slate-100 flex items-center justify-around">
                         <SeverityGauge
                           value={results.detection.severity_score}
                           size={130}
@@ -520,7 +520,7 @@ export default function AnalyzePage() {
                         />
                         <div className="text-xs space-y-2">
                           <div>
-                            <span className="text-stone-400 block text-[10px] uppercase font-mono">Urgency</span>
+                            <span className="text-slate-400 block text-[10px] uppercase font-mono">Urgency</span>
                             <span className={`font-semibold px-2 py-0.5 rounded text-[11px] inline-block ${
                               isHealthy ? 'text-emerald-700 bg-emerald-50' : 'text-amber-800 bg-amber-50'
                             }`}>
@@ -528,8 +528,8 @@ export default function AnalyzePage() {
                             </span>
                           </div>
                           <div>
-                            <span className="text-stone-400 block text-[10px] uppercase font-mono">Canopy Risk</span>
-                            <span className="font-semibold text-stone-800">
+                            <span className="text-slate-400 block text-[10px] uppercase font-mono">Canopy Risk</span>
+                            <span className="font-semibold text-slate-800">
                               {isHealthy ? 'Minimal' : 'Elevated Foliar Spread'}
                             </span>
                           </div>
@@ -541,31 +541,31 @@ export default function AnalyzePage() {
 
                 {/* Agronomic Prescriptions & Symptoms (7 cols) */}
                 <div className="lg:col-span-7 space-y-4">
-                  <Card className="border border-stone-200 shadow-xs">
-                    <CardHeader className="pb-3 border-b border-stone-100">
-                      <CardTitle className="font-display text-sm font-bold text-stone-900">
+                  <Card className="border border-slate-200 shadow-xs">
+                    <CardHeader className="pb-3 border-b border-slate-100">
+                      <CardTitle className="font-display text-sm font-bold text-slate-900">
                         Prescribed Clinical Agronomic Action
                       </CardTitle>
-                      <CardDescription className="text-xs text-stone-500">
+                      <CardDescription className="text-xs text-slate-500">
                         Targeted chemical, biological, and cultural disease management recommendations
                       </CardDescription>
                     </CardHeader>
                     <CardContent className="pt-4 space-y-4">
-                      <Alert className="border-emerald-200 bg-emerald-50/50">
-                        <CheckCircle2 className="h-4 w-4 text-emerald-700" />
-                        <AlertTitle className="text-xs font-bold text-emerald-900 uppercase tracking-wide">
+                      <Alert className="border-[#0d5c46]/20 bg-[#0d5c46]/5">
+                        <CheckCircle2 className="h-4 w-4 text-[#0d5c46]" />
+                        <AlertTitle className="text-xs font-bold text-[#0d5c46] uppercase tracking-wide">
                           Recommended Agronomic Protocol
                         </AlertTitle>
-                        <AlertDescription className="text-xs text-emerald-950 mt-1 leading-relaxed">
+                        <AlertDescription className="text-xs text-slate-800 mt-1 leading-relaxed">
                           {results.detection.recommendation}
                         </AlertDescription>
                       </Alert>
 
                       <div className="space-y-1.5">
-                        <span className="text-xs font-bold text-stone-800 block">
+                        <span className="text-xs font-bold text-slate-800 block">
                           Visual Folio-Pathological Symptoms:
                         </span>
-                        <div className="text-xs text-stone-700 bg-stone-50 p-3.5 rounded-lg border border-stone-200/70 leading-relaxed">
+                        <div className="text-xs text-slate-700 bg-slate-50 p-3.5 rounded-lg border border-slate-200/70 leading-relaxed">
                           {results.detection.symptoms}
                         </div>
                       </div>
@@ -573,13 +573,13 @@ export default function AnalyzePage() {
                       <Separator className="my-2" />
 
                       <div className="space-y-3">
-                        <span className="text-xs font-bold text-stone-800 block">
+                        <span className="text-xs font-bold text-slate-800 block">
                           Model Softmax Certainty Bounds:
                         </span>
                         <div className="space-y-1.5">
                           <div className="flex justify-between text-xs">
-                            <span className="text-stone-600">Primary Classification Posterior</span>
-                            <span className="font-mono font-bold text-stone-900">
+                            <span className="text-slate-600">Primary Classification Posterior</span>
+                            <span className="font-mono font-bold text-slate-900">
                               {(results.detection.confidence * 100).toFixed(1)}%
                             </span>
                           </div>
@@ -587,7 +587,7 @@ export default function AnalyzePage() {
                         </div>
                         <div className="space-y-1.5">
                           <div className="flex justify-between text-xs">
-                            <span className="text-stone-600">Benchmark Test Set Validation Accuracy</span>
+                            <span className="text-slate-600">Benchmark Test Set Validation Accuracy</span>
                             <span className="font-mono font-bold text-emerald-800">
                               {results.detection.accuracy || '96.8%'}
                             </span>
@@ -603,21 +603,21 @@ export default function AnalyzePage() {
 
             {/* TAB 2: GRAD-CAM SALIENCY */}
             <TabsContent value="gradcam" className="space-y-6">
-              <Card className="border border-stone-200 shadow-xs">
-                <CardHeader className="pb-3 border-b border-stone-100">
+              <Card className="border border-slate-200 shadow-xs">
+                <CardHeader className="pb-3 border-b border-slate-100">
                   <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
                     <div>
-                      <CardTitle className="font-display text-sm font-bold text-stone-900">
+                      <CardTitle className="font-display text-sm font-bold text-slate-900">
                         Gradient-Weighted Class Activation Mapping (Grad-CAM)
                       </CardTitle>
-                      <CardDescription className="text-xs text-stone-500">
+                      <CardDescription className="text-xs text-slate-500">
                         Neural feature gradients reveal convolutional attention focal points
                       </CardDescription>
                     </div>
 
                     <div className="flex items-center gap-2 shrink-0">
-                      <Sliders className="w-3.5 h-3.5 text-stone-400" />
-                      <span className="text-xs text-stone-600 font-medium">Heatmap Opacity:</span>
+                      <Sliders className="w-3.5 h-3.5 text-slate-400" />
+                      <span className="text-xs text-slate-600 font-medium">Heatmap Opacity:</span>
                       <input
                         type="range"
                         min="0"
@@ -626,17 +626,17 @@ export default function AnalyzePage() {
                         onChange={(e) => setHeatmapOpacity(Number(e.target.value))}
                         className="w-24 accent-emerald-700 cursor-pointer"
                       />
-                      <span className="text-xs font-mono text-stone-700 w-8">{heatmapOpacity}%</span>
+                      <span className="text-xs font-mono text-slate-700 w-8">{heatmapOpacity}%</span>
                     </div>
                   </div>
                 </CardHeader>
                 <CardContent className="pt-4 space-y-4">
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <div className="space-y-1.5">
-                      <span className="text-[11px] font-mono uppercase tracking-wider text-stone-500 block">
+                      <span className="text-[11px] font-mono uppercase tracking-wider text-slate-500 block">
                         Raw Specimen Photography
                       </span>
-                      <div className="w-full h-80 rounded-lg overflow-hidden bg-stone-900 border border-stone-200 relative">
+                      <div className="w-full h-80 rounded-lg overflow-hidden bg-slate-900 border border-slate-200 relative">
                         <img
                           src={selectedImageData.previewUrl}
                           alt="Raw specimen"
@@ -646,10 +646,10 @@ export default function AnalyzePage() {
                     </div>
 
                     <div className="space-y-1.5">
-                      <span className="text-[11px] font-mono uppercase tracking-wider text-stone-500 block">
+                      <span className="text-[11px] font-mono uppercase tracking-wider text-slate-500 block">
                         Neural Saliency Activation Overlay
                       </span>
-                      <div className="w-full h-80 rounded-lg overflow-hidden bg-stone-900 border border-stone-200 relative">
+                      <div className="w-full h-80 rounded-lg overflow-hidden bg-slate-900 border border-slate-200 relative">
                         <canvas ref={canvasRef} className="w-full h-full object-cover" />
                         <div className="absolute top-2 left-2 px-2 py-0.5 rounded bg-black/70 text-amber-400 text-[10px] font-mono flex items-center gap-1">
                           <Activity className="w-3 h-3" />
@@ -659,10 +659,10 @@ export default function AnalyzePage() {
                     </div>
                   </div>
 
-                  <div className="p-3.5 rounded-lg bg-stone-50 border border-stone-200 text-xs text-stone-700 flex items-start gap-3">
+                  <div className="p-3.5 rounded-lg bg-slate-50 border border-slate-200 text-xs text-slate-700 flex items-start gap-3">
                     <Info className="w-4 h-4 text-emerald-700 shrink-0 mt-0.5" />
                     <div>
-                      <span className="font-bold text-stone-900 block mb-0.5">XAI Interpretability Summary:</span>
+                      <span className="font-bold text-slate-900 block mb-0.5">XAI Interpretability Summary:</span>
                       <p>{results.gradcam.description}</p>
                       <div className="flex flex-wrap gap-2 mt-2">
                         {results.gradcam.focal_features.map((f, i) => (
@@ -682,14 +682,14 @@ export default function AnalyzePage() {
               <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
                 {/* 30-Day Projections (7 cols) */}
                 <div className="lg:col-span-7 space-y-4">
-                  <Card className="border border-stone-200 shadow-xs">
-                    <CardHeader className="pb-3 border-b border-stone-100">
+                  <Card className="border border-slate-200 shadow-xs">
+                    <CardHeader className="pb-3 border-b border-slate-100">
                       <div className="flex items-center justify-between">
                         <div>
-                          <CardTitle className="font-display text-sm font-bold text-stone-900">
+                          <CardTitle className="font-display text-sm font-bold text-slate-900">
                             30-Day Delay-Differential Disease Trajectory
                           </CardTitle>
-                          <CardDescription className="text-xs text-stone-500">
+                          <CardDescription className="text-xs text-slate-500">
                             Van der Plank epidemiological ODE model with microclimate integration
                           </CardDescription>
                         </div>
@@ -749,21 +749,21 @@ export default function AnalyzePage() {
                         </ResponsiveContainer>
                       </div>
 
-                      <div className="grid grid-cols-2 sm:grid-cols-3 gap-2.5 text-xs pt-2 border-t border-stone-100">
-                        <div className="p-2.5 rounded-lg bg-stone-50 border border-stone-200">
-                          <span className="text-stone-400 block text-[10px] uppercase font-mono">Doubling Time</span>
-                          <span className="font-mono font-bold text-stone-900">
+                      <div className="grid grid-cols-2 sm:grid-cols-3 gap-2.5 text-xs pt-2 border-t border-slate-100">
+                        <div className="p-2.5 rounded-lg bg-slate-50 border border-slate-200">
+                          <span className="text-slate-400 block text-[10px] uppercase font-mono">Doubling Time</span>
+                          <span className="font-mono font-bold text-slate-900">
                             {isHealthy ? 'Optimal (N/A)' : `${results.forecast.doubling_time_days || 9.2} days`}
                           </span>
                         </div>
-                        <div className="p-2.5 rounded-lg bg-stone-50 border border-stone-200">
-                          <span className="text-stone-400 block text-[10px] uppercase font-mono">Unchecked Peak</span>
+                        <div className="p-2.5 rounded-lg bg-slate-50 border border-slate-200">
+                          <span className="text-slate-400 block text-[10px] uppercase font-mono">Unchecked Peak</span>
                           <span className={`font-mono font-bold ${isHealthy ? 'text-emerald-700' : 'text-red-700'}`}>
                             {isHealthy ? `${results.detection.severity_score}% (Stable)` : '96.0% (Day 30)'}
                           </span>
                         </div>
-                        <div className="p-2.5 rounded-lg bg-stone-50 border border-stone-200 col-span-2 sm:col-span-1">
-                          <span className="text-stone-400 block text-[10px] uppercase font-mono">Intervention Delta</span>
+                        <div className="p-2.5 rounded-lg bg-slate-50 border border-slate-200 col-span-2 sm:col-span-1">
+                          <span className="text-slate-400 block text-[10px] uppercase font-mono">Intervention Delta</span>
                           <span className="font-mono font-bold text-emerald-800">
                             {isHealthy ? 'Optimal Vitality' : '-74.2% Severity'}
                           </span>
@@ -775,51 +775,51 @@ export default function AnalyzePage() {
 
                 {/* Yield Loss & Economics (5 cols) */}
                 <div className="lg:col-span-5 space-y-4">
-                  <Card className="border border-stone-200 shadow-xs">
-                    <CardHeader className="pb-3 border-b border-stone-100">
-                      <CardTitle className="font-display text-sm font-bold text-stone-900">
+                  <Card className="border border-slate-200 shadow-xs">
+                    <CardHeader className="pb-3 border-b border-slate-100">
+                      <CardTitle className="font-display text-sm font-bold text-slate-900">
                         Harvest Yield Loss &amp; Economic Exposure
                       </CardTitle>
-                      <CardDescription className="text-xs text-stone-500">
+                      <CardDescription className="text-xs text-slate-500">
                         Random forest regression calibrated on AUDPC and phenological stages
                       </CardDescription>
                     </CardHeader>
                     <CardContent className="pt-4 space-y-4">
-                      <div className="p-4 rounded-lg bg-stone-50 border border-stone-200 flex items-center justify-between">
+                      <div className="p-4 rounded-lg bg-slate-50 border border-slate-200 flex items-center justify-between">
                         <div>
-                          <span className="text-[10px] font-mono uppercase tracking-wider text-stone-500 block">
+                          <span className="text-[10px] font-mono uppercase tracking-wider text-slate-500 block">
                             Estimated Yield Loss
                           </span>
                           <div className={`font-mono text-3xl font-bold ${isHealthy ? 'text-emerald-700' : 'text-amber-800'}`}>
                             {results.yield_impact.estimated_yield_loss_pct}%
                           </div>
-                          <span className="text-[11px] text-stone-500">
+                          <span className="text-[11px] text-slate-500">
                             Range: {results.yield_impact.potential_loss_range[0]}% – {results.yield_impact.potential_loss_range[1]}%
                           </span>
                         </div>
 
                         <div className="text-right">
-                          <span className="text-[10px] font-mono uppercase tracking-wider text-stone-500 block">
+                          <span className="text-[10px] font-mono uppercase tracking-wider text-slate-500 block">
                             Economic Loss / Ha
                           </span>
-                          <div className="font-mono text-2xl font-bold text-stone-900">
+                          <div className="font-mono text-2xl font-bold text-slate-900">
                             ${results.yield_impact.estimated_economic_impact_per_hectare}
                           </div>
-                          <span className="text-[11px] text-stone-500">
+                          <span className="text-[11px] text-slate-500">
                             {isHealthy ? 'Zero exposure' : 'Estimated exposure'}
                           </span>
                         </div>
                       </div>
 
                       <div className="space-y-2">
-                        <span className="text-xs font-bold text-stone-800 block">
+                        <span className="text-xs font-bold text-slate-800 block">
                           Remediation Cost-Benefit Breakdown:
                         </span>
                         <div className="space-y-1.5 text-xs">
                           {results.yield_impact.interventions.map((item, idx) => (
-                            <div key={idx} className="p-2.5 rounded-lg bg-stone-50 border border-stone-200/80 flex items-center justify-between">
+                            <div key={idx} className="p-2.5 rounded-lg bg-slate-50 border border-slate-200/80 flex items-center justify-between">
                               <div>
-                                <span className="font-semibold text-stone-900">{item.action}</span>
+                                <span className="font-semibold text-slate-900">{item.action}</span>
                                 <span className="text-[11px] text-emerald-800 block">{item.impact}</span>
                               </div>
                               <Badge variant="outline" className="font-mono text-xs">
@@ -837,14 +837,14 @@ export default function AnalyzePage() {
 
             {/* TAB 4: BAYESIAN TRUST */}
             <TabsContent value="trust" className="space-y-6">
-              <Card className="border border-stone-200 shadow-xs">
-                <CardHeader className="pb-3 border-b border-stone-100">
+              <Card className="border border-slate-200 shadow-xs">
+                <CardHeader className="pb-3 border-b border-slate-100">
                   <div className="flex items-center justify-between">
                     <div>
-                      <CardTitle className="font-display text-sm font-bold text-stone-900">
+                      <CardTitle className="font-display text-sm font-bold text-slate-900">
                         Multi-Evidence Bayesian Conjugate Trust Engine
                       </CardTitle>
-                      <CardDescription className="text-xs text-stone-500">
+                      <CardDescription className="text-xs text-slate-500">
                         Concordance analysis across 12 independent optical, geospatial, and microclimatic signals
                       </CardDescription>
                     </div>
@@ -855,19 +855,19 @@ export default function AnalyzePage() {
                 </CardHeader>
                 <CardContent className="pt-4 space-y-6">
                   <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-center">
-                    <div className="lg:col-span-6 bg-stone-50 rounded-lg p-2 border border-stone-200">
+                    <div className="lg:col-span-6 bg-slate-50 rounded-lg p-2 border border-slate-200">
                       <TrustScoreRadar data={results.trust_score.evidence_breakdown} height={300} />
                     </div>
 
                     <div className="lg:col-span-6 space-y-3">
-                      <span className="text-xs font-mono font-bold uppercase tracking-wider text-stone-600 block">
+                      <span className="text-xs font-mono font-bold uppercase tracking-wider text-slate-600 block">
                         Signal Concordance Metrics
                       </span>
                       <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs">
                         {results.trust_score.evidence_breakdown.map((item, idx) => (
-                          <div key={idx} className="p-2.5 rounded-lg bg-stone-50 border border-stone-200">
+                          <div key={idx} className="p-2.5 rounded-lg bg-slate-50 border border-slate-200">
                             <div className="flex justify-between items-center mb-1">
-                              <span className="text-[11px] font-medium text-stone-700 truncate" title={item.label}>
+                              <span className="text-[11px] font-medium text-slate-700 truncate" title={item.label}>
                                 {item.label}
                               </span>
                               <span className="font-mono font-bold text-emerald-800 text-[11px]">
@@ -879,9 +879,9 @@ export default function AnalyzePage() {
                         ))}
                       </div>
 
-                      <div className="p-3 rounded-lg bg-emerald-50 border border-emerald-200/80 text-xs text-emerald-900 flex items-center gap-2">
-                        <CheckCircle2 className="w-4 h-4 text-emerald-700 shrink-0" />
-                        <span>
+                      <div className="p-3 rounded-lg bg-[#0d5c46]/10 border border-[#0d5c46]/20 text-xs text-[#0d5c46] flex items-center gap-2">
+                        <CheckCircle2 className="w-4 h-4 text-[#0d5c46] shrink-0" />
+                        <span className="font-medium">
                           Zero out-of-distribution (OOD) anomalies detected. Sensor parameters strictly match natural biological bounds.
                         </span>
                       </div>
@@ -893,10 +893,10 @@ export default function AnalyzePage() {
 
             {/* TAB 5: SOLANA CROP PASSPORT */}
             <TabsContent value="blockchain" className="space-y-6">
-              <div className="rounded-xl p-6 bg-stone-950 border border-stone-800 text-stone-100 shadow-md">
+              <div className="rounded-xl p-6 bg-slate-950 border border-slate-800 text-slate-100 shadow-md">
                 <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6">
                   <div className="flex items-center gap-3">
-                    <div className="w-9 h-9 rounded-lg bg-stone-800 border border-stone-700 flex items-center justify-center text-emerald-400 font-mono font-bold text-sm">
+                    <div className="w-9 h-9 rounded-lg bg-slate-800 border border-slate-700 flex items-center justify-center text-emerald-400 font-mono font-bold text-sm">
                       SOL
                     </div>
                     <div>
@@ -908,14 +908,14 @@ export default function AnalyzePage() {
                           SPL Memo v2
                         </Badge>
                       </div>
-                      <p className="text-xs text-stone-400">
+                      <p className="text-xs text-slate-400">
                         Cryptographic SHA-256 leaf specimen fingerprint permanently anchored to Solana ledger
                       </p>
                     </div>
                   </div>
 
                   <div className="flex items-center gap-3">
-                    <Badge variant="outline" className="font-mono text-xs text-stone-300 border-stone-700 bg-stone-900">
+                    <Badge variant="outline" className="font-mono text-xs text-slate-300 border-slate-700 bg-slate-900">
                       Passport: {results.blockchain?.passport_id || 'CS-SOL-9YWEQ7TP'}
                     </Badge>
                     <div className="px-2.5 py-1 rounded-md bg-emerald-950/80 border border-emerald-800/80 flex items-center gap-1.5 text-xs text-emerald-300">
@@ -929,9 +929,9 @@ export default function AnalyzePage() {
                   {/* Left Column (7 cols) */}
                   <div className="lg:col-span-7 space-y-4">
                     {/* SHA-256 Fingerprint */}
-                    <div className="p-4 rounded-lg bg-stone-900/90 border border-stone-800 space-y-2">
+                    <div className="p-4 rounded-lg bg-slate-900/90 border border-slate-800 space-y-2">
                       <div className="flex items-center justify-between">
-                        <div className="flex items-center gap-1.5 text-xs font-bold uppercase tracking-wider text-stone-300">
+                        <div className="flex items-center gap-1.5 text-xs font-bold uppercase tracking-wider text-slate-300">
                           <Lock className="w-3.5 h-3.5 text-emerald-400" />
                           <span>Specimen Digital Fingerprint (SHA-256)</span>
                         </div>
@@ -940,24 +940,24 @@ export default function AnalyzePage() {
                           size="sm"
                           effect="ripple"
                           onClick={() => handleCopy(results.blockchain?.specimen_sha256 || results.image_metadata?.sha256, 'hash')}
-                          className="h-7 text-xs font-mono text-stone-400 hover:text-white hover:bg-stone-800"
+                          className="h-7 text-xs font-mono text-slate-400 hover:text-white hover:bg-slate-800"
                         >
                           {copiedHash ? <Check className="w-3.5 h-3.5 text-emerald-400" /> : <Copy className="w-3.5 h-3.5" />}
                           <span className="ml-1">{copiedHash ? 'Copied' : 'Copy'}</span>
                         </Button>
                       </div>
-                      <div className="font-mono text-xs text-emerald-400 break-all bg-black/60 p-2.5 rounded border border-stone-800 select-all">
+                      <div className="font-mono text-xs text-emerald-400 break-all bg-black/60 p-2.5 rounded border border-slate-800 select-all">
                         {results.blockchain?.specimen_sha256 || results.image_metadata?.sha256 || 'e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855'}
                       </div>
-                      <p className="text-[11px] text-stone-400">
+                      <p className="text-[11px] text-slate-400">
                         Cryptographic binding between uploaded foliage and diagnostic prediction. Precludes alteration for phytosanitary export and insurance claims.
                       </p>
                     </div>
 
                     {/* Solana Transaction Signature */}
-                    <div className="p-4 rounded-lg bg-stone-900/90 border border-stone-800 space-y-2">
+                    <div className="p-4 rounded-lg bg-slate-900/90 border border-slate-800 space-y-2">
                       <div className="flex items-center justify-between">
-                        <div className="flex items-center gap-1.5 text-xs font-bold uppercase tracking-wider text-stone-300">
+                        <div className="flex items-center gap-1.5 text-xs font-bold uppercase tracking-wider text-slate-300">
                           <Link2 className="w-3.5 h-3.5 text-purple-400" />
                           <span>Solana Devnet Transaction Signature</span>
                         </div>
@@ -967,7 +967,7 @@ export default function AnalyzePage() {
                             size="sm"
                             effect="ripple"
                             onClick={() => handleCopy(results.blockchain?.tx_signature, 'tx')}
-                            className="h-7 text-xs font-mono text-stone-400 hover:text-white hover:bg-stone-800"
+                            className="h-7 text-xs font-mono text-slate-400 hover:text-white hover:bg-slate-800"
                           >
                             {copiedTx ? <Check className="w-3.5 h-3.5 text-emerald-400" /> : <Copy className="w-3.5 h-3.5" />}
                             <span className="ml-1">{copiedTx ? 'Copied' : 'Copy'}</span>
@@ -988,12 +988,12 @@ export default function AnalyzePage() {
                           )}
                         </div>
                       </div>
-                      <div className="font-mono text-xs text-stone-300 break-all bg-black/60 p-2.5 rounded border border-stone-800 select-all">
+                      <div className="font-mono text-xs text-slate-300 break-all bg-black/60 p-2.5 rounded border border-slate-800 select-all">
                         {results.blockchain?.tx_signature || 'Anchor pending or confirmed via validator'}
                       </div>
 
-                      <div className="flex items-center justify-between pt-2 border-t border-stone-800">
-                        <span className="text-[11px] text-stone-400">
+                      <div className="flex items-center justify-between pt-2 border-t border-slate-800">
+                        <span className="text-[11px] text-slate-400">
                           Verify validator inclusion &amp; block timestamp
                         </span>
                         <Button
@@ -1010,7 +1010,7 @@ export default function AnalyzePage() {
                       </div>
 
                       {verificationResult && (
-                        <div className="p-3 rounded bg-stone-900 border border-emerald-600/40 text-xs space-y-1">
+                        <div className="p-3 rounded bg-slate-900 border border-emerald-600/40 text-xs space-y-1">
                           <div className="flex items-center justify-between text-emerald-400 font-bold">
                             <span className="flex items-center gap-1">
                               <CheckCircle2 className="w-3.5 h-3.5" />
@@ -1019,7 +1019,7 @@ export default function AnalyzePage() {
                             <span className="font-mono text-[11px]">Slot: {verificationResult.slot || 'Finalized'}</span>
                           </div>
                           {verificationResult.block_time && (
-                            <div className="text-[11px] text-stone-400">
+                            <div className="text-[11px] text-slate-400">
                               Block Timestamp: {verificationResult.block_time}
                             </div>
                           )}
@@ -1035,37 +1035,37 @@ export default function AnalyzePage() {
 
                   {/* Right Column (5 cols) */}
                   <div className="lg:col-span-5 space-y-4 text-xs">
-                    <div className="p-4 rounded-lg bg-stone-900/90 border border-stone-800 space-y-2">
-                      <span className="font-mono font-bold uppercase tracking-wider text-stone-300 block mb-2">
+                    <div className="p-4 rounded-lg bg-slate-900/90 border border-slate-800 space-y-2">
+                      <span className="font-mono font-bold uppercase tracking-wider text-slate-300 block mb-2">
                         Consensus Ledger Parameters
                       </span>
-                      <div className="flex justify-between py-1 border-b border-stone-800">
-                        <span className="text-stone-400">Network</span>
-                        <span className="font-semibold text-stone-200">Solana Devnet (POS)</span>
+                      <div className="flex justify-between py-1 border-b border-slate-800">
+                        <span className="text-slate-400">Network</span>
+                        <span className="font-semibold text-slate-200">Solana Devnet (POS)</span>
                       </div>
-                      <div className="flex justify-between py-1 border-b border-stone-800">
-                        <span className="text-stone-400">Authority Wallet</span>
-                        <span className="font-mono text-[11px] text-stone-300 truncate max-w-[170px]" title={results.blockchain?.authority_wallet}>
+                      <div className="flex justify-between py-1 border-b border-slate-800">
+                        <span className="text-slate-400">Authority Wallet</span>
+                        <span className="font-mono text-[11px] text-slate-300 truncate max-w-[170px]" title={results.blockchain?.authority_wallet}>
                           {results.blockchain?.authority_wallet || 'CM7QUSZCrD2XNNYThFFwNbXhf8jymFbFq9QRFh56cy5R'}
                         </span>
                       </div>
-                      <div className="flex justify-between py-1 border-b border-stone-800">
-                        <span className="text-stone-400">SPL Program ID</span>
-                        <span className="font-mono text-[11px] text-stone-300 truncate max-w-[170px]" title={results.blockchain?.program_id}>
+                      <div className="flex justify-between py-1 border-b border-slate-800">
+                        <span className="text-slate-400">SPL Program ID</span>
+                        <span className="font-mono text-[11px] text-slate-300 truncate max-w-[170px]" title={results.blockchain?.program_id}>
                           {results.blockchain?.program_id || 'MemoSq4gqABAXKb96qnH8TysNcWxMyWCqXgDLGmfcHr'}
                         </span>
                       </div>
                       <div className="flex justify-between py-1">
-                        <span className="text-stone-400">Anchoring Gas Fee</span>
+                        <span className="text-slate-400">Anchoring Gas Fee</span>
                         <span className="font-mono text-[11px] text-emerald-400">~0.000005 SOL ($0.0008)</span>
                       </div>
                     </div>
 
-                    <div className="p-4 rounded-lg bg-stone-900/90 border border-stone-800">
-                      <span className="font-mono font-bold uppercase tracking-wider text-stone-300 block mb-2">
+                    <div className="p-4 rounded-lg bg-slate-900/90 border border-slate-800">
+                      <span className="font-mono font-bold uppercase tracking-wider text-slate-300 block mb-2">
                         Immutable Memo Payload
                       </span>
-                      <pre className="text-[11px] font-mono text-emerald-400 bg-black/60 p-2.5 rounded border border-stone-800 overflow-x-auto">
+                      <pre className="text-[11px] font-mono text-emerald-400 bg-black/60 p-2.5 rounded border border-slate-800 overflow-x-auto">
                         {JSON.stringify(
                           results.blockchain?.memo_payload || {
                             p: "CropSure-v1",
@@ -1086,17 +1086,17 @@ export default function AnalyzePage() {
           </Tabs>
 
           {/* AUDIT LOG ACCORDION */}
-          <Card className="border border-stone-200 bg-white shadow-xs">
+          <Card className="border border-slate-200 bg-white shadow-xs">
             <Accordion type="single" collapsible className="w-full">
               <AccordionItem value="json-audit" className="border-none px-4">
-                <AccordionTrigger className="text-xs font-mono font-bold text-stone-800 hover:no-underline py-4">
+                <AccordionTrigger className="text-xs font-mono font-bold text-slate-800 hover:no-underline py-4">
                   <div className="flex items-center gap-2">
-                    <FileText className="w-4 h-4 text-stone-500" />
+                    <FileText className="w-4 h-4 text-slate-500" />
                     <span>Diagnostic Pipeline JSON Telemetry (Audit Trail &amp; Provenance Record)</span>
                   </div>
                 </AccordionTrigger>
                 <AccordionContent className="pb-4">
-                  <div className="p-3.5 bg-stone-950 text-emerald-400 font-mono text-xs rounded-lg overflow-x-auto max-h-96">
+                  <div className="p-3.5 bg-slate-950 text-emerald-400 font-mono text-xs rounded-lg overflow-x-auto max-h-96">
                     <pre>{JSON.stringify(results, null, 2)}</pre>
                   </div>
                 </AccordionContent>

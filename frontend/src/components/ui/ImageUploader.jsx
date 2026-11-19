@@ -262,17 +262,17 @@ export default function ImageUploader({
                 </div>
 
                 <div className="grid grid-cols-2 gap-2 text-xs pt-2">
-                  <div className="bg-stone-50 p-2.5 rounded-lg border border-stone-200/80">
-                    <span className="text-stone-400 block text-[10px] uppercase font-mono font-semibold">Format</span>
-                    <span className="text-stone-800 font-medium">RGB Color Spectrum</span>
+                  <div className="bg-slate-50 p-2.5 rounded-lg border border-slate-200/80">
+                    <span className="text-slate-400 block text-[10px] uppercase font-mono font-semibold">Format</span>
+                    <span className="text-slate-800 font-medium">RGB Color Spectrum</span>
                   </div>
-                  <div className="bg-stone-50 p-2.5 rounded-lg border border-stone-200/80">
-                    <span className="text-stone-400 block text-[10px] uppercase font-mono font-semibold">Target Specimen</span>
-                    <span className="text-stone-800 font-medium">Solanaceae Foliage</span>
+                  <div className="bg-slate-50 p-2.5 rounded-lg border border-slate-200/80">
+                    <span className="text-slate-400 block text-[10px] uppercase font-mono font-semibold">Target Specimen</span>
+                    <span className="text-slate-800 font-medium">Solanaceae Foliage</span>
                   </div>
                 </div>
 
-                <p className="text-[11px] text-stone-500 pt-1">
+                <p className="text-[11px] text-slate-500 pt-1">
                   Ready to stream to YOLOv8s Pathology Detector + Grad-CAM Saliency Engine + Solana Devnet Ledger.
                 </p>
               </div>

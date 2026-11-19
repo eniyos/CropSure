@@ -30,9 +30,9 @@ export default function StatusBadge({
       pulseDot: 'bg-sky-400'
     },
     neutral: {
-      bg: 'bg-gray-100 border-gray-200 text-gray-700',
-      dot: 'bg-gray-400',
-      pulseDot: 'bg-gray-300'
+      bg: 'bg-slate-100 border-slate-200 text-slate-700',
+      dot: 'bg-slate-400',
+      pulseDot: 'bg-slate-300'
     }
   };
 
