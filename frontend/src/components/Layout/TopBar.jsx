@@ -20,7 +20,7 @@ export default function TopBar({ onOpenSidebar }) {
   };
 
   return (
-    <header className="h-16 bg-white border-b border-slate-200/80 shadow-xs sticky top-0 z-30 flex items-center justify-between px-4 sm:px-6 font-sans">
+    <header className="h-16 bg-white/80 backdrop-blur-md border-b border-slate-200/80 shadow-xs sticky top-0 z-30 flex items-center justify-between px-4 sm:px-6 font-sans">
       {/* Left: Hamburger & Dynamic Title */}
       <div className="flex items-center gap-3">
         <Button
