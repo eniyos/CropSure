@@ -1,6 +1,7 @@
 import datetime
 import json
 import logging
+import os
 from flask import Blueprint, request, jsonify
 
 from backend.app.services.ai_service import AIService
@@ -120,6 +121,7 @@ def analyze():
     include_forecast = request.args.get("forecast", "true").lower() in ("true", "1", "yes")
     include_yield = request.args.get("yield", "true").lower() in ("true", "1", "yes")
     include_trust = request.args.get("trust", "true").lower() in ("true", "1", "yes")
+    include_blockchain = request.args.get("blockchain", "true").lower() in ("true", "1", "yes")
 
     ai_service = AIService.get_instance()
     result = ai_service.analyze_leaf(
@@ -128,7 +130,8 @@ def analyze():
         include_gradcam=include_gradcam,
         include_forecast=include_forecast,
         include_yield=include_yield,
-        include_trust=include_trust
+        include_trust=include_trust,
+        include_blockchain=include_blockchain
     )
 
     return jsonify(result), 200
@@ -538,4 +541,36 @@ def auth_register():
 @api_bp.route("/v1/auth/logout", methods=["POST"])
 def auth_logout():
     return jsonify({"success": True}), 200
+
+
+# =========================================================================
+# 7. Solana Devnet Proof-of-Diagnosis & Verification Endpoints
+# =========================================================================
+
+@api_bp.route("/solana/status", methods=["GET"])
+def solana_status():
+    """Query current Solana Devnet authority wallet and node balance."""
+    from backend.app.services.solana_service import SolanaService
+    solana_service = SolanaService.get_instance()
+    balance = solana_service.get_balance()
+    return jsonify({
+        "success": True,
+        "network": "Solana Devnet",
+        "cluster": solana_service.cluster,
+        "rpc_url": solana_service.rpc_url,
+        "wallet_address": solana_service.wallet_address,
+        "balance_sol": balance,
+        "memo_program_id": solana_service.memo_program_id,
+        "cli_available": os.path.exists(solana_service.solana_cli)
+    }), 200
+
+
+@api_bp.route("/solana/verify/<signature>", methods=["GET"])
+def solana_verify(signature):
+    """Verify on-chain transaction confirmation, block time, and SPL memo record."""
+    from backend.app.services.solana_service import SolanaService
+    solana_service = SolanaService.get_instance()
+    verification = solana_service.verify_transaction(signature)
+    return jsonify(verification), 200 if verification.get("verified") else 404
+
 

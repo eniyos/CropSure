@@ -162,7 +162,8 @@ class AIService:
         include_gradcam=True,
         include_forecast=True,
         include_yield=True,
-        include_trust=True
+        include_trust=True,
+        include_blockchain=True
     ):
         """
         Execute unified multimodal leaf analysis pipeline.
@@ -307,12 +308,38 @@ class AIService:
             else:
                 results["trust"] = {"success": False, "error": "Bayesian trust engine not initialized"}
 
-        # Summary Synthesis
-        elapsed_sec = time.time() - start_time
-        results["processing_time_ms"] = round(elapsed_sec * 1000.0, 2)
         det_conf = detection_result.get("confidence", 0.942) if detection_result else 0.942
         det_acc = detection_result.get("accuracy", 0.968) if detection_result else 0.968
         det_map = detection_result.get("map50", 93.8) if detection_result else 93.8
+
+        # 6. Solana Devnet Proof of Diagnosis Anchoring (Web3 Crop Passport)
+        if include_blockchain:
+            try:
+                from backend.app.services.solana_service import SolanaService
+                solana_service = SolanaService.get_instance()
+                specimen_hash = solana_service.compute_image_sha256(image)
+                results["image_metadata"]["sha256"] = specimen_hash
+                sev_cat = detection_result.get("severity", {}).get("level", "Moderate") if detection_result else "Moderate"
+                passport = solana_service.anchor_leaf_specimen(
+                    image_sha256=specimen_hash,
+                    disease=primary_condition,
+                    confidence=det_conf,
+                    severity_category=sev_cat,
+                    severity_score=severity_score * 100.0,
+                    metadata=meta
+                )
+                results["solana_passport"] = passport
+            except Exception as exc:
+                logger.error(f"Solana anchoring error: {exc}")
+                results["solana_passport"] = {
+                    "success": False,
+                    "error": str(exc)
+                }
+
+        # Summary Synthesis
+        elapsed_sec = time.time() - start_time
+        results["processing_time_ms"] = round(elapsed_sec * 1000.0, 2)
+        passport_data = results.get("solana_passport", {})
         results["summary"] = {
             "primary_diagnosis": primary_condition,
             "confidence": det_conf,
@@ -321,7 +348,11 @@ class AIService:
             "map50": det_map,
             "severity_level": detection_result.get("severity", {}).get("level", "Unknown") if detection_result else "Unknown",
             "trust_status": results.get("trust", {}).get("trust_level", "Unverified"),
-            "predicted_loss_pct": results.get("yield_loss", {}).get("yield_loss_pct", None)
+            "predicted_loss_pct": results.get("yield_loss", {}).get("yield_loss_pct", None),
+            "passport_id": passport_data.get("passport_id"),
+            "blockchain_status": passport_data.get("status", "Not Anchored"),
+            "tx_signature": passport_data.get("tx_signature"),
+            "explorer_url": passport_data.get("explorer_url")
         }
 
         return results

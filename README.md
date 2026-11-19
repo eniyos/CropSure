@@ -80,6 +80,13 @@ flowchart TD
      - Scan rate flooding (>20 submissions/hr)
      - Biological impossibility (>30% severity drop in 24 hr without treatment)
 
+7. **Solana Devnet Blockchain Ledger (`SolanaService`)**
+   - Anchors leaf specimen diagnostic proofs directly to the Solana Devnet blockchain.
+   - Computes deterministic SHA-256 cryptographic fingerprints of leaf specimens.
+   - Emits immutable SPL Memo transactions (`MemoSq4gqABAXKb96qnH8TysNcWxMyWCqXgDLGmfcHr`) embedding:
+     `{"p":"CropSure-v1","type":"CROP_PASSPORT","hash":"<sha256>","disease":"...","conf":0.94,"sev":35.0,"ts":"..."}`
+   - Provides verifiable on-chain Explorer links (`https://explorer.solana.com/tx/<sig>?cluster=devnet`) and real-time validator verification endpoints.
+
 ---
 
 ## Directory Structure
